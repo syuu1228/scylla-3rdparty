@@ -4,7 +4,7 @@ ALL_BUILDDIR := $(shell pwd)/build
 
 DEB_BUILDDIR := $(ALL_BUILDDIR)/objdir
 DEB_DH_INSTALL_SOURCEDIR := $(shell pwd)/debian/tmp
-DEB_DH_STRIP_ARGS_GDB := --dbg-package=gdb-dbg
+DEB_DH_STRIP_ARGS_GDB := --dbg-package=scylla-gdb-dbg
 
 # Override CDBS's default CFLAGS, which also includes -Wall; gdb
 # does not handle -Wunused well with -Werror, but defaults to
@@ -122,7 +122,7 @@ ifdef GDB_TARGET
 else
   # To avoid file conflicts, only enable the global gdbinit file for native
   # debuggers.
-  arch_config_args += --with-system-gdbinit=/etc/gdb/gdbinit
+  arch_config_args += --with-system-gdbinit=/opt/scylladb/etc/gdb/gdbinit --prefix=/opt/scylladb
 endif
 
 INSTALL = $(install)
@@ -203,14 +203,14 @@ BUILDDIRMIN := $(ALL_BUILDDIR)/gdb-minimal
 
 # This should probably be common-post-build-arch, but that runs during
 # install, under fakeroot, in CDBS 0.4.21.
-build/gdb$(TS):: check-stamp
+build/scylla-gdb$(TS):: check-stamp
 	$(MAKE) -C $(DEB_BUILDDIR) info
 	$(MAKE) -C $(DEB_BUILDDIR)/gdb/doc refcard.dvi refcard.ps
 
-build/gdb-doc:: check-stamp
+build/scylla-gdb-doc:: check-stamp
 	$(MAKE) -C $(DEB_BUILDDIR)/gdb/doc pdf html
 
-build/gdb64:: build64-stamp
+build/scylla-gdb64:: build64-stamp
 build64-stamp:
 	mkdir -p $(BUILDDIR64)
 	cd $(BUILDDIR64) && CC="$(CC64)" CFLAGS="$(CFLAGS64)" AR=ar \
@@ -218,7 +218,7 @@ build64-stamp:
 	cd $(BUILDDIR64) && $(DEB_MAKE_ENVVARS) $(MAKE) $(NJOBS)
 	touch $@
 
-build/gdb-multiarch:: build-multiarch-stamp
+build/scylla-gdb-multiarch:: build-multiarch-stamp
 build-multiarch-stamp:
 	mkdir -p $(BUILDDIRMULTIARCH)
 	cd $(BUILDDIRMULTIARCH) && CFLAGS="$(CFLAGS)" \
@@ -226,7 +226,7 @@ build-multiarch-stamp:
 	cd $(BUILDDIRMULTIARCH) && $(DEB_MAKE_ENVVARS) $(MAKE) $(NJOBS)
 	touch $@
 
-build/gdb-minimal:: build-minimal-stamp
+build/scylla-gdb-minimal:: build-minimal-stamp
 build-minimal-stamp:
 	mkdir -p $(BUILDDIRMIN)
 	cd $(BUILDDIRMIN) && CFLAGS="$(CFLAGS)" \
@@ -257,92 +257,93 @@ clean::
 	# updates the copy in the source directory.
 	find bfd -name bfd.info\* | xargs --no-run-if-empty touch
 
-binary-post-install/gdb$(TS) ::
-	if [ -x debian/tmp/usr/bin/run ]; then				\
-		mv debian/tmp/usr/bin/run					\
-		  debian/gdb$(TS)/usr/bin/$(DEB_TARGET_ALIAS)-run;		\
+binary-post-install/scylla-gdb$(TS) ::
+	if [ -x debian/tmp/opt/scylladb/bin/run ]; then				\
+		mv debian/tmp/opt/scylladb/bin/run					\
+		  debian/scylla-gdb$(TS)/opt/scylladb/bin/$(DEB_TARGET_ALIAS)-run;		\
 	fi
-	if [ -x debian/tmp/usr/share/man/man1/run.1 ]; then				\
-		mv debian/tmp/usr/share/man/man1/run.1			\
-		  debian/gdb$(TS)/usr/share/man/man1/$(DEB_TARGET_ALIAS)-run.1;	\
+	if [ -x debian/tmp/opt/scylladb/share/man/man1/run.1 ]; then				\
+		mv debian/tmp/opt/scylladb/share/man/man1/run.1			\
+		  debian/scylla-gdb$(TS)/opt/scylladb/share/man/man1/$(DEB_TARGET_ALIAS)-run.1;	\
 	fi
 ifeq ($(run_tests),yes)
-	install -d debian/gdb$(TS)/usr/share/doc/gdb
+	install -d debian/scylla-gdb$(TS)/opt/scylladb/share/doc/gdb
 	install -m 644 $(DEB_BUILDDIR)/gdb/testsuite/gdb.sum \
-		debian/gdb$(TS)/usr/share/doc/gdb/check.log
+		debian/scylla-gdb$(TS)/opt/scylladb/share/doc/gdb/check.log
 endif
 
 ifneq ($(DEB_CROSS),yes)
 	# Only ship a global gdbinit for the native GDB.
-	install -d debian/gdb$(TS)/etc/gdb
-	install -m 644 debian/gdbinit debian/gdb$(TS)/etc/gdb/
+	install -d debian/scylla-gdb$(TS)/opt/scylladb/etc/gdb
+	install -m 644 debian/gdbinit debian/scylla-gdb$(TS)/opt/scylladb/etc/gdb/
 	# Likewise gdb-add-index
-	install -m 755 gdb/contrib/gdb-add-index.sh debian/gdb$(TS)/usr/bin/gdb-add-index
+	install -m 755 gdb/contrib/gdb-add-index.sh debian/scylla-gdb$(TS)/opt/scylladb/bin/gdb-add-index
 endif
 
-	rm -f debian/gdb$(TS)/usr/bin/$(TP)gdbtui
-	install -m 755 debian/gdbtui debian/gdb$(TS)/usr/bin/$(TP)gdbtui
+	rm -f debian/scylla-gdb$(TS)/opt/scylladb/bin/$(TP)gdbtui
+	install -m 755 debian/gdbtui debian/scylla-gdb$(TS)/opt/scylladb/bin/$(TP)gdbtui
 
-binary-post-install/gdb-doc ::
-	install -d debian/gdb-doc/usr/share/info
-	install -m 644 debian/tmp/usr/share/info/gdb.info debian/gdb-doc/usr/share/info/.
-	install -m 644 debian/tmp/usr/share/info/stabs.info debian/gdb-doc/usr/share/info/.
+binary-post-install/scylla-gdb-doc ::
+	install -d debian/scylla-gdb-doc/opt/scylladb/share/info
+	install -m 644 debian/tmp/opt/scylladb/share/info/gdb.info debian/scylla-gdb-doc/opt/scylladb/share/info/.
+	install -m 644 debian/tmp/opt/scylladb/share/info/stabs.info debian/scylla-gdb-doc/opt/scylladb/share/info/.
 
-	$(MAKE) -C $(DEB_BUILDDIR)/gdb/doc DESTDIR=$(CURDIR)/debian/gdb-doc \
-		pdfdir=/usr/share/doc/gdb-doc/pdf \
-		htmldir=/usr/share/doc/gdb-doc/html \
+	$(MAKE) -C $(DEB_BUILDDIR)/gdb/doc DESTDIR=$(CURDIR)/debian/scylla-gdb-doc \
+		pdfdir=/opt/scylladb/share/doc/gdb-doc/pdf \
+		htmldir=/opt/scylladb/share/doc/gdb-doc/html \
 		install-html install-pdf
 	: # This manual documents a long-obsolete facility
-	rm -f debian/gdb-doc/usr/share/info/annota*
-	rm -rf debian/gdb-doc/usr/share/doc/gdb-doc/*/annota*
+	rm -f debian/scylla-gdb-doc/opt/scylladb/share/info/annota*
+	rm -rf debian/scylla-gdb-doc/opt/scylladb/share/doc/gdb-doc/*/annota*
 
-	rm -f debian/gdb-doc/usr/share/info/dir*
+	rm -f debian/scylla-gdb-doc/opt/scylladb/share/info/dir*
 
 	: # Symlink stuff into gdb's doc directory
-	install -d debian/gdb-doc/usr/share/doc/gdb
-	ln -s ../gdb-doc/html debian/gdb-doc/usr/share/doc/gdb/html
-	ln -s ../gdb-doc/pdf debian/gdb-doc/usr/share/doc/gdb/pdf
+	install -d debian/scylla-gdb-doc/opt/scylladb/share/doc/gdb
+	ln -s ../gdb-doc/html debian/scylla-gdb-doc/opt/scylladb/share/doc/gdb/html
+	ln -s ../gdb-doc/pdf debian/scylla-gdb-doc/opt/scylladb/share/doc/gdb/pdf
 
-binary-post-install/gdb64 ::
-	install -d debian/gdb64/usr/bin
-	install -s -m 755 $(BUILDDIR64)/gdb/gdb debian/gdb64/usr/bin/gdb64
-	rm -rf debian/gdb64/usr/share/doc/gdb64
-	ln -s gdb debian/gdb64/usr/share/doc/gdb64
+binary-post-install/scylla-gdb64 ::
+	install -d debian/scylla-gdb64/opt/scylladb/bin
+	install -s -m 755 $(BUILDDIR64)/gdb/gdb debian/scylla-gdb64/opt/scylladb/bin/gdb64
+	rm -rf debian/scylla-gdb64/opt/scylladb/share/doc/gdb64
+	ln -sf gdb debian/scylla-gdb64/opt/scylladb/share/doc/gdb64
 
-binary-post-install/gdb-multiarch ::
-	install -d debian/gdb-multiarch/usr/bin
-	install -s -m 755 $(BUILDDIRMULTIARCH)/gdb/gdb debian/gdb-multiarch/usr/bin/gdb-multiarch
-	rm -rf debian/gdb-multiarch/usr/share/doc/gdb-multiarch
-	ln -s gdb debian/gdb-multiarch/usr/share/doc/gdb-multiarch
+binary-post-install/scylla-gdb-multiarch ::
+	install -d debian/scylla-gdb-multiarch/opt/scylladb/bin
+	install -d debian/scylla-gdb-multiarch/opt/scylladb/share/doc/gdb-multiarch
+	install -s -m 755 $(BUILDDIRMULTIARCH)/gdb/gdb debian/scylla-gdb-multiarch/opt/scylladb/bin/gdb-multiarch
+	rm -rf debian/scylla-gdb-multiarch/opt/scylladb/share/doc/gdb-multiarch
+	ln -sf gdb debian/scylla-gdb-multiarch/opt/scylladb/share/doc/gdb-multiarch
 
-binary-post-install/gdbserver ::
-	install -d debian/gdbserver/usr/lib
+binary-post-install/scylla-gdbserver ::
+	install -d debian/scylla-gdbserver/opt/scylladb/lib
 	# This file is only built on some arches (x86 ones, so far)
-	if [ -f debian/tmp/usr/lib/libinproctrace.so ]; then \
-	  mkdir -p debian/gdbserver/usr/lib/$(DEB_HOST_MULTIARCH); \
-	  install debian/tmp/usr/lib/libinproctrace.so debian/gdbserver/usr/lib/$(DEB_HOST_MULTIARCH); \
+	if [ -f debian/tmp/opt/scylladb/lib/libinproctrace.so ]; then \
+	  mkdir -p debian/scylla-gdbserver/opt/scylladb/lib/$(DEB_HOST_MULTIARCH); \
+	  install debian/tmp/opt/scylladb/lib/libinproctrace.so debian/scylla-gdbserver/opt/scylladb/lib/$(DEB_HOST_MULTIARCH); \
 	fi
 
-binary-post-install/gdb-minimal ::
-	install -d debian/gdb-minimal/usr/bin
+binary-post-install/scylla-gdb-minimal ::
+	install -d debian/scylla-gdb-minimal/opt/scylladb/bin
 	$(INSTALL) -m 755 -o root -g root \
-		$(BUILDDIRMIN)/gdb/gdb debian/gdb-minimal/usr/bin/gdb
+		$(BUILDDIRMIN)/gdb/gdb debian/scylla-gdb-minimal/opt/scylladb/bin/gdb
 
 	$(INSTALL) -m 755 -o root -g root \
-		$(BUILDDIRMIN)/gdb/gcore debian/gdb-minimal/usr/bin/gcore
+		$(BUILDDIRMIN)/gdb/gcore debian/scylla-gdb-minimal/opt/scylladb/bin/gcore
 
 	# Only ship a global gdbinit for the native GDB.
-	install -d debian/gdb-minimal/etc/gdb
-	install -m 644 debian/gdbinit debian/gdb-minimal/etc/gdb/
+	install -d debian/scylla-gdb-minimal/opt/scylladb/etc/gdb
+	install -m 644 debian/gdbinit debian/scylla-gdb-minimal/opt/scylladb/etc/gdb/
 
-binary-post-install/gdb-source ::
-	install -d debian/gdb-source/usr/src
+binary-post-install/scylla-gdb-source ::
+	install -d debian/scylla-gdb-source/opt/scylladb/src
 	mkdir -p $(BUILDDIRSOURCE)
 	tar --exclude build --exclude .git -cf - . \
 	  | (cd $(BUILDDIRSOURCE) && tar -xf -)
 	cd $(BUILDDIRSOURCE) && debian/rules clean
 	cd $(dir $(BUILDDIRSOURCE)) \
-	  && tar -cjf $(shell pwd)/debian/gdb-source/usr/src/gdb.tar.bz2 \
+	  && tar -cjf $(shell pwd)/debian/scylla-gdb-source/opt/scylladb/src/gdb.tar.bz2 \
 	     $(notdir $(BUILDDIRSOURCE))
 
 debian/control:: debian/control.in $(CROSS_FORCE)
@@ -356,27 +357,27 @@ ifeq ($(DEB_CROSS),yes)
 endif
 
 # The default changelog is the top level one, which is useless.
-DEB_INSTALL_CHANGELOGS_ALL =
-
-DEB_INSTALL_DOCS_gdb$(TS) = gdb/NEWS gdb/README gdb/doc/refcard.tex \
-	$(DEB_BUILDDIR)/gdb/doc/refcard.dvi \
-	$(DEB_BUILDDIR)/gdb/doc/refcard.ps \
-	debian/README.python_switch \
-	gdb/contrib/
-DEB_INSTALL_CHANGELOGS_gdb$(TS) = gdb/ChangeLog
-ifneq ($(DEB_CROSS),yes)
-DEB_INSTALL_MANPAGES_gdb$(TS) = $(DEB_BUILDDIR)/gdb/doc/gdb.1 \
-	$(DEB_BUILDDIR)/gdb/doc/gcore.1
-endif
-
-DEB_INSTALL_DOCS_gdbserver = gdb/gdbserver/README
-DEB_INSTALL_CHANGELOGS_gdbserver = gdb/gdbserver/ChangeLog
-ifneq ($(DEB_CROSS),yes)
-DEB_INSTALL_MANPAGES_gdbserver = $(DEB_BUILDDIR)/gdb/doc/gdbserver.1
-endif
-
-DEB_INSTALL_DOCS_gdb-minimal = $(DEB_INSTALL_DOCS_gdb$(TS))
-DEB_INSTALL_CHANGELOGS_gdb-minimal = -XChangeLog
+#DEB_INSTALL_CHANGELOGS_ALL =
+#
+#DEB_INSTALL_DOCS_gdb$(TS) = gdb/NEWS gdb/README gdb/doc/refcard.tex \
+#	$(DEB_BUILDDIR)/gdb/doc/refcard.dvi \
+#	$(DEB_BUILDDIR)/gdb/doc/refcard.ps \
+#	debian/README.python_switch \
+#	gdb/contrib/
+#DEB_INSTALL_CHANGELOGS_gdb$(TS) = gdb/ChangeLog
+#ifneq ($(DEB_CROSS),yes)
+#DEB_INSTALL_MANPAGES_gdb$(TS) = $(DEB_BUILDDIR)/gdb/doc/gdb.1 \
+#	$(DEB_BUILDDIR)/gdb/doc/gcore.1
+#endif
+#
+#DEB_INSTALL_DOCS_gdbserver = gdb/gdbserver/README
+#DEB_INSTALL_CHANGELOGS_gdbserver = gdb/gdbserver/ChangeLog
+#ifneq ($(DEB_CROSS),yes)
+#DEB_INSTALL_MANPAGES_gdbserver = $(DEB_BUILDDIR)/gdb/doc/gdbserver.1
+#endif
+#
+#DEB_INSTALL_DOCS_gdb-minimal = $(DEB_INSTALL_DOCS_gdb$(TS))
+#DEB_INSTALL_CHANGELOGS_gdb-minimal = -XChangeLog
 
 .PHONY: FORCE
 FORCE:

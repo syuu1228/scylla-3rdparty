@@ -1,0 +1,15 @@
+Document: stabs
+Title: The "stabs" debugging format.
+Abstract: This document describes the stabs debugging format.
+Section: Programming
+
+Format: Info
+Index: /opt/scylladb/share/info/stabs.info.gz
+Files: /opt/scylladb/share/info/stabs.info*
+
+Format: HTML
+Index: /opt/scylladb/share/doc/gdb-doc/html/stabs/index.html
+Files: /opt/scylladb/share/doc/gdb-doc/html/stabs/*.html
+
+Format: PDF
+Files: /opt/scylladb/share/doc/gdb-doc/pdf/stabs.pdf.gz

@@ -1,0 +1,3 @@
+opt/scylladb/bin/gdb
+opt/scylladb/bin/gcore
+opt/scylladb/share/gdb

@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+# Replace documentation directory with symlink
+if [ -d /opt/scylladb/share/doc/gdb64 ] && [ ! -L /opt/scylladb/share/doc/gdb64 ]; then
+    if rmdir /opt/scylladb/share/doc/gdb64 2>/dev/null; then
+        ln -sf gdb /opt/scylladb/share/doc/gdb64
+    fi
+fi
+
+#DEBHELPER#
+
+exit 0

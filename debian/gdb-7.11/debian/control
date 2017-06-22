@@ -1,7 +1,6 @@
-Source: gdb
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Source: scylla-gdb
+Maintainer: Takuya ASADA <syuu@scylladb.com>
 XSBC-Original-Maintainer: Héctor Orón Martínez <zumbi@debian.org>
-Uploaders: Luca Bruno <lucab@debian.org>, Samuel Bronson <naesten@gmail.com>
 Section: devel
 Priority: optional
 Standards-Version: 3.9.6
@@ -47,18 +46,19 @@ Vcs-Git: git://anonscm.debian.org/pkg-gdb/gdb.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-gdb/gdb.git
 Homepage: http://www.gnu.org/s/gdb/
 
-Package: gdb
+Package: scylla-gdb
 Architecture: any
 Multi-Arch: allowed
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         ${python3:Depends}
+         ${python3:Depends},
+         scylla-env
 Recommends: libc-dbg,
 	    libcc1-0,
-            gdbserver [amd64 armel armhf arm64 i386 ia64 m32r m68k mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x x32]
-Suggests: gdb-doc
-Conflicts: gdb
-Replaces: gdb, gdb-doc (<< 7.8-1~)
+            scylla-gdbserver [amd64 armel armhf arm64 i386 ia64 m32r m68k mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x x32]
+Suggests: scylla-gdb-doc
+Conflicts: scylla-gdb
+Replaces: scylla-gdb, scylla-gdb-doc (<< 7.8-1~)
 Description: GNU Debugger
  GDB is a source-level debugger, capable of breaking programs at
  any specific line, displaying variable values, and determining
@@ -66,10 +66,10 @@ Description: GNU Debugger
  Objective-C, Fortran, Java, OpenCL C, Pascal, assembly, Modula-2,
  Go, and Ada. A must-have for any serious programmer.
 
-Package: gdb64
+Package: scylla-gdb64
 Architecture: i386 powerpc s390 sparc
-Replaces: gdb-multiarch (<< 7.6-1)
-Depends: gdb (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Replaces: scylla-gdb-multiarch (<< 7.6-1)
+Depends: scylla-gdb (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
 Description: GNU Debugger (64-bit)
  GDB is a source-level debugger, capable of breaking programs at
  any specific line, displaying variable values, and determining
@@ -80,9 +80,9 @@ Description: GNU Debugger (64-bit)
  This package contains a version of GDB compiled for a 64-bit variant
  of its architecture.
 
-Package: gdb-multiarch
+Package: scylla-gdb-multiarch
 Architecture: any
-Depends: gdb (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Depends: scylla-gdb (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
 Description: GNU Debugger (with support for multiple architectures)
  GDB is a source-level debugger, capable of breaking programs at
  any specific line, displaying variable values, and determining
@@ -93,10 +93,10 @@ Description: GNU Debugger (with support for multiple architectures)
  This package contains a version of GDB which supports multiple
  target architectures.
 
-Package: gdbserver
+Package: scylla-gdbserver
 Architecture: amd64 armel armhf arm64 i386 ia64 m32r m68k mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x x32
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Replaces: gdb (<< 7.0.1-1)
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
+Replaces: scylla-gdb (<< 7.0.1-1)
 Description: GNU Debugger (remote server)
  GDB is a source-level debugger, capable of breaking programs at
  any specific line, displaying variable values, and determining
@@ -107,7 +107,7 @@ Description: GNU Debugger (remote server)
  This package contains gdbserver.  Install this to debug remotely
  from another system where GDB is installed.
 
-Package: gdb-source
+Package: scylla-gdb-source
 Architecture: all
 Depends: ${misc:Depends}
 Description: GNU Debugger (source)
@@ -120,11 +120,11 @@ Description: GNU Debugger (source)
  This package contains the sources and patches which are needed
  to build GDB.
 
-Package: gdb-dbg
+Package: scylla-gdb-dbg
 Section: debug
 Priority: extra
 Architecture: any
-Depends: ${misc:Depends}, gdb (= ${binary:Version})
+Depends: ${misc:Depends}, scylla-gdb (= ${binary:Version})
 Description: GNU Debugger (debug package)
  GDB is a source-level debugger, capable of breaking programs at
  any specific line, displaying variable values, and determining
@@ -135,12 +135,12 @@ Description: GNU Debugger (debug package)
  This package contains the detached debugging symbols for the GNU
  GDB.
 
-Package: gdb-doc
+Package: scylla-gdb-doc
 Architecture: all
 Section: doc
 Depends: ${misc:Depends}
-Breaks: gdb (<< 7.8), gdbserver (<< 7.8)
-Replaces: gdb (<< 7.8), gdbserver (<< 7.8)
+Breaks: scylla-gdb (<< 7.8), scylla-gdbserver (<< 7.8)
+Replaces: scylla-gdb (<< 7.8), scylla-gdbserver (<< 7.8)
 Description: The GNU Debugger Documentation
  GDB is a source-level debugger, capable of breaking programs at
  any specific line, displaying variable values, and determining
