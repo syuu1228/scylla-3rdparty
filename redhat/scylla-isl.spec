@@ -1,5 +1,5 @@
 Summary: Integer point manipulation library
-Name: isl
+Name: scylla-isl
 Version: 0.14
 License: MIT
 Group: System Environment/Libraries
@@ -17,8 +17,10 @@ Release: 4%{?buildid}%{?dist}
 
 BuildRequires: gmp-devel
 BuildRequires: pkgconfig
+Requires: scylla-env
 
 Source0: http://isl.gforge.inria.fr/isl-%{version}.tar.xz
+%define _prefix /opt/scylladb
 
 %description
 isl is a library for manipulating sets and relations of integer points
@@ -32,7 +34,8 @@ graphs), dependence analysis and bounds on piecewise step-polynomials.
 
 %package devel
 Summary: Development for building integer point manipulation library
-Requires: isl%{?_isa} == %{version}-%{release}
+Requires: scylla-env
+Requires: scylla-isl%{?_isa} == %{version}-%{release}
 Requires: gmp-devel%{?_isa}
 Group: Development/Libraries
 
@@ -47,7 +50,7 @@ basis reduction, transitive closures on maps (which may encode infinite
 graphs), dependence analysis and bounds on piecewise step-polynomials.
 
 %prep
-%setup -q
+%setup -q -n isl-%{version}
 
 %build
 %configure
