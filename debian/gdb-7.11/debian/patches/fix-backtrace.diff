@@ -1,0 +1,11 @@
+--- a/gdb/python/py-framefilter.c
++++ b/gdb/python/py-framefilter.c
+@@ -1122,7 +1122,7 @@ py_print_frame (PyObject *filter, int fl
+ 
+ 	  if (paddr != Py_None)
+ 	    {
+-	      address = PyLong_AsLong (paddr);
++	      address = PyLong_AsUnsignedLongLong (paddr);
+ 	      has_addr = 1;
+ 	    }
+ 	  Py_DECREF (paddr);

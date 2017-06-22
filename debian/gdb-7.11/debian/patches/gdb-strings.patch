@@ -1,0 +1,13 @@
+Index: b/gdb/remote.c
+===================================================================
+--- a/gdb/remote.c
++++ b/gdb/remote.c
+@@ -8563,7 +8563,7 @@ compare_sections_command (char *args, in
+       do_cleanups (old_chain);
+     }
+   if (mismatched > 0)
+-    warning (_("One or more sections of the target image does not match\n\
++    warning (_("One or more sections of the target image do not match\n\
+ the loaded file\n"));
+   if (args && !matched)
+     printf_filtered (_("No loaded section named '%s'.\n"), args);
