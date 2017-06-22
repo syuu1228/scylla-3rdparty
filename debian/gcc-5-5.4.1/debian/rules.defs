@@ -412,7 +412,7 @@ endif
 # gcc versions (fixincludes, libgcj-common) ...
 #with_common_pkgs := yes
 # ... and some libraries, which do not change (libgcc1, libssp0).
-#with_common_libs := yes
+with_common_libs := yes
 # XXX: should with_common_libs be "yes" only if this is the default compiler
 # version on the targeted arch?
 
@@ -560,7 +560,7 @@ endif
 # C ---------------------------
 enabled_languages := c
 
-with_jit = yes
+with_jit = no
 
 # FIXME: compiler bug
 jit_no_cpus	:= ia64
@@ -659,6 +659,8 @@ ifneq (,$(filter $(distrelease),lucid))
   with_ada :=
 endif
 with_ada := $(call envfilt, ada, , , $(with_ada))
+
+with_ada := no
 
 
 ifeq ($(DEB_STAGE)-$(filter libgnat, $(with_rtlibs)),rtlibs-)
@@ -785,6 +787,8 @@ ifeq ($(java_no_cross)-$(DEB_CROSS),yes-yes)
   with_java := disabled for cross compiler package
 endif
 with_java := $(call envfilt, java, , c++, $(with_java))
+
+with_java := no
 
 ifeq ($(DEB_STAGE)-$(filter libgcj, $(with_rtlibs)),rtlibs-)
   with_java := disabled for rtlibs stage
@@ -915,6 +919,8 @@ ifeq ($(DEB_STAGE)-$(filter libgo, $(with_rtlibs)),rtlibs-)
 endif
 with_go := $(call envfilt, go, , , $(with_go))
 
+with_go := no
+
 # Build all packages needed for Go development
 ifneq (,$(findstring gcc, $(PKGSOURCE)))
   ifeq ($(with_go),yes)
@@ -960,6 +966,8 @@ ifeq ($(DEB_STAGE)-$(filter libphobos, $(with_rtlibs)),rtlibs-)
   with_d := disabled for rtlibs stage
 endif
 with_d := $(call envfilt, d, , , $(with_d))
+
+with_d := no
 
 ifeq ($(with_base_only),yes)
   with_d := no
@@ -1016,6 +1024,8 @@ endif
 
 with_fortran := $(call envfilt, fortran, , , $(with_fortran))
 
+with_fortran := no
+
 # Build all packages needed for Fortran development
 ifeq ($(with_fortran),yes)
   ifeq ($(with_dev),yes)
@@ -1063,6 +1073,8 @@ ifeq ($(DEB_STAGE)-$(filter libobjc, $(with_rtlibs)),rtlibs-)
 endif
 with_objc := $(call envfilt, objc, obj-c++, , $(with_objc))
 
+with_objc := no
+
 ifeq ($(with_objc),yes)
   # the ObjC runtime with garbage collection enabled needs the Boehm GC
   with_objc_gc := yes
@@ -1102,6 +1114,8 @@ ifeq ($(objcxx_no_cross)-$(DEB_CROSS),yes-yes)
   with_objcxx := disabled for cross compiler package
 endif
 with_objcxx := $(call envfilt, obj-c++, , c++ objc, $(with_objcxx))
+
+with_objcxx := no
 
 ifeq ($(with_objcxx),yes)
   enabled_languages += obj-c++
@@ -1480,6 +1494,9 @@ ifneq (,$(findstring gdc,$(PKGSOURCE)))
   with_check := disabled for D
 endif
 with_check := $(call envfilt, check, , , $(with_check))
+
+with_check := no
+
 ifdef WITHOUT_CHECK
   with_check := disabled by environment
 endif
