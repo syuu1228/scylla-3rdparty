@@ -1,0 +1,83 @@
+# DP: C++ PATCH for implicit abi_tag on template member function
+
+https://gcc.gnu.org/ml/gcc-patches/2016-04/msg00472.html
+
+gcc/cp/
+
+2016-04-11  Jason Merrill  <jason@redhat.com>
+
+	* mangle.c (decl_is_template_id): The template itself counts as a
+	template-id.
+
+2016-04-06  Jason Merrill  <jason@redhat.com>
+
+	* class.c (check_abi_tags): Fix function template handling.
+
+--- a/src/gcc/testsuite/g++.dg/abi/abi-tag19.C
++++ b/src/gcc/testsuite/g++.dg/abi/abi-tag19.C
+@@ -0,0 +1,4 @@
++struct __attribute__((abi_tag("a"))) X { };
++template<typename T> struct Y { X f() { return X(); } };
++template struct Y<int>;
++// { dg-final { scan-assembler "_ZN1YIiE1fB1aEv" } }
+--- a/src/gcc/testsuite/g++.dg/abi/abi-tag20.C
++++ b/src/gcc/testsuite/g++.dg/abi/abi-tag20.C
+@@ -0,0 +1,15 @@
++// { dg-do compile { target c++11 } }
++// { dg-final { scan-assembler "_ZN1B1gIcEEN7__cxx111XEv" } }
++
++inline namespace __cxx11 __attribute__((__abi_tag__ ("ABI_TAG"))) {
++  class X {};
++}
++struct B {
++  X f();
++  template <class U> X g();
++};
++int main() {
++  B b;
++  b.g<char>();
++  return 0;
++}
+--- a/src/gcc/cp/class.c
++++ b/src/gcc/cp/class.c
+@@ -1602,6 +1602,15 @@
+ void
+ check_abi_tags (tree decl)
+ {
++  tree t;
++  if (abi_version_at_least (10)
++      && DECL_LANG_SPECIFIC (decl)
++      && DECL_USE_TEMPLATE (decl)
++      && (t = DECL_TEMPLATE_RESULT (DECL_TI_TEMPLATE (decl)),
++	  t != decl))
++    /* Make sure that our template has the appropriate tags, since
++       write_unqualified_name looks for them there.  */
++    check_abi_tags (t);
+   if (TREE_CODE (decl) == VAR_DECL)
+     check_abi_tags (decl, TREE_TYPE (decl));
+   else if (TREE_CODE (decl) == FUNCTION_DECL
+--- a/src/gcc/cp/mangle.c
++++ b/src/gcc/cp/mangle.c
+@@ -278,9 +278,9 @@
+ #define write_unsigned_number(NUMBER)					\
+   write_number ((NUMBER), /*unsigned_p=*/1, 10)
+ 
+-/* If DECL is a template instance, return nonzero and, if
+-   TEMPLATE_INFO is non-NULL, set *TEMPLATE_INFO to its template info.
+-   Otherwise return zero.  */
++/* If DECL is a template instance (including the uninstantiated template
++   itself), return nonzero and, if TEMPLATE_INFO is non-NULL, set
++   *TEMPLATE_INFO to its template info.  Otherwise return zero.  */
+ 
+ static int
+ decl_is_template_id (const tree decl, tree* const template_info)
+@@ -304,7 +304,8 @@
+     {
+       /* Check if this is a primary template.  */
+       if (DECL_LANG_SPECIFIC (decl) != NULL
+-	  && DECL_USE_TEMPLATE (decl)
++	  && VAR_OR_FUNCTION_DECL_P (decl)
++	  && DECL_TEMPLATE_INFO (decl)
+ 	  && PRIMARY_TEMPLATE_P (DECL_TI_TEMPLATE (decl))
+ 	  && TREE_CODE (decl) != TEMPLATE_DECL)
+ 	{
