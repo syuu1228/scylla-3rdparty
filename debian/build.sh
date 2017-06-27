@@ -2,7 +2,8 @@
 
 . /etc/os-release
 print_usage() {
-    echo "build.sh --name <name> --email <mail> --suffix-count <n>"
+    echo "build.sh --target <dist> --name <name> --email <mail> --suffix-count <n>"
+    echo "  --target    specify target distribution"
     echo "  --name  maintainer name"
     echo "  --email  maintainer email"
     echo "  --suffix-count  the number append to local version"
@@ -12,8 +13,13 @@ print_usage() {
 
 COUNT=1
 PPA=0
+TARGET=
 while [ $# -gt 0 ]; do
     case "$1" in
+        "--target")
+            TARGET=$2
+            shift 2
+            ;;
         "--suffix-count")
             COUNT=$2
             shift 2
@@ -59,16 +65,20 @@ if [ ! -f /usr/bin/cdbs-edit-patch ]; then
 fi
 CODENAME=`lsb_release -c|awk '{print $2}'`
 
+if [ -z "$TARGET" ]; then
+    TARGET=$CODENAME
+fi
+
 rm -rf build
 mkdir -p build
 
-if [ "$CODENAME" = "trusty" ] || [ "$CODENAME" = "jessie" ]; then
+if [ "$TARGET" = "trusty" ] || [ "$TARGET" = "jessie" ]; then
     cp -a common/antlr3-3.5.2 build/
     cp -a debian/antlr3-3.5.2/debian build/antlr3-3.5.2/
     cd build/antlr3-3.5.2
     wget http://www.antlr3.org/download/antlr-3.5.2-complete-no-st3.jar
     for ((i=0; i < $COUNT; i++)); do
-        dch --distribution $CODENAME -l ~${CODENAME}ppa "generate ppa package for $CODENAME."
+        dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
     done
     debuild -r fakeroot --no-tgz-check -S -sa
     cd -
@@ -77,7 +87,7 @@ if [ "$CODENAME" = "trusty" ] || [ "$CODENAME" = "jessie" ]; then
     cp -a debian/scylla-env-1.0/debian build/scylla-env-1.0/
     cd build/scylla-env-1.0
     for ((i=0; i < $COUNT; i++)); do
-        dch --distribution $CODENAME -l ~${CODENAME}ppa "generate ppa package for $CODENAME."
+        dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
     done
     debuild -r fakeroot --no-tgz-check -S -sa
     cd -
@@ -93,13 +103,13 @@ if [ "$CODENAME" = "trusty" ] || [ "$CODENAME" = "jessie" ]; then
     fi
     cd build
     dpkg-source -x gdb_7.11-0ubuntu1.dsc
-    mv gdb_7.11.orig.tar.xz scylla-gdb_7.11.orig.tar.xz
+    mv gdb_7.11.orig.tar.xz scylla-gdb711_7.11.orig.tar.xz
     cd -
     rm -rf build/gdb-7.11/debian
     cp -a debian/gdb-7.11/debian build/gdb-7.11/
     cd build/gdb-7.11
     for ((i=0; i < $COUNT; i++)); do
-        dch --distribution $CODENAME -l ~${CODENAME}ppa "generate ppa package for $CODENAME."
+        dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
     done
     debuild -r fakeroot --no-tgz-check -S -sa
     cd -
@@ -113,7 +123,7 @@ cd -
 cp -a debian/antlr3-c++-dev-3.5.2/debian build/antlr3-c++-dev-3.5.2
 cd build/antlr3-c++-dev-3.5.2
 for ((i=0; i < $COUNT; i++)); do
-    dch --distribution $CODENAME -l ~${CODENAME}ppa "generate ppa package for $CODENAME."
+    dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
 done
 debuild -r fakeroot --no-tgz-check -S -sa
 cd -
@@ -125,12 +135,12 @@ cd -
 cp -a debian/thrift-0.9.3/debian build/thrift-0.9.3/
 cd build/thrift-0.9.3
 for ((i=0; i < $COUNT; i++)); do
-    dch --distribution $CODENAME -l ~${CODENAME}ppa "generate ppa package for $CODENAME."
+    dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
 done
 debuild -r fakeroot --no-tgz-check -S -sa
 cd -
 
-if [ "$CODENAME" = "jessie" ]; then
+if [ "$TARGET" = "jessie" ]; then
     cd build
     wget https://launchpad.net/debian/+archive/primary/+files/gcc-5_5.4.1-5.dsc
     wget https://launchpad.net/debian/+archive/primary/+files/gcc-5_5.4.1.orig.tar.gz
@@ -143,7 +153,7 @@ if [ "$CODENAME" = "jessie" ]; then
     sudo apt-get install -y g++-multilib libc6-dev-i386 lib32gcc1 libc6-dev-x32 libx32gcc1 libc6-dbg m4 libtool autoconf2.64 autogen gawk zlib1g-dev systemtap-sdt-dev gperf bison flex gdb texinfo locales sharutils libantlr-java libffi-dev gnat-4.9 libisl-dev libmpc-dev libmpfr-dev libgmp-dev dejagnu realpath chrpath quilt doxygen graphviz ghostscript texlive-latex-base xsltproc libxml2-utils docbook-xsl-ns
     ./debian/rules control
     for ((i=0; i < $COUNT; i++)); do
-        dch --distribution $CODENAME -l ~${CODENAME}ppa "generate ppa package for $CODENAME."
+        dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
     done
     debuild -r fakeroot -S -sa
     cd -
