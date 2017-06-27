@@ -92,15 +92,9 @@ if [ "$TARGET" = "trusty" ] || [ "$TARGET" = "jessie" ]; then
     debuild -r fakeroot --no-tgz-check -S -sa
     cd -
 
-    if [ ! -f build/gdb_7.11-0ubuntu1.dsc ]; then
-        wget -O build/gdb_7.11-0ubuntu1.dsc http://archive.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.11-0ubuntu1.dsc
-    fi
-    if [ ! -f build/gdb_7.11.orig.tar.xz ]; then
-        wget -O build/gdb_7.11.orig.tar.xz http://archive.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.11.orig.tar.xz
-    fi
-    if [ ! -f build/gdb_7.11-0ubuntu1.debian.tar.xz ]; then
-        wget -O build/gdb_7.11-0ubuntu1.debian.tar.xz http://archive.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.11-0ubuntu1.debian.tar.xz
-    fi
+    wget -O build/gdb_7.11-0ubuntu1.dsc http://archive.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.11-0ubuntu1.dsc
+    wget -O build/gdb_7.11.orig.tar.xz http://archive.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.11.orig.tar.xz
+    wget -O build/gdb_7.11-0ubuntu1.debian.tar.xz http://archive.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.11-0ubuntu1.debian.tar.xz
     cd build
     dpkg-source -x gdb_7.11-0ubuntu1.dsc
     mv gdb_7.11.orig.tar.xz scylla-gdb711_7.11.orig.tar.xz
