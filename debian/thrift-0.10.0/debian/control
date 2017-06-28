@@ -1,0 +1,37 @@
+Source: thrift0100
+Section: devel
+Priority: extra
+Build-Depends: debhelper (>= 9), build-essential, autoconf, automake,
+    pkg-config, libtool, bison, flex, libboost-dev | libboost1.53-dev,
+    libboost-test-dev | libboost-test1.53-dev, libevent-dev, libssl-dev, 
+    libglib2.0-dev, qtchooser, qtbase5-dev-tools
+Maintainer: Thrift Developer's <dev@thrift.apache.org>
+Homepage: http://thrift.apache.org/
+Vcs-Git: https://git-wip-us.apache.org/repos/asf/thrift.git
+Vcs-Browser: https://git-wip-us.apache.org/repos/asf?p=thrift.git
+Standards-Version: 3.9.7
+X-Python-Version: >= 2.6
+X-Python3-Version: >= 3.3
+
+Package: libthrift0100
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Thrift C++ library
+ Thrift is a software framework for scalable cross-language services
+ development. It combines a software stack with a code generation engine to
+ build services that work efficiently and seamlessly.
+ .
+ This package contains the runtime libraries needed for C++ applications
+ using Thrift.
+
+Package: libthrift0100-dev
+Architecture: any
+Section: libdevel
+Depends: ${shlibs:Depends}, ${misc:Depends}, libthrift0100 (= ${binary:Version}), libglib2.0-dev
+Description: Thrift C++ library (development headers)
+ Thrift is a software framework for scalable cross-language services
+ development. It combines a software stack with a code generation engine to
+ build services that work efficiently and seamlessly.
+ .
+ This package contains the development libraries required for writing C++
+ applications using Thrift.
