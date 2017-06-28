@@ -119,6 +119,6 @@ if [ "$TARGET" = "jessie" ]; then
     # resolve build time dependencies manually, since mk-build-deps doesn't works for gcc package
     sudo apt-get install -y g++-multilib libc6-dev-i386 lib32gcc1 libc6-dev-x32 libx32gcc1 libc6-dbg m4 libtool autoconf2.64 autogen gawk zlib1g-dev systemtap-sdt-dev gperf bison flex gdb texinfo locales sharutils libantlr-java libffi-dev gnat-4.9 libisl-dev libmpc-dev libmpfr-dev libgmp-dev dejagnu realpath chrpath quilt doxygen graphviz ghostscript texlive-latex-base xsltproc libxml2-utils docbook-xsl-ns
     ./debian/rules control
-    debuild -r fakeroot -S -sa
+    debuild -r fakeroot --no-tgz-check -S -sa
     cd -
 fi
