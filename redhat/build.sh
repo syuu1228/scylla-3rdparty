@@ -63,58 +63,58 @@ cd -
 
 if [ ! -f build/srpms/scylla-env-1.0-1.el7*.src.rpm ]; then
     cd common
-    tar cpf ../../../build/scylla-env-1.0.tar scylla-env-1.0
+    tar cpf ../build/scylla-env-1.0.tar scylla-env-1.0
     cd -
     sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-env.spec --sources=build/
 fi
 
 if [ ! -f build/srpms/scylla-binutils-2.25-15.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/binutils-2.25-15.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-binutils.spec --sources=$RPMBUILD/SOURCES
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-binutils225.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-isl-0.14-4.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/isl-0.14-4.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-isl.spec --sources=$RPMBUILD/SOURCES
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-isl014.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-gcc-5.3.1-2.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/gcc-5.3.1-2.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-gcc.spec --sources=$RPMBUILD/SOURCES
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-gcc531.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-boost-1.58.0-11.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/boost-1.58.0-11.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-boost.spec --sources=$RPMBUILD/SOURCES
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-boost158.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-ragel-6.8-5.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/ragel-6.8-5.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-ragel.spec --sources=$RPMBUILD/SOURCES
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-ragel68.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-gdb-7.10.1-30.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/gdb-7.10.1-30.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-gdb.spec --sources=$RPMBUILD/SOURCES
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-gdb7101.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/pyparsing-2.0.3-2.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/pyparsing-2.0.3-2.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/pyparsing.spec --sources=$RPMBUILD/SOURCES
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/pyparsing203.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-antlr3-tool-3.5.2-1.el7*.src.rpm ]; then
-    cp -a common/antlr3-3.5.2 build/scylla-antlr3-tool-3.5.2
-    cd build/scylla-antlr3-tool-3.5.2
+    cp -a common/antlr3-3.5.2 build/scylla-antlr352-tool-3.5.2
+    cd build/scylla-antlr352-tool-3.5.2
     wget http://www.antlr3.org/download/antlr-3.5.2-complete-no-st3.jar
     cd -
     cd build
-    tar cJpf scylla-antlr3-tool-3.5.2.tar.xz scylla-antlr3-tool-3.5.2
+    tar cJpf scylla-antlr352-tool-3.5.2.tar.xz scylla-antlr352-tool-3.5.2
     cd -
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-antlr3-tool.spec --sources=build/
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-antlr352-tool.spec --sources=build/
 fi
 
 if [ ! -f build/srpms/scylla-antlr3-C++-devel-3.5.2-1.el7*.src.rpm ];then
     wget -O build/3.5.2.tar.gz https://github.com/antlr/antlr3/archive/3.5.2.tar.gz
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-antlr3-C++-devel.spec --sources=build/
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-antlr352-C++-devel.spec --sources=build/
 fi

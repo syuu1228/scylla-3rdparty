@@ -33,7 +33,7 @@
 
 %bcond_without python3
 
-Name: scylla-boost
+Name: scylla-boost158
 %define orig_name boost
 Summary: The free peer-reviewed portable C++ source libraries
 Version: 1.58.0
@@ -59,30 +59,30 @@ Requires: scylla-env
 # components, except for MPI and Python 3 sub-packages.  Those are
 # special in that they are rarely necessary, and it's not a big burden
 # to have interested parties install them explicitly.
-Requires: scylla-boost-atomic%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-chrono%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-atomic%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-chrono%{?_isa} = %{version}-%{release}
 %if %{with context}
-Requires: scylla-boost-context%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-coroutine%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-context%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-coroutine%{?_isa} = %{version}-%{release}
 %endif
-Requires: scylla-boost-date-time%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-filesystem%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-graph%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-iostreams%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-locale%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-log%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-math%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-program-options%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-python%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-random%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-regex%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-serialization%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-signals%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-system%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-test%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-thread%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-timer%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-wave%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-date-time%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-filesystem%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-graph%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-iostreams%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-locale%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-log%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-math%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-program-options%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-python%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-random%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-regex%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-serialization%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-signals%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-test%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-thread%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-timer%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-wave%{?_isa} = %{version}-%{release}
 
 BuildRequires: m4
 BuildRequires: libstdc++-devel
@@ -177,7 +177,7 @@ variables.
 Summary: Run-Time component of boost chrono library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-system%{?_isa} = %{version}-%{release}
 
 %description chrono
 
@@ -232,7 +232,7 @@ on generic programming concepts.
 Summary: Run-Time component of boost filesystem library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-system%{?_isa} = %{version}-%{release}
 
 %description filesystem
 
@@ -244,7 +244,7 @@ directories.
 Summary: Run-Time component of boost graph library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-regex%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-regex%{?_isa} = %{version}-%{release}
 
 %description graph
 
@@ -265,9 +265,9 @@ stream buffers and i/o filters.
 Summary: Run-Time component of boost locale library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-chrono%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-system%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-thread%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-chrono%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-thread%{?_isa} = %{version}-%{release}
 
 %description locale
 
@@ -338,8 +338,8 @@ support for Boost Python Library compiled for Python 3.
 Summary: Shared object symbolic links for Boost.Python 3
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-python3%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-devel%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-python3%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-devel%{?_isa} = %{version}-%{release}
 
 %description python3-devel
 
@@ -408,7 +408,7 @@ program execution monitoring.
 Summary: Run-Time component of boost thread library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-system%{?_isa} = %{version}-%{release}
 
 %description thread
 
@@ -421,8 +421,8 @@ data specific to individual threads.
 Summary: Run-Time component of boost timer library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-chrono%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-chrono%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-system%{?_isa} = %{version}-%{release}
 
 %description timer
 
@@ -434,11 +434,11 @@ with as little as one #include and one additional line of code.
 Summary: Run-Time component of boost C99/C++ pre-processing library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-chrono%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-date-time%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-filesystem%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-system%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-thread%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-chrono%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-date-time%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-filesystem%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-thread%{?_isa} = %{version}-%{release}
 
 %description wave
 
@@ -450,8 +450,8 @@ pre-processor functionality.
 Summary: The Boost C++ headers and shared development libraries
 Group: Development/Libraries
 Requires: scylla-env
-Requires: scylla-boost%{?_isa} = %{version}-%{release}
-Provides: scylla-boost-python-devel
+Requires: scylla-boost158%{?_isa} = %{version}-%{release}
+Provides: scylla-boost158-python-devel
 Requires: libicu-devel%{?_isa}
 
 %description devel
@@ -461,8 +461,8 @@ Headers and shared object symbolic links for the Boost C++ libraries.
 Summary: The Boost C++ static development libraries
 Group: Development/Libraries
 Requires: scylla-env
-Requires: scylla-boost-devel%{?_isa} = %{version}-%{release}
-Provides: scylla-boost-devel-static = %{version}-%{release}
+Requires: scylla-boost158-devel%{?_isa} = %{version}-%{release}
+Provides: scylla-boost158-devel-static = %{version}-%{release}
 
 %description static
 Static Boost C++ libraries.
@@ -473,7 +473,7 @@ Group: Documentation
 %if 0%{?rhel} >= 6
 BuildArch: noarch
 %endif
-Provides: scylla-boost-python-docs = %{version}-%{release}
+Provides: scylla-boost158-python-docs = %{version}-%{release}
 
 %description doc
 This package contains the documentation in the HTML format of the Boost C++
@@ -486,7 +486,7 @@ Group: Documentation
 %if 0%{?rhel} >= 6
 BuildArch: noarch
 %endif
-Requires: scylla-boost-devel = %{version}-%{release}
+Requires: scylla-boost158-devel = %{version}-%{release}
 
 %description examples
 This package contains example source files distributed with boost.
@@ -499,7 +499,7 @@ Summary: Run-Time component of Boost.MPI library
 Group: System Environment/Libraries
 Requires: scylla-env
 BuildRequires: openmpi-devel
-Requires: scylla-boost-serialization%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-serialization%{?_isa} = %{version}-%{release}
 
 %description openmpi
 
@@ -510,10 +510,10 @@ API over the OpenMPI implementation of MPI.
 Summary: Shared library symbolic links for Boost.MPI
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-devel%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-openmpi%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-openmpi-python%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-graph-openmpi%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-devel%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-openmpi%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-openmpi-python%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-graph-openmpi%{?_isa} = %{version}-%{release}
 
 %description openmpi-devel
 
@@ -524,9 +524,9 @@ API over the OpenMPI implementation of MPI.
 Summary: Python run-time component of Boost.MPI library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-openmpi%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-python%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-serialization%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-openmpi%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-python%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-serialization%{?_isa} = %{version}-%{release}
 
 %description openmpi-python
 
@@ -537,8 +537,8 @@ API over the OpenMPI implementation of MPI.
 Summary: Run-Time component of parallel boost graph library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-openmpi%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-serialization%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-openmpi%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-serialization%{?_isa} = %{version}-%{release}
 
 %description graph-openmpi
 
@@ -557,8 +557,8 @@ Summary: Run-Time component of Boost.MPI library
 Group: System Environment/Libraries
 Requires: scylla-env
 BuildRequires: mpich-devel
-Requires: scylla-boost-serialization%{?_isa} = %{version}-%{release}
-Provides: scylla-boost-mpich2 = %{version}-%{release}
+Requires: scylla-boost158-serialization%{?_isa} = %{version}-%{release}
+Provides: scylla-boost158-mpich2 = %{version}-%{release}
 
 %description mpich
 
@@ -569,11 +569,11 @@ API over the MPICH implementation of MPI.
 Summary: Shared library symbolic links for Boost.MPI
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-devel%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-mpich%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-mpich-python%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-graph-mpich%{?_isa} = %{version}-%{release}
-Provides: scylla-boost-mpich2-devel = %{version}-%{release}
+Requires: scylla-boost158-devel%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-mpich%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-mpich-python%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-graph-mpich%{?_isa} = %{version}-%{release}
+Provides: scylla-boost158-mpich2-devel = %{version}-%{release}
 
 %description mpich-devel
 
@@ -584,10 +584,10 @@ API over the MPICH implementation of MPI.
 Summary: Python run-time component of Boost.MPI library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-mpich%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-python%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-serialization%{?_isa} = %{version}-%{release}
-Provides: scylla-boost-mpich2-python = %{version}-%{release}
+Requires: scylla-boost158-mpich%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-python%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-serialization%{?_isa} = %{version}-%{release}
+Provides: scylla-boost158-mpich2-python = %{version}-%{release}
 
 %description mpich-python
 
@@ -598,9 +598,9 @@ API over the MPICH implementation of MPI.
 Summary: Run-Time component of parallel boost graph library
 Group: System Environment/Libraries
 Requires: scylla-env
-Requires: scylla-boost-mpich%{?_isa} = %{version}-%{release}
-Requires: scylla-boost-serialization%{?_isa} = %{version}-%{release}
-Provides: scylla-boost-graph-mpich2 = %{version}-%{release}
+Requires: scylla-boost158-mpich%{?_isa} = %{version}-%{release}
+Requires: scylla-boost158-serialization%{?_isa} = %{version}-%{release}
+Provides: scylla-boost158-graph-mpich2 = %{version}-%{release}
 
 %description graph-mpich
 
@@ -615,7 +615,7 @@ back-end to do the parallel work.
 Summary: Cross platform build system for C++ projects
 Group: Development/Tools
 Requires: scylla-env
-Requires: scylla-boost-jam
+Requires: scylla-boost158-jam
 BuildArch: noarch
 
 %description build

@@ -1,4 +1,4 @@
-Name:           scylla-ragel   
+Name:           scylla-ragel68
 %define orig_name ragel
 Version:        6.8
 Release:        5%{?dist}

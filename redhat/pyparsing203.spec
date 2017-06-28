@@ -2,7 +2,7 @@
 %global with_python3 1
 %endif
 
-Name:           pyparsing
+Name:           pyparsing203
 Version:        2.0.3
 Release:        2%{?dist}
 Summary:        An object-oriented approach to text processing
@@ -42,7 +42,7 @@ This is the Python 3 version.
 %endif # if with_python3
 
 %prep
-%setup -q
+%setup -q -n pyparsing-%{version}
 mv docs/pyparsingClassDiagram.PNG docs/pyparsingClassDiagram.png
 rm docs/pyparsingClassDiagram.JPG
 dos2unix -k CHANGES LICENSE README

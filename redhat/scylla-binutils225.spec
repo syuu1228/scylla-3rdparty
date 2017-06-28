@@ -17,7 +17,7 @@
 %define enable_deterministic_archives 1
 
 Summary: A GNU collection of binary utilities
-Name: scylla-%{?cross}binutils%{?_with_debug:-debug}
+Name: scylla-%{?cross}binutils225%{?_with_debug:-debug}
 Version: 2.25
 Release: 15%{?dist}
 License: GPLv3+

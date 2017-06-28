@@ -1,5 +1,5 @@
 Summary: Integer point manipulation library
-Name: scylla-isl
+Name: scylla-isl014
 Version: 0.14
 License: MIT
 Group: System Environment/Libraries
@@ -35,7 +35,7 @@ graphs), dependence analysis and bounds on piecewise step-polynomials.
 %package devel
 Summary: Development for building integer point manipulation library
 Requires: scylla-env
-Requires: scylla-isl%{?_isa} == %{version}-%{release}
+Requires: scylla-isl014%{?_isa} == %{version}-%{release}
 Requires: gmp-devel%{?_isa}
 Group: Development/Libraries
 

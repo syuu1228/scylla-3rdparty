@@ -1,6 +1,6 @@
 %global antlr_version 3.5.2
 
-Name:		scylla-antlr3-C++-devel
+Name:		scylla-antlr352-C++-devel
 Version:        %{antlr_version}
 Release:	1%{?dist}
 Summary:        C++ runtime support for ANTLR-generated parsers
