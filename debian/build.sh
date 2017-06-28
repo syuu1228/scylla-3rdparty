@@ -2,24 +2,18 @@
 
 . /etc/os-release
 print_usage() {
-    echo "build.sh --target <dist> --name <name> --email <mail> --suffix-count <n>"
+    echo "build.sh --target <dist> --name <name> --email <mail>"
     echo "  --target    specify target distribution"
     echo "  --name  maintainer name"
     echo "  --email  maintainer email"
-    echo "  --suffix-count  the number append to local version"
     exit 1
 }
 
-COUNT=1
 TARGET=
 while [ $# -gt 0 ]; do
     case "$1" in
         "--target")
             TARGET=$2
-            shift 2
-            ;;
-        "--suffix-count")
-            COUNT=$2
             shift 2
             ;;
         "--name")
@@ -67,32 +61,16 @@ rm -rf build
 mkdir -p build
 
 if [ "$TARGET" = "jessie" ]; then
-    RELEASE=oldstable
-elif [ "$TARGET" = "stretch" ]; then
-    RELEASE=stable
-elif [ "$TARGET" = "buster" ]; then
-    RELEASE=testing
-elif [ "$TARGET" = "sid" ]; then
-    RELEASE=unstable
-fi
-
-if [ "$TARGET" = "jessie" ]; then
     cp -a common/antlr3-3.5.2 build/
     cp -a debian/antlr3-3.5.2/debian build/antlr3-3.5.2/
     cd build/antlr3-3.5.2
     wget http://www.antlr3.org/download/antlr-3.5.2-complete-no-st3.jar
-    for ((i=0; i < $COUNT; i++)); do
-        dch --distribution $RELEASE -l ~$TARGET "generate package for $TARGET."
-    done
     debuild -r fakeroot --no-tgz-check -S -sa
     cd -
 
     cp -a common/scylla-env-1.0 build/
     cp -a debian/scylla-env-1.0/debian build/scylla-env-1.0/
     cd build/scylla-env-1.0
-    for ((i=0; i < $COUNT; i++)); do
-        dch --distribution $RELEASE -l ~$TARGET "generate package for $TARGET."
-    done
     debuild -r fakeroot --no-tgz-check -S -sa
     cd -
 
@@ -106,9 +84,6 @@ if [ "$TARGET" = "jessie" ]; then
     rm -rf build/gdb-7.11/debian
     cp -a debian/gdb-7.11/debian build/gdb-7.11/
     cd build/gdb-7.11
-    for ((i=0; i < $COUNT; i++)); do
-        dch --distribution $RELEASE -l ~$TARGET "generate package for $TARGET."
-    done
     debuild -r fakeroot --no-tgz-check -S -sa
     cd -
 fi
@@ -120,9 +95,6 @@ cp -a antlr3-3.5.2 antlr3-c++-dev-3.5.2
 cd -
 cp -a debian/antlr3-c++-dev-3.5.2/debian build/antlr3-c++-dev-3.5.2
 cd build/antlr3-c++-dev-3.5.2
-for ((i=0; i < $COUNT; i++)); do
-    dch --distribution $RELEASE -l ~$TARGET "generate package for $TARGET."
-done
 debuild -r fakeroot --no-tgz-check -S -sa
 cd -
 
@@ -132,9 +104,6 @@ tar xpf thrift-0.9.3.tar.gz
 cd -
 cp -a debian/thrift-0.9.3/debian build/thrift-0.9.3/
 cd build/thrift-0.9.3
-for ((i=0; i < $COUNT; i++)); do
-    dch --distribution $RELEASE -l ~$TARGET "generate package for $TARGET."
-done
 debuild -r fakeroot --no-tgz-check -S -sa
 cd -
 
@@ -150,9 +119,6 @@ if [ "$TARGET" = "jessie" ]; then
     # resolve build time dependencies manually, since mk-build-deps doesn't works for gcc package
     sudo apt-get install -y g++-multilib libc6-dev-i386 lib32gcc1 libc6-dev-x32 libx32gcc1 libc6-dbg m4 libtool autoconf2.64 autogen gawk zlib1g-dev systemtap-sdt-dev gperf bison flex gdb texinfo locales sharutils libantlr-java libffi-dev gnat-4.9 libisl-dev libmpc-dev libmpfr-dev libgmp-dev dejagnu realpath chrpath quilt doxygen graphviz ghostscript texlive-latex-base xsltproc libxml2-utils docbook-xsl-ns
     ./debian/rules control
-    for ((i=0; i < $COUNT; i++)); do
-        dch --distribution $RELEASE -l ~$TARGET "generate package for $TARGET."
-    done
     debuild -r fakeroot -S -sa
     cd -
 fi
