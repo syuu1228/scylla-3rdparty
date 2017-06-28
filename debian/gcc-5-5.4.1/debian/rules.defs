@@ -341,6 +341,7 @@ SPACE = $(EMPTY) $(EMPTY)
 
 # lang= overwrites all of nolang=, overwrites all of WITHOUT_LANG
 
+WITHOUT_LANG    := java,fortran,pascal,obj,obj-c++,ada,treelang,d,go
 DEB_LANG_OPT	:= $(filter lang=%,$(DEB_BUILD_OPTIONS))
 DEB_LANG	:= $(strip $(subst $(COMMA), ,$(patsubst lang=%,%,$(DEB_LANG_OPT))))
 DEB_NOLANG_OPT	:= $(filter nolang=%,$(DEB_BUILD_OPTIONS))
