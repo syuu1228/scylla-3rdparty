@@ -122,12 +122,12 @@ done
 debuild -r fakeroot --no-tgz-check -S -sa
 cd -
 
-wget -O build/thrift-0.9.3.tar.gz http://archive.apache.org/dist/thrift/0.9.3/thrift-0.9.3.tar.gz
+wget -O build/thrift-0.10.0.tar.gz http://archive.apache.org/dist/thrift/0.10.0/thrift-0.10.0.tar.gz
 cd build
-tar xpf thrift-0.9.3.tar.gz
+tar xpf thrift-0.10.0.tar.gz
 cd -
-cp -a debian/thrift-0.9.3/debian build/thrift-0.9.3/
-cd build/thrift-0.9.3
+cp -a debian/thrift-0.10.0/debian build/thrift-0.10.0/
+cd build/thrift-0.10.0
 for ((i=0; i < $COUNT; i++)); do
     dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
 done
