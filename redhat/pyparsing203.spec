@@ -30,11 +30,11 @@ Group:          Development/Libraries
 The package contains documentation for pyparsing.
 
 %if 0%{?with_python3}
-%package -n python34-pyparsing
+%package -n python34-pyparsing203
 Summary:        An object-oriented approach to text processing (Python 3 version)
 Group:          Development/Libraries
 
-%description -n python34-pyparsing
+%description -n python34-pyparsing203
 pyparsing is a module that can be used to easily and directly configure syntax
 definitions for any number of text parsing applications.
 
@@ -90,7 +90,7 @@ rm -rf %{buildroot}
 %{python_sitelib}/pyparsing.py*
 
 %if 0%{?with_python3}
-%files -n python34-pyparsing
+%files -n python34-pyparsing203
 %doc CHANGES README LICENSE
 %{python3_sitelib}/pyparsing*egg-info
 %{python3_sitelib}/pyparsing.py*
