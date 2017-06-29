@@ -271,7 +271,7 @@ C++ Library.
 %package -n scylla-libstdc++-devel531
 Summary: Header files and libraries for C++ development
 Group: Development/Libraries
-Requires: scylla-libstdc++%{?_isa}531 = %{version}-%{release}
+Requires: scylla-libstdc++531%{?_isa} = %{version}-%{release}
 Autoreq: true
 Requires: scylla-env
 
