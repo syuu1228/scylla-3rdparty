@@ -1,4 +1,4 @@
-Source: thrift093
+Source: thrift09
 Section: devel
 Priority: extra
 Build-Depends: debhelper (>= 5), build-essential, autoconf, automake,
@@ -12,7 +12,7 @@ Vcs-Browser: https://git-wip-us.apache.org/repos/asf?p=thrift.git
 Standards-Version: 3.7.2
 X-Python-Version: >= 2.6
 
-Package: libthrift093
+Package: libthrift09
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Thrift C++ library
@@ -23,7 +23,7 @@ Description: Thrift C++ library
  This package contains the runtime libraries needed for C++ applications
  using Thrift.
 
-Package: libthrift093-dev
+Package: libthrift09-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libthrift0, libglib2.0-dev

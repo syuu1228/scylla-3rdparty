@@ -79,7 +79,7 @@ if [ "$TARGET" = "jessie" ]; then
     wget -O build/gdb_7.11-0ubuntu1.debian.tar.xz http://archive.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.11-0ubuntu1.debian.tar.xz
     cd build
     dpkg-source -x gdb_7.11-0ubuntu1.dsc
-    mv gdb_7.11.orig.tar.xz scylla-gdb711_7.11.orig.tar.xz
+    mv gdb_7.11.orig.tar.xz scylla-gdb_7.11.orig.tar.xz
     cd -
     rm -rf build/gdb-7.11/debian
     cp -a debian/gdb-7.11/debian build/gdb-7.11/

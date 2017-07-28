@@ -1,4 +1,4 @@
-Source: gcc-541
+Source: gcc-54
 Section: devel
 Priority: optional
 Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
@@ -25,7 +25,7 @@ Homepage: http://gcc.gnu.org/
 Vcs-Browser: http://svn.debian.org/viewsvn/gcccvs/branches/sid/gcc-5/
 Vcs-Svn: svn://anonscm.debian.org/gcccvs/branches/sid/gcc-5
 
-Package: gcc-541-base
+Package: gcc-54-base
 Architecture: any
 Multi-Arch: same
 Section: libs
@@ -37,12 +37,12 @@ Description: GCC, the GNU Compiler Collection (base package)
  This package contains files common to all languages and libraries
  contained in the GNU Compiler Collection (GCC).
 
-Package: libgcc-541-dev
+Package: libgcc-54-dev
 Architecture: any
 Section: libdevel
 Priority: optional
 Recommends: ${dep:libcdev}
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libgcc}, ${dep:libssp}, ${dep:libgomp}, ${dep:libitm},
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libgcc}, ${dep:libssp}, ${dep:libgomp}, ${dep:libitm},
  ${dep:libatomic}, ${dep:libbtrace}, ${dep:libasan}, ${dep:liblsan},
  ${dep:libtsan}, ${dep:libubsan}, ${dep:libcilkrts}, ${dep:libvtv},
  ${dep:libmpx},
@@ -53,34 +53,34 @@ Description: GCC support library (development files)
  This package contains the headers and static library files necessary for
  building C programs which use libgcc, libgomp, libquadmath, libssp or libitm.
 
-Package: libgcc4-541
+Package: libgcc4-54
 Architecture: hppa
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Breaks: ${multiarch:breaks}
 Section: libs
 Priority: required
-Depends: gcc-541-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: GCC support library
  Shared version of the support library, a library of internal subroutines
  that GCC uses to overcome shortcomings of particular machines, or
  special needs for some languages.
 
-Package: libgcc4-dbg-541
+Package: libgcc4-dbg-54
 Architecture: hppa
 Multi-Arch: same
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libgcc4-541 (= ${gcc:EpochVersion}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libgcc4-54 (= ${gcc:EpochVersion}), ${misc:Depends}
 Description: GCC support library (debug symbols)
  Debug symbols for the GCC support library.
 
-Package: lib64gcc-541-dev
+Package: lib64gcc-54-dev
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Section: libdevel
 Priority: optional
 Recommends: ${dep:libcdev}
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libgccbiarch}, ${dep:libsspbiarch},
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libgccbiarch}, ${dep:libsspbiarch},
  ${dep:libgompbiarch}, ${dep:libitmbiarch}, ${dep:libatomicbiarch},
  ${dep:libbtracebiarch}, ${dep:libasanbiarch}, ${dep:liblsanbiarch},
  ${dep:libtsanbiarch}, ${dep:libubsanbiarch},
@@ -91,12 +91,12 @@ Description: GCC support library (64bit development files)
  This package contains the headers and static library files necessary for
  building C programs which use libgcc, libgomp, libquadmath, libssp or libitm.
 
-Package: lib32gcc-541-dev
+Package: lib32gcc-54-dev
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Section: libdevel
 Priority: optional
 Recommends: ${dep:libcdev}
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libgccbiarch}, ${dep:libsspbiarch},
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libgccbiarch}, ${dep:libsspbiarch},
  ${dep:libgompbiarch}, ${dep:libitmbiarch}, ${dep:libatomicbiarch},
  ${dep:libbtracebiarch}, ${dep:libasanbiarch}, ${dep:liblsanbiarch},
  ${dep:libtsanbiarch}, ${dep:libubsanbiarch},
@@ -107,12 +107,12 @@ Description: GCC support library (32 bit development files)
  This package contains the headers and static library files necessary for
  building C programs which use libgcc, libgomp, libquadmath, libssp or libitm.
 
-Package: libn32gcc-541-dev
+Package: libn32gcc-54-dev
 Architecture: mips mipsel mips64 mips64el
 Section: libdevel
 Priority: optional
 Recommends: ${dep:libcdev}
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libgccbiarch}, ${dep:libsspbiarch},
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libgccbiarch}, ${dep:libsspbiarch},
  ${dep:libgompbiarch}, ${dep:libitmbiarch}, ${dep:libatomicbiarch},
  ${dep:libbtracebiarch}, ${dep:libasanbiarch}, ${dep:liblsanbiarch},
  ${dep:libtsanbiarch}, ${dep:libubsanbiarch},
@@ -123,12 +123,12 @@ Description: GCC support library (n32 development files)
  This package contains the headers and static library files necessary for
  building C programs which use libgcc, libgomp, libquadmath, libssp or libitm.
 
-Package: libx32gcc-541-dev
+Package: libx32gcc-54-dev
 Architecture: amd64 i386
 Section: libdevel
 Priority: optional
 Recommends: ${dep:libcdev}
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libgccbiarch}, ${dep:libsspbiarch},
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libgccbiarch}, ${dep:libsspbiarch},
  ${dep:libgompbiarch}, ${dep:libitmbiarch}, ${dep:libatomicbiarch},
  ${dep:libbtracebiarch}, ${dep:libasanbiarch}, ${dep:liblsanbiarch},
  ${dep:libtsanbiarch}, ${dep:libubsanbiarch},
@@ -139,82 +139,82 @@ Description: GCC support library (x32 development files)
  This package contains the headers and static library files necessary for
  building C programs which use libgcc, libgomp, libquadmath, libssp or libitm.
 
-Package: gcc-541
+Package: gcc-54
 Architecture: any
 Section: devel
 Priority: optional
-Depends: cpp-541 (= ${gcc:Version}), gcc-541-base (= ${gcc:Version}),
+Depends: cpp-54 (= ${gcc:Version}), gcc-54-base (= ${gcc:Version}),
     ${dep:libcc1}, 
   binutils (>= ${binutils:Version}), 
   ${dep:libgccdev}, ${shlibs:Depends}, ${misc:Depends}
 Recommends: ${dep:libcdev}
-Replaces: gccgo-5 (<< ${gcc:Version}), gcc-541-plugin-dev (<< 5-20150321-1),
-  gcc-541-base (<< 5-20150329-1)
-Suggests: ${gcc:multilib}, gcc-541-doc (>= ${gcc:SoftVersion}),
- gcc-541-locales (>= ${gcc:SoftVersion}),
- libgcc1-dbg-541 (>= ${libgcc:Version}),
- libgomp1-dbg-541 (>= ${gcc:Version}),
- libitm1-dbg-541 (>= ${gcc:Version}),
- libatomic1-dbg-541 (>= ${gcc:Version}),
- libasan2-dbg-541 (>= ${gcc:Version}),
- liblsan0-dbg-541 (>= ${gcc:Version}),
- libtsan0-dbg-541 (>= ${gcc:Version}),
- libubsan0-dbg-541 (>= ${gcc:Version}),
- libcilkrts5-dbg-541 (>= ${gcc:Version}),
- libmpx0-dbg-541 (>= ${gcc:Version}),
- libquadmath0-dbg-541 (>= ${gcc:Version})
+Replaces: gccgo-5 (<< ${gcc:Version}), gcc-54-plugin-dev (<< 5-20150321-1),
+  gcc-54-base (<< 5-20150329-1)
+Suggests: ${gcc:multilib}, gcc-54-doc (>= ${gcc:SoftVersion}),
+ gcc-54-locales (>= ${gcc:SoftVersion}),
+ libgcc1-dbg-54 (>= ${libgcc:Version}),
+ libgomp1-dbg-54 (>= ${gcc:Version}),
+ libitm1-dbg-54 (>= ${gcc:Version}),
+ libatomic1-dbg-54 (>= ${gcc:Version}),
+ libasan2-dbg-54 (>= ${gcc:Version}),
+ liblsan0-dbg-54 (>= ${gcc:Version}),
+ libtsan0-dbg-54 (>= ${gcc:Version}),
+ libubsan0-dbg-54 (>= ${gcc:Version}),
+ libcilkrts5-dbg-54 (>= ${gcc:Version}),
+ libmpx0-dbg-54 (>= ${gcc:Version}),
+ libquadmath0-dbg-54 (>= ${gcc:Version})
 Provides: c-compiler
 Description: GNU C compiler
  This is the GNU C compiler, a fairly portable optimizing compiler for C.
 
-Package: gcc-541-multilib
+Package: gcc-54-multilib
 Architecture: amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel mipsn32 mipsn32el powerpc ppc64 s390 s390x sparc sparc64 x32
 Section: devel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gcc-541 (= ${gcc:Version}), ${dep:libcbiarchdev}, ${dep:libgccbiarchdev}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gcc-54 (= ${gcc:Version}), ${dep:libcbiarchdev}, ${dep:libgccbiarchdev}, ${shlibs:Depends}, ${misc:Depends}
 Description: GNU C compiler (multilib support)
  This is the GNU C compiler, a fairly portable optimizing compiler for C.
  .
  This is a dependency package, depending on development packages
  for the non-default multilib architecture(s).
 
-Package: gcc-541-test-results
+Package: gcc-54-test-results
 Architecture: any
 Section: devel
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${misc:Depends}
 Replaces: g++-5 (<< 5.2.1-28)
 Description: Test results for the GCC test suite
  This package contains the test results for running the GCC test suite
  for a post build analysis.
 
-Package: gcc-541-plugin-dev
+Package: gcc-54-plugin-dev
 Architecture: any
 Section: devel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gcc-541 (= ${gcc:Version}), libgmp-dev (>= 2:5.0.1~), libmpc-dev (>= 1.0), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gcc-54 (= ${gcc:Version}), libgmp-dev (>= 2:5.0.1~), libmpc-dev (>= 1.0), ${shlibs:Depends}, ${misc:Depends}
 Description: Files for GNU GCC plugin development.
  This package contains (header) files for GNU GCC plugin development. It
  is only used for the development of GCC plugins, but not needed to run
  plugins.
 
-Package: gcc-541-hppa64-linux-gnu
+Package: gcc-54-hppa64-linux-gnu
 Architecture: hppa amd64 i386 x32
 Section: devel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}, binutils-hppa64-linux-gnu | binutils-hppa64
+Depends: gcc-54-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}, binutils-hppa64-linux-gnu | binutils-hppa64
 Replaces: gcc-5-hppa64 (<< 5.2.1-22)
 Provides: gcc-5-hppa64
 Conflicts: gcc-3.3-hppa64 (<= 1:3.3.4-5), gcc-3.4-hppa64 (<= 3.4.1-3), gcc-4.7-hppa64 (<< 4.7.3-13), gcc-4.8-hppa64 (<< 4.8.2-22), gcc-4.9-hppa64 (<< 4.9.3-1)
 Description: GNU C compiler (cross compiler for hppa64)
  This is the GNU C compiler, a fairly portable optimizing compiler for C.
 
-Package: cpp-541
+Package: cpp-54
 Architecture: any
 Section: interpreters
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
-Suggests: gcc-541-locales (>= ${gcc:SoftVersion})
+Depends: gcc-54-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Suggests: gcc-54-locales (>= ${gcc:SoftVersion})
 Replaces: gccgo-5 (<< ${gcc:Version})
 Description: GNU C preprocessor
  A macro processor that is used automatically by the GNU C compiler
@@ -223,12 +223,12 @@ Description: GNU C preprocessor
  This package has been separated from gcc for the benefit of those who
  require the preprocessor but not the compiler.
 
-Package: gcc-541-locales
+Package: gcc-54-locales
 Architecture: all
 Section: devel
 Priority: optional
-Depends: gcc-541-base (>= ${gcc:SoftVersion}), cpp-541 (>= ${gcc:SoftVersion}), ${misc:Depends}
-Recommends: gcc-541 (>= ${gcc:SoftVersion})
+Depends: gcc-54-base (>= ${gcc:SoftVersion}), cpp-54 (>= ${gcc:SoftVersion}), ${misc:Depends}
+Recommends: gcc-54 (>= ${gcc:SoftVersion})
 Description: GCC, the GNU compiler collection (native language support files)
  Native language support for GCC. Lets GCC speak your language,
  if translations are available.
@@ -236,21 +236,21 @@ Description: GCC, the GNU compiler collection (native language support files)
  Please do NOT submit bug reports in other languages than "C".
  Always reset your language settings to use the "C" locales.
 
-Package: g++-541
+Package: g++-54
 Architecture: any
 Section: devel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gcc-541 (= ${gcc:Version}), libstdc++-541-dev (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gcc-54 (= ${gcc:Version}), libstdc++-54-dev (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Provides: c++-compiler, c++abi2-dev
-Suggests: ${gxx:multilib}, gcc-541-doc (>= ${gcc:SoftVersion}), libstdc++6-541-dbg (>= ${gcc:Version})
+Suggests: ${gxx:multilib}, gcc-54-doc (>= ${gcc:SoftVersion}), libstdc++6-54-dbg (>= ${gcc:Version})
 Description: GNU C++ compiler
  This is the GNU C++ compiler, a fairly portable optimizing compiler for C++.
 
-Package: g++-541-multilib
+Package: g++-54-multilib
 Architecture: amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel mipsn32 mipsn32el powerpc ppc64 s390 s390x sparc sparc64 x32
 Section: devel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), g++-541 (= ${gcc:Version}), gcc-541-multilib (= ${gcc:Version}), ${dep:libcxxbiarchdev}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), g++-54 (= ${gcc:Version}), gcc-54-multilib (= ${gcc:Version}), ${dep:libcxxbiarchdev}, ${shlibs:Depends}, ${misc:Depends}
 Suggests: ${dep:libcxxbiarchdbg}
 Description: GNU C++ compiler (multilib support)
  This is the GNU C++ compiler, a fairly portable optimizing compiler for C++.
@@ -258,62 +258,62 @@ Description: GNU C++ compiler (multilib support)
  This is a dependency package, depending on development packages
  for the non-default multilib architecture(s).
 
-Package: libasan2-541
+Package: libasan2-54
 Section: libs
 Architecture: any
 Provides: libasan2-armel [armel], libasan2-armhf [armhf]
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: AddressSanitizer -- a fast memory error detector
  AddressSanitizer (ASan) is a fast memory error detector.  It finds
  use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs.
 
-Package: libasan2-dbg-541
+Package: libasan2-dbg-54
 Architecture: any
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libasan2-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libasan2-54 (= ${gcc:Version}), ${misc:Depends}
 Provides: libasan2-dbg-armel [armel], libasan2-dbg-armhf [armhf]
 Multi-Arch: same
 Description: AddressSanitizer -- a fast memory error detector (debug symbols)
  AddressSanitizer (ASan) is a fast memory error detector.  It finds
  use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs.
 
-Package: lib32asan2-541
+Package: lib32asan2-54
 Section: libs
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: ${confl:lib32}
 Description: AddressSanitizer -- a fast memory error detector (32bit)
  AddressSanitizer (ASan) is a fast memory error detector.  It finds
  use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs.
 
-Package: lib32asan2-dbg-541
+Package: lib32asan2-dbg-54
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), lib32asan2-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib32asan2-54 (= ${gcc:Version}), ${misc:Depends}
 Description: AddressSanitizer -- a fast memory error detector (32 bit debug symbols)
  AddressSanitizer (ASan) is a fast memory error detector.  It finds
  use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs.
 
-Package: lib64asan2-541
+Package: lib64asan2-54
 Section: libs
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
 Description: AddressSanitizer -- a fast memory error detector (64bit)
  AddressSanitizer (ASan) is a fast memory error detector.  It finds
  use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs.
 
-Package: lib64asan2-dbg-541
+Package: lib64asan2-dbg-54
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), lib64asan2-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib64asan2-54 (= ${gcc:Version}), ${misc:Depends}
 Description: AddressSanitizer -- a fast memory error detector (64bit debug symbols)
  AddressSanitizer (ASan) is a fast memory error detector.  It finds
  use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs.
@@ -338,43 +338,43 @@ Description: AddressSanitizer -- a fast memory error detector (64bit debug symbo
 # AddressSanitizer (ASan) is a fast memory error detector.  It finds
 # use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs.
 
-Package: libx32asan2-541
+Package: libx32asan2-54
 Section: libs
 Architecture: amd64 i386
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
 Description: AddressSanitizer -- a fast memory error detector (x32)
  AddressSanitizer (ASan) is a fast memory error detector.  It finds
  use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs.
 
-Package: libx32asan2-dbg-541
+Package: libx32asan2-dbg-54
 Architecture: amd64 i386
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libx32asan2-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libx32asan2-54 (= ${gcc:Version}), ${misc:Depends}
 Description: AddressSanitizer -- a fast memory error detector (x32 debug symbols)
  AddressSanitizer (ASan) is a fast memory error detector.  It finds
  use-after-free and {heap,stack,global}-buffer overflow bugs in C/C++ programs.
 
-Package: libmpx0-541
+Package: libmpx0-54
 Section: libs
 Architecture: any
 Provides: libmpx0-armel [armel], libmpx0-armhf [armhf]
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Intel memory protection extensions (runtime)
  Intel MPX is a set of processor features which, with compiler,
  runtime library and OS support, brings increased robustness to
  software by checking pointer references whose compile time normal
  intentions are usurped at runtime due to buffer overflow.
 
-Package: libmpx0-dbg-541
+Package: libmpx0-dbg-54
 Architecture: any
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libmpx0-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libmpx0-54 (= ${gcc:Version}), ${misc:Depends}
 Provides: libmpx0-dbg-armel [armel], libmpx0-dbg-armhf [armhf]
 Multi-Arch: same
 Description: Intel memory protection extensions (debug symbols)
@@ -383,11 +383,11 @@ Description: Intel memory protection extensions (debug symbols)
  software by checking pointer references whose compile time normal
  intentions are usurped at runtime due to buffer overflow.
 
-Package: lib32mpx0-541
+Package: lib32mpx0-54
 Section: libs
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: ${confl:lib32}
 Description: Intel memory protection extensions (32bit)
  Intel MPX is a set of processor features which, with compiler,
@@ -395,33 +395,33 @@ Description: Intel memory protection extensions (32bit)
  software by checking pointer references whose compile time normal
  intentions are usurped at runtime due to buffer overflow.
 
-Package: lib32mpx0-dbg-541
+Package: lib32mpx0-dbg-54
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), lib32mpx0-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib32mpx0-54 (= ${gcc:Version}), ${misc:Depends}
 Description: Intel memory protection extensions (32 bit debug symbols)
  Intel MPX is a set of processor features which, with compiler,
  runtime library and OS support, brings increased robustness to
  software by checking pointer references whose compile time normal
  intentions are usurped at runtime due to buffer overflow.
 
-Package: lib64mpx0-541
+Package: lib64mpx0-54
 Section: libs
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
 Description: Intel memory protection extensions (64bit)
  Intel MPX is a set of processor features which, with compiler,
  runtime library and OS support, brings increased robustness to
  software by checking pointer references whose compile time normal
  intentions are usurped at runtime due to buffer overflow.
 
-Package: lib64mpx0-dbg-541
+Package: lib64mpx0-dbg-54
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), lib64mpx0-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib64mpx0-54 (= ${gcc:Version}), ${misc:Depends}
 Description: Intel memory protection extensions (64bit debug symbols)
  Intel MPX is a set of processor features which, with compiler,
  runtime library and OS support, brings increased robustness to
@@ -432,7 +432,7 @@ Package: libgccjit-5-doc
 Section: doc
 Architecture: all
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${misc:Depends}
 Description: GCC just-in-time compilation (documentation)
  libgccjit provides an embeddable shared library with an API for adding
  compilation to existing programs using GCC.
@@ -443,29 +443,29 @@ Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libgccjit0 (>= ${gcc:Version}),
+Depends: gcc-54-base (= ${gcc:Version}), libgccjit0 (>= ${gcc:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 Suggests: libgccjit-5-dbg
 Description: GCC just-in-time compilation (development files)
  libgccjit provides an embeddable shared library with an API for adding
  compilation to existing programs using GCC.
 
-Package: gobjc++-5-541
+Package: gobjc++-5-54
 Architecture: any
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gobjc-541 (= ${gcc:Version}), g++-541 (= ${gcc:Version}), ${shlibs:Depends}, libobjc-541-dev (= ${gcc:Version}), ${misc:Depends}
-Suggests: ${gobjcxx:multilib}, gcc-541-doc (>= ${gcc:SoftVersion})
+Depends: gcc-54-base (= ${gcc:Version}), gobjc-54 (= ${gcc:Version}), g++-54 (= ${gcc:Version}), ${shlibs:Depends}, libobjc-54-dev (= ${gcc:Version}), ${misc:Depends}
+Suggests: ${gobjcxx:multilib}, gcc-54-doc (>= ${gcc:SoftVersion})
 Provides: objc++-compiler
 Description: GNU Objective-C++ compiler
  This is the GNU Objective-C++ compiler, which compiles
  Objective-C++ on platforms supported by the gcc compiler. It uses the
  gcc backend to generate optimized code.
 
-Package: gobjc++-541-multilib
+Package: gobjc++-54-multilib
 Architecture: amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel mipsn32 mipsn32el powerpc ppc64 s390 s390x sparc sparc64 x32
 Section: devel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gobjc++-541 (= ${gcc:Version}), g++-541-multilib (= ${gcc:Version}), gobjc-541-multilib (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gobjc++-54 (= ${gcc:Version}), g++-54-multilib (= ${gcc:Version}), gobjc-54-multilib (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: GNU Objective-C++ compiler (multilib support)
  This is the GNU Objective-C++ compiler, which compiles Objective-C++ on
  platforms supported by the gcc compiler.
@@ -473,22 +473,22 @@ Description: GNU Objective-C++ compiler (multilib support)
  This is a dependency package, depending on development packages
  for the non-default multilib architecture(s).
 
-Package: gobjc-541
+Package: gobjc-54
 Architecture: any
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gcc-541 (= ${gcc:Version}), ${dep:libcdev}, ${shlibs:Depends}, libobjc-541-dev (= ${gcc:Version}), ${misc:Depends}
-Suggests: ${gobjc:multilib}, gcc-541-doc (>= ${gcc:SoftVersion}), libobjc4-dbg-541 (>= ${gcc:Version})
+Depends: gcc-54-base (= ${gcc:Version}), gcc-54 (= ${gcc:Version}), ${dep:libcdev}, ${shlibs:Depends}, libobjc-54-dev (= ${gcc:Version}), ${misc:Depends}
+Suggests: ${gobjc:multilib}, gcc-54-doc (>= ${gcc:SoftVersion}), libobjc4-dbg-54 (>= ${gcc:Version})
 Provides: objc-compiler
 Description: GNU Objective-C compiler
  This is the GNU Objective-C compiler, which compiles
  Objective-C on platforms supported by the gcc compiler. It uses the
  gcc backend to generate optimized code.
 
-Package: gobjc-541-multilib
+Package: gobjc-54-multilib
 Architecture: amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel mipsn32 mipsn32el powerpc ppc64 s390 s390x sparc sparc64 x32
 Section: devel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gobjc-541 (= ${gcc:Version}), gcc-541-multilib (= ${gcc:Version}), ${dep:libobjcbiarchdev}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gobjc-54 (= ${gcc:Version}), gcc-54-multilib (= ${gcc:Version}), ${dep:libobjcbiarchdev}, ${shlibs:Depends}, ${misc:Depends}
 Description: GNU Objective-C compiler (multilib support)
  This is the GNU Objective-C compiler, which compiles Objective-C on platforms
  supported by the gcc compiler.
@@ -496,68 +496,68 @@ Description: GNU Objective-C compiler (multilib support)
  This is a dependency package, depending on development packages
  for the non-default multilib architecture(s).
 
-Package: libobjc-541-dev
+Package: libobjc-54-dev
 Architecture: any
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libgcc-541-dev (= ${gcc:Version}), libobjc4-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libgcc-54-dev (= ${gcc:Version}), libobjc4-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Multi-Arch: same
 Description: Runtime library for GNU Objective-C applications (development files)
  This package contains the headers and static library files needed to build
  GNU ObjC applications.
 
-Package: lib64objc-541-dev
+Package: lib64objc-54-dev
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), lib64gcc-541-dev (= ${gcc:Version}), lib64objc4-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib64gcc-54-dev (= ${gcc:Version}), lib64objc4-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Runtime library for GNU Objective-C applications (64bit development files)
  This package contains the headers and static library files needed to build
  GNU ObjC applications.
 
-Package: lib32objc-541-dev
+Package: lib32objc-54-dev
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), lib32gcc-541-dev (= ${gcc:Version}), lib32objc4-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib32gcc-54-dev (= ${gcc:Version}), lib32objc4-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Runtime library for GNU Objective-C applications (32bit development files)
  This package contains the headers and static library files needed to build
  GNU ObjC applications.
 
-Package: libn32objc-541-dev
+Package: libn32objc-54-dev
 Architecture: mips mipsel mips64 mips64el
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libn32gcc-541-dev (= ${gcc:Version}), libn32objc4-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libn32gcc-54-dev (= ${gcc:Version}), libn32objc4-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Runtime library for GNU Objective-C applications (n32 development files)
  This package contains the headers and static library files needed to build
  GNU ObjC applications.
 
-Package: libx32objc-541-dev
+Package: libx32objc-54-dev
 Architecture: amd64 i386
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libx32gcc-541-dev (= ${gcc:Version}), libx32objc4-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libx32gcc-54-dev (= ${gcc:Version}), libx32objc4-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Runtime library for GNU Objective-C applications (x32 development files)
  This package contains the headers and static library files needed to build
  GNU ObjC applications.
 
-Package: gfortran-541
+Package: gfortran-54
 Architecture: any
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gcc-541 (= ${gcc:Version}), libgfortran-541-dev (= ${gcc:Version}), ${dep:libcdev}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gcc-54 (= ${gcc:Version}), libgfortran-54-dev (= ${gcc:Version}), ${dep:libcdev}, ${shlibs:Depends}, ${misc:Depends}
 Provides: fortran95-compiler, ${fortran:mod-version}
-Suggests: ${gfortran:multilib}, gfortran-541-doc, libgfortran3-dbg-541 (>= ${gcc:Version})
+Suggests: ${gfortran:multilib}, gfortran-54-doc, libgfortran3-dbg-54 (>= ${gcc:Version})
 Description: GNU Fortran compiler
  This is the GNU Fortran compiler, which compiles
  Fortran on platforms supported by the gcc compiler. It uses the
  gcc backend to generate optimized code.
 
-Package: gfortran-541-multilib
+Package: gfortran-54-multilib
 Architecture: amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel mipsn32 mipsn32el powerpc ppc64 s390 s390x sparc sparc64 x32
 Section: devel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gfortran-541 (= ${gcc:Version}), gcc-541-multilib (= ${gcc:Version}), ${dep:libgfortranbiarchdev}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gfortran-54 (= ${gcc:Version}), gcc-54-multilib (= ${gcc:Version}), ${dep:libgfortranbiarchdev}, ${shlibs:Depends}, ${misc:Depends}
 Description: GNU Fortran compiler (multilib support)
  This is the GNU Fortran compiler, which compiles Fortran on platforms
  supported by the gcc compiler.
@@ -565,68 +565,68 @@ Description: GNU Fortran compiler (multilib support)
  This is a dependency package, depending on development packages
  for the non-default multilib architecture(s).
 
-Package: libgfortran-541-dev
+Package: libgfortran-54-dev
 Architecture: any
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libgcc-541-dev (= ${gcc:Version}), libgfortran3-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libgcc-54-dev (= ${gcc:Version}), libgfortran3-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Multi-Arch: same
 Description: Runtime library for GNU Fortran applications (development files)
  This package contains the headers and static library files needed to build
  GNU Fortran applications.
 
-Package: lib64gfortran-541-dev
+Package: lib64gfortran-54-dev
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), lib64gcc-541-dev (= ${gcc:Version}), lib64gfortran3-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib64gcc-54-dev (= ${gcc:Version}), lib64gfortran3-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Runtime library for GNU Fortran applications (64bit development files)
  This package contains the headers and static library files needed to build
  GNU Fortran applications.
 
-Package: lib32gfortran-541-dev
+Package: lib32gfortran-54-dev
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), lib32gcc-541-dev (= ${gcc:Version}), lib32gfortran3-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib32gcc-54-dev (= ${gcc:Version}), lib32gfortran3-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Runtime library for GNU Fortran applications (32bit development files)
  This package contains the headers and static library files needed to build
  GNU Fortran applications.
 
-Package: libn32gfortran-541-dev
+Package: libn32gfortran-54-dev
 Architecture: mips mipsel mips64 mips64el
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libn32gcc-541-dev (= ${gcc:Version}), libn32gfortran3-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libn32gcc-54-dev (= ${gcc:Version}), libn32gfortran3-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Runtime library for GNU Fortran applications (n32 development files)
  This package contains the headers and static library files needed to build
  GNU Fortran applications.
 
-Package: libx32gfortran-541-dev
+Package: libx32gfortran-54-dev
 Architecture: amd64 i386
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libx32gcc-541-dev (= ${gcc:Version}), libx32gfortran3-541 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libx32gcc-54-dev (= ${gcc:Version}), libx32gfortran3-54 (>= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Runtime library for GNU Fortran applications (x32 development files)
  This package contains the headers and static library files needed to build
  GNU Fortran applications.
 
-Package: gccgo-541
+Package: gccgo-54
 Architecture: any
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gcc-541 (= ${gcc:Version}), libgo7-541 (>= ${gcc:Version}), ${dep:libcdev}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gcc-54 (= ${gcc:Version}), libgo7-54 (>= ${gcc:Version}), ${dep:libcdev}, ${shlibs:Depends}, ${misc:Depends}
 Provides: go-compiler
-Suggests: ${go:multilib}, gccgo-541-doc, libgo7-dbg-541 (>= ${gcc:Version})
+Suggests: ${go:multilib}, gccgo-54-doc, libgo7-dbg-54 (>= ${gcc:Version})
 Conflicts: ${golang:Conflicts}
 Description: GNU Go compiler
  This is the GNU Go compiler, which compiles Go on platforms supported
  by the gcc compiler. It uses the gcc backend to generate optimized code.
 
-Package: gccgo-541-multilib
+Package: gccgo-54-multilib
 Architecture: amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel mipsn32 mipsn32el powerpc ppc64 s390 s390x sparc sparc64 x32
 Section: devel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gccgo-541 (= ${gcc:Version}), gcc-541-multilib (= ${gcc:Version}), ${dep:libgobiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gccgo-54 (= ${gcc:Version}), gcc-54-multilib (= ${gcc:Version}), ${dep:libgobiarch}, ${shlibs:Depends}, ${misc:Depends}
 Suggests: ${dep:libgobiarchdbg}
 Description: GNU Go compiler (multilib support)
  This is the GNU Go compiler, which compiles Go on platforms supported
@@ -635,120 +635,120 @@ Description: GNU Go compiler (multilib support)
  This is a dependency package, depending on development packages
  for the non-default multilib architecture(s).
 
-Package: libgo7-541
+Package: libgo7-54
 Section: libs
 Architecture: any
 Provides: libgo7-armel [armel], libgo7-armhf [armhf]
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Replaces: libgo3
 Description: Runtime library for GNU Go applications
  Library needed for GNU Go applications linked against the
  shared library.
 
-Package: libgo7-dbg-541
+Package: libgo7-dbg-54
 Section: debug
 Architecture: any
 Provides: libgo7-dbg-armel [armel], libgo7-dbg-armhf [armhf]
 Multi-Arch: same
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libgo7-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libgo7-54 (= ${gcc:Version}), ${misc:Depends}
 Description: Runtime library for GNU Go applications (debug symbols)
  Library needed for GNU Go applications linked against the
  shared library. This currently is an empty package, because the
  library is completely unstripped.
 
-Package: lib64go7-541
+Package: lib64go7-54
 Section: libs
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
 Replaces: lib64go3
 Description: Runtime library for GNU Go applications (64bit)
  Library needed for GNU Go applications linked against the
  shared library.
 
-Package: lib64go7-dbg-541
+Package: lib64go7-dbg-54
 Section: debug
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), lib64go7-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib64go7-54 (= ${gcc:Version}), ${misc:Depends}
 Description: Runtime library for GNU Go applications (64bit debug symbols)
  Library needed for GNU Go applications linked against the
  shared library. This currently is an empty package, because the
  library is completely unstripped.
 
-Package: lib32go7-541
+Package: lib32go7-54
 Section: libs
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: ${confl:lib32}
 Replaces: lib32go3
 Description: Runtime library for GNU Go applications (32bit)
  Library needed for GNU Go applications linked against the
  shared library.
 
-Package: lib32go7-dbg-541
+Package: lib32go7-dbg-54
 Section: debug
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), lib32go7-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib32go7-54 (= ${gcc:Version}), ${misc:Depends}
 Description: Runtime library for GNU Go applications (32 bit debug symbols)
  Library needed for GNU Go applications linked against the
  shared library. This currently is an empty package, because the
  library is completely unstripped.
 
-Package: libn32go7-541
+Package: libn32go7-54
 Section: libs
 Architecture: mips mipsel mips64 mips64el
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
 Replaces: libn32go3
 Description: Runtime library for GNU Go applications (n32)
  Library needed for GNU Go applications linked against the
  shared library.
 
-Package: libn32go7-dbg-541
+Package: libn32go7-dbg-54
 Section: debug
 Architecture: mips mipsel mips64 mips64el
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libn32go7-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libn32go7-54 (= ${gcc:Version}), ${misc:Depends}
 Description: Runtime library for GNU Go applications (n32 debug symbols)
  Library needed for GNU Go applications linked against the
  shared library. This currently is an empty package, because the
  library is completely unstripped.
 
-Package: libx32go7-541
+Package: libx32go7-54
 Section: libs
 Architecture: amd64 i386
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:libcbiarch}, ${shlibs:Depends}, ${misc:Depends}
 Replaces: libx32go3
 Description: Runtime library for GNU Go applications (x32)
  Library needed for GNU Go applications linked against the
  shared library.
 
-Package: libx32go7-dbg-541
+Package: libx32go7-dbg-54
 Section: debug
 Architecture: amd64 i386
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libx32go7-541 (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libx32go7-54 (= ${gcc:Version}), ${misc:Depends}
 Description: Runtime library for GNU Go applications (x32 debug symbols)
  Library needed for GNU Go applications linked against the
  shared library. This currently is an empty package, because the
  library is completely unstripped.
 
-Package: gcj-541
+Package: gcj-54
 Section: java
 Architecture: any
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:gcj}, ${dep:gcjcross}, ${dep:libcdev}, ${dep:ecj}, ${shlibs:Depends}, dpkg (>= 1.15.4) | install-info, ${misc:Depends}
-Recommends: libecj-java-gcj-541
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:gcj}, ${dep:gcjcross}, ${dep:libcdev}, ${dep:ecj}, ${shlibs:Depends}, dpkg (>= 1.15.4) | install-info, ${misc:Depends}
+Recommends: libecj-java-gcj-54
 Replaces: gcj-5-jdk (<< 5.2.1-19)
-Suggests: gcj-541-jdk
+Suggests: gcj-54-jdk
 Description: GCJ byte code and native compiler for Java(TM)
  GCJ is a front end to the GCC compiler which can natively compile both
  Java(tm) source and bytecode files. The compiler can also generate class
@@ -756,13 +756,13 @@ Description: GCJ byte code and native compiler for Java(TM)
  .
  Install the gcj-5-jdk package for a more complete SDK environment.
 
-Package: gcj-541-jdk
+Package: gcj-54-jdk
 Section: java
 Architecture: any
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${dep:gcj}, ${dep:libcdev}, gcj-541 (= ${gcj:Version}), gcj-541-jre (= ${gcj:Version}), libgcj16-dev-541 (>= ${gcj:Version}), fastjar, libgcj-bc, java-common, libantlr-java, ${shlibs:Depends}, dpkg (>= 1.15.4) | install-info, ${misc:Depends}
-Recommends: libecj-java-gcj-541
-Suggests: gcj-541-source (>= ${gcj:SoftVersion}), libgcj16-dbg-541 (>= ${gcc:Version})
+Depends: gcc-54-base (= ${gcc:Version}), ${dep:gcj}, ${dep:libcdev}, gcj-54 (= ${gcj:Version}), gcj-54-jre (= ${gcj:Version}), libgcj16-dev-54 (>= ${gcj:Version}), fastjar, libgcj-bc, java-common, libantlr-java, ${shlibs:Depends}, dpkg (>= 1.15.4) | install-info, ${misc:Depends}
+Recommends: libecj-java-gcj-54
+Suggests: gcj-54-source (>= ${gcj:SoftVersion}), libgcj16-dbg-54 (>= ${gcc:Version})
 Provides: java-compiler, java-sdk, java2-sdk, java5-sdk
 Conflicts: gcj-4.4, cpp-4.1 (<< 4.1.1), gcc-4.1 (<< 4.1.1)
 Replaces: libgcj11 (<< 4.5-20100101-1)
@@ -775,11 +775,11 @@ Description: GCJ and Classpath development tools for Java(TM)
  The package contains as well a collection of wrapper scripts and symlinks.
  It is meant to provide a Java-SDK-like interface to the GCJ tool set.
 
-Package: gcj-541-jre-headless
+Package: gcj-54-jre-headless
 Priority: optional
 Section: java
 Architecture: any
-Depends: gcc-541-base (= ${gcc:Version}), gcj-541-jre-lib (>= ${gcj:SoftVersion}), libgcj16-541 (>= ${gcj:Version}), ${dep:prctl}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gcj-54-jre-lib (>= ${gcj:SoftVersion}), libgcj16-54 (>= ${gcj:Version}), ${dep:prctl}, ${shlibs:Depends}, ${misc:Depends}
 Suggests: fastjar, gcj-5-jdk (= ${gcj:Version}), libgcj16-awt (>= ${gcj:Version})
 Provides: java5-runtime-headless, java2-runtime-headless, java1-runtime-headless, java-runtime-headless
 Description: Java runtime environment using GIJ/Classpath (headless version)
@@ -792,11 +792,11 @@ Description: Java runtime environment using GIJ/Classpath (headless version)
  It is meant to provide a Java-RTE-like interface to the GIJ/GCJ tool set,
  limited to the headless tools and libraries.
 
-Package: gcj-541-jre
+Package: gcj-54-jre
 Section: java
 Architecture: any
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), gcj-541-jre-headless (= ${gcj:Version}), libgcj16-awt-541 (>= ${gcj:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gcj-54-jre-headless (= ${gcj:Version}), libgcj16-awt-54 (>= ${gcj:Version}), ${shlibs:Depends}, ${misc:Depends}
 Provides: java5-runtime, java2-runtime, java1-runtime, java-runtime
 Description: Java runtime environment using GIJ/Classpath
  GIJ is a Java bytecode interpreter, not limited to interpreting bytecode.
@@ -807,15 +807,15 @@ Description: Java runtime environment using GIJ/Classpath
  The package contains as well a collection of wrapper scripts and symlinks.
  It is meant to provide a Java-RTE-like interface to the GIJ/GCJ tool set.
 
-Package: libgcj16-541
+Package: libgcj16-54
 Section: libs
 Architecture: any
 Priority: optional
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
-Depends: gcc-541-base (>= ${gcc:SoftVersion}), libgcj-common-541 (>= 1:4.1.1-21), ${shlibs:Depends}, ${misc:Depends}
-Recommends: gcj-541-jre-lib (>= ${gcj:SoftVersion})
-Suggests: libgcj16-dbg-541 (>= ${gcc:Version}), libgcj16-awt-541 (= ${gcj:Version})
+Depends: gcc-54-base (>= ${gcc:SoftVersion}), libgcj-common-54 (>= 1:4.1.1-21), ${shlibs:Depends}, ${misc:Depends}
+Recommends: gcj-54-jre-lib (>= ${gcj:SoftVersion})
+Suggests: libgcj16-dbg-54 (>= ${gcc:Version}), libgcj16-awt-54 (= ${gcj:Version})
 Description: Java runtime library for use with gcj
  This is the runtime that goes along with the gcj front end to
  gcc. libgcj includes parts of the Java Class Libraries, plus glue to
@@ -824,46 +824,46 @@ Description: Java runtime library for use with gcj
  To show file names and line numbers in stack traces, the packages
  libgcj16-dbg and binutils are required.
 
-Package: gcj-541-jre-lib
+Package: gcj-54-jre-lib
 Section: java
 Architecture: all
 Priority: optional
-Depends: gcc-541-base (>= ${gcc:SoftVersion}), libgcj16-541 (>= ${gcj:SoftVersion}), ${misc:Depends}
+Depends: gcc-54-base (>= ${gcc:SoftVersion}), libgcj16-54 (>= ${gcj:SoftVersion}), ${misc:Depends}
 Description: Java runtime library for use with gcj (jar files)
  This is the jar file that goes along with the gcj front end to gcc.
 
-Package: libgcj16-awt-541
+Package: libgcj16-awt-54
 Section: libs
 Architecture: any
 Priority: optional
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
-Depends: gcc-541-base (>= ${gcc:SoftVersion}), libgcj16-541 (= ${gcj:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (>= ${gcc:SoftVersion}), libgcj16-54 (= ${gcj:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: ${pkg:gcjqt}
 Description: AWT peer runtime libraries for use with gcj
  These are runtime libraries holding the AWT peer implementations
  for libgcj (currently the GTK+ based peer library is required, the
  QT bases library is not built).
 
-Package: libgcj16-dev-541
+Package: libgcj16-dev-54
 Section: libdevel
 Architecture: any
 Multi-Arch: same
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libgcj16-awt-541 (= ${gcj:Version}), libgcj-bc-541, ${pkg:gcjgtk}, ${pkg:gcjqt}, zlib1g-dev, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libgcj16-awt-54 (= ${gcj:Version}), libgcj-bc-54, ${pkg:gcjgtk}, ${pkg:gcjqt}, zlib1g-dev, ${shlibs:Depends}, ${misc:Depends}
 Suggests: libgcj-doc
 Description: Java development headers for use with gcj
  These are the development headers that go along with the gcj front end
  to gcc. libgcj includes parts of the Java Class Libraries, plus glue
  to connect the libraries to the compiler and the underlying OS.
 
-Package: libgcj16-dbg-541
+Package: libgcj16-dbg-54
 Section: debug
 Architecture: any
 Priority: extra
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
-Depends: gcc-541-base (= ${gcc:Version}), libgcj16-541 (= ${gcj:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libgcj16-54 (= ${gcj:Version}), ${misc:Depends}
 Recommends: binutils, libc6-dbg | libc-dbg
 Description: Debugging symbols for libraries provided in libgcj16-dev
  The package provides debugging symbols for the libraries provided
@@ -871,37 +871,37 @@ Description: Debugging symbols for libraries provided in libgcj16-dev
  .
  binutils is required to show file names and line numbers in stack traces.
 
-Package: gcj-541-source
+Package: gcj-54-source
 Section: java
 Architecture: all
 Priority: optional
-Depends: gcc-541-base (>= ${gcc:SoftVersion}), gcj-541-jdk (>= ${gcj:SoftVersion}), ${misc:Depends}
+Depends: gcc-54-base (>= ${gcc:SoftVersion}), gcj-54-jdk (>= ${gcj:SoftVersion}), ${misc:Depends}
 Description: GCJ java sources for use in IDEs like eclipse and netbeans
  These are the java source files packaged as a zip file for use in development
  environments like eclipse and netbeans.
 
-Package: libgcj-doc-541
+Package: libgcj-doc-54
 Section: doc
 Architecture: all
 Priority: optional
-Depends: gcc-541-base (>= ${gcc:SoftVersion}), ${misc:Depends}
-Enhances: libgcj16-dev-541
+Depends: gcc-54-base (>= ${gcc:SoftVersion}), ${misc:Depends}
+Enhances: libgcj16-dev-54
 Provides: classpath-doc
 Description: libgcj API documentation and example programs
  Autogenerated documentation describing the API of the libgcj library.
  Sources and precompiled example programs from the Classpath library.
 
-Package: libstdc++-541-dev
+Package: libstdc++-54-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libgcc-541-dev (= ${gcc:Version}),
+Depends: gcc-54-base (= ${gcc:Version}), libgcc-54-dev (= ${gcc:Version}),
  libstdc++6 (>= ${gcc:Version}), ${dep:libcdev}, ${misc:Depends}
 Conflicts: libg++27-dev, libg++272-dev (<< 2.7.2.8-1), libstdc++2.8-dev,
  libg++2.8-dev, libstdc++2.9-dev, libstdc++2.9-glibc2.1-dev,
  libstdc++2.10-dev (<< 1:2.95.3-2), libstdc++3.0-dev
-Suggests: libstdc++-541-doc
+Suggests: libstdc++-54-doc
 Provides: libstdc++-dev
 Description: GNU Standard C++ Library v3 (development files)
  This package contains the headers and static library files necessary for
@@ -911,28 +911,28 @@ Description: GNU Standard C++ Library v3 (development files)
  was included up to g++-2.95. The first version of libstdc++-v3 appeared
  in g++-3.0.
 
-Package: libstdc++-541-pic
+Package: libstdc++-54-pic
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libstdc++6-541 (>= ${gcc:Version}),
- libstdc++-541-dev (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libstdc++6-54 (>= ${gcc:Version}),
+ libstdc++-54-dev (= ${gcc:Version}), ${misc:Depends}
 Description: GNU Standard C++ Library v3 (shared library subset kit)
  This is used to develop subsets of the libstdc++ shared libraries for
  use on custom installation floppies and in embedded systems.
  .
  Unless you are making one of those, you will not need this package.
 
-Package: libstdc++6-541-dbg
+Package: libstdc++6-54-dbg
 Architecture: any
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libstdc++6-541 (>= ${gcc:Version}),
- libgcc1-dbg-541 (>= ${libgcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libstdc++6-54 (>= ${gcc:Version}),
+ libgcc1-dbg-54 (>= ${libgcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Provides: libstdc++6-5-dbg-armel [armel], libstdc++6-5-dbg-armhf [armhf]
 Multi-Arch: same
-Recommends: libstdc++-541-dev (= ${gcc:Version})
+Recommends: libstdc++-54-dev (= ${gcc:Version})
 Conflicts: libstdc++5-dbg, libstdc++5-3.3-dbg, libstdc++6-dbg,
  libstdc++6-4.0-dbg, libstdc++6-4.1-dbg, libstdc++6-4.2-dbg,
  libstdc++6-4.3-dbg, libstdc++6-4.4-dbg, libstdc++6-4.5-dbg,
@@ -942,12 +942,12 @@ Description: GNU Standard C++ Library v3 (debugging files)
  This package contains the shared library of libstdc++ compiled with
  debugging symbols.
 
-Package: lib32stdc++-541-dev
+Package: lib32stdc++-54-dev
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), lib32gcc-541-dev (= ${gcc:Version}),
- lib32stdc++6-541 (>= ${gcc:Version}), libstdc++-541-dev (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib32gcc-54-dev (= ${gcc:Version}),
+ lib32stdc++6-54 (>= ${gcc:Version}), libstdc++-54-dev (= ${gcc:Version}), ${misc:Depends}
 Description: GNU Standard C++ Library v3 (development files)
  This package contains the headers and static library files necessary for
  building C++ programs which use libstdc++.
@@ -956,12 +956,12 @@ Description: GNU Standard C++ Library v3 (development files)
  was included up to g++-2.95. The first version of libstdc++-v3 appeared
  in g++-3.0.
 
-Package: lib32stdc++6-541-dbg
+Package: lib32stdc++6-54-dbg
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), lib32stdc++6-541 (>= ${gcc:Version}),
- libstdc++-541-dev (= ${gcc:Version}), lib32gcc1-dbg-541 (>= ${gcc:EpochVersion}),
+Depends: gcc-54-base (= ${gcc:Version}), lib32stdc++6-54 (>= ${gcc:Version}),
+ libstdc++-54-dev (= ${gcc:Version}), lib32gcc1-dbg-54 (>= ${gcc:EpochVersion}),
  ${shlibs:Depends}, ${misc:Depends}
 Conflicts: lib32stdc++6-dbg, lib32stdc++6-4.0-dbg,
  lib32stdc++6-4.1-dbg, lib32stdc++6-4.2-dbg, lib32stdc++6-4.3-dbg,
@@ -971,12 +971,12 @@ Description: GNU Standard C++ Library v3 (debugging files)
  This package contains the shared library of libstdc++ compiled with
  debugging symbols.
 
-Package: lib64stdc++-541-dev
+Package: lib64stdc++-54-dev
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), lib64gcc-541-dev (= ${gcc:Version}),
- lib64stdc++6-541 (>= ${gcc:Version}), libstdc++-541-dev (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib64gcc-54-dev (= ${gcc:Version}),
+ lib64stdc++6-54 (>= ${gcc:Version}), libstdc++-54-dev (= ${gcc:Version}), ${misc:Depends}
 Description: GNU Standard C++ Library v3 (development files)
  This package contains the headers and static library files necessary for
  building C++ programs which use libstdc++.
@@ -985,12 +985,12 @@ Description: GNU Standard C++ Library v3 (development files)
  was included up to g++-2.95. The first version of libstdc++-v3 appeared
  in g++-3.0.
 
-Package: lib64stdc++6-541-dbg
+Package: lib64stdc++6-54-dbg
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), lib64stdc++6-541 (>= ${gcc:Version}),
- libstdc++-541-dev (= ${gcc:Version}), lib64gcc1-dbg-541 (>= ${gcc:EpochVersion}),
+Depends: gcc-54-base (= ${gcc:Version}), lib64stdc++6-54 (>= ${gcc:Version}),
+ libstdc++-54-dev (= ${gcc:Version}), lib64gcc1-dbg-54 (>= ${gcc:EpochVersion}),
  ${shlibs:Depends}, ${misc:Depends}
 Conflicts: lib64stdc++6-dbg, lib64stdc++6-4.0-dbg,
  lib64stdc++6-4.1-dbg, lib64stdc++6-4.2-dbg, lib64stdc++6-4.3-dbg,
@@ -1000,12 +1000,12 @@ Description: GNU Standard C++ Library v3 (debugging files)
  This package contains the shared library of libstdc++ compiled with
  debugging symbols.
 
-Package: libn32stdc++-541-dev
+Package: libn32stdc++-54-dev
 Architecture: mips mipsel mips64 mips64el
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libn32gcc-541-dev (= ${gcc:Version}),
- libn32stdc++6-541 (>= ${gcc:Version}), libstdc++-541-dev (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libn32gcc-54-dev (= ${gcc:Version}),
+ libn32stdc++6-54 (>= ${gcc:Version}), libstdc++-54-dev (= ${gcc:Version}), ${misc:Depends}
 Description: GNU Standard C++ Library v3 (development files)
  This package contains the headers and static library files necessary for
  building C++ programs which use libstdc++.
@@ -1014,12 +1014,12 @@ Description: GNU Standard C++ Library v3 (development files)
  was included up to g++-2.95. The first version of libstdc++-v3 appeared
  in g++-3.0.
 
-Package: libn32stdc++6-541-dbg
+Package: libn32stdc++6-54-dbg
 Architecture: mips mipsel mips64 mips64el
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libn32stdc++6-541 (>= ${gcc:Version}),
- libstdc++-541-dev (= ${gcc:Version}), libn32gcc1-dbg-541 (>= ${gcc:EpochVersion}),
+Depends: gcc-54-base (= ${gcc:Version}), libn32stdc++6-54 (>= ${gcc:Version}),
+ libstdc++-54-dev (= ${gcc:Version}), libn32gcc1-dbg-54 (>= ${gcc:EpochVersion}),
  ${shlibs:Depends}, ${misc:Depends}
 Conflicts: libn32stdc++6-dbg, libn32stdc++6-4.0-dbg,
  libn32stdc++6-4.1-dbg, libn32stdc++6-4.2-dbg, libn32stdc++6-4.3-dbg,
@@ -1029,12 +1029,12 @@ Description: GNU Standard C++ Library v3 (debugging files)
  This package contains the shared library of libstdc++ compiled with
  debugging symbols.
 
-Package: libx32stdc++-541-dev
+Package: libx32stdc++-54-dev
 Architecture: amd64 i386
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libx32gcc-541-dev (= ${gcc:Version}), libx32stdc++6-541 (>= ${gcc:Version}),
- libstdc++-541-dev (= ${gcc:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libx32gcc-54-dev (= ${gcc:Version}), libx32stdc++6-54 (>= ${gcc:Version}),
+ libstdc++-54-dev (= ${gcc:Version}), ${misc:Depends}
 Description: GNU Standard C++ Library v3 (development files)
  This package contains the headers and static library files necessary for
  building C++ programs which use libstdc++.
@@ -1043,12 +1043,12 @@ Description: GNU Standard C++ Library v3 (development files)
  was included up to g++-2.95. The first version of libstdc++-v3 appeared
  in g++-3.0.
 
-Package: libx32stdc++6-541-dbg
+Package: libx32stdc++6-54-dbg
 Architecture: amd64 i386
 Section: debug
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libx32stdc++6-541 (>= ${gcc:Version}),
- libstdc++-541-dev (= ${gcc:Version}), libx32gcc1-dbg-541 (>= ${gcc:EpochVersion}),
+Depends: gcc-54-base (= ${gcc:Version}), libx32stdc++6-54 (>= ${gcc:Version}),
+ libstdc++-54-dev (= ${gcc:Version}), libx32gcc1-dbg-54 (>= ${gcc:EpochVersion}),
  ${shlibs:Depends}, ${misc:Depends}
 Conflicts: libx32stdc++6-dbg, libx32stdc++6-4.6-dbg,
  libx32stdc++6-4.7-dbg, libx32stdc++6-4.8-dbg, libx32stdc++6-4.9-dbg
@@ -1056,11 +1056,11 @@ Description: GNU Standard C++ Library v3 (debugging files)
  This package contains the shared library of libstdc++ compiled with
  debugging symbols.
 
-Package: libstdc++-541-doc
+Package: libstdc++-54-doc
 Architecture: all
 Section: doc
 Priority: optional
-Depends: gcc-541-base (>= ${gcc:SoftVersion}), ${misc:Depends}
+Depends: gcc-54-base (>= ${gcc:SoftVersion}), ${misc:Depends}
 Conflicts: libstdc++5-doc, libstdc++5-3.3-doc, libstdc++6-doc,
  libstdc++6-4.0-doc, libstdc++6-4.1-doc, libstdc++6-4.2-doc, libstdc++6-4.3-doc,
  libstdc++6-4.4-doc, libstdc++6-4.5-doc, libstdc++6-4.6-doc, libstdc++6-4.7-doc,
@@ -1073,12 +1073,12 @@ Description: GNU Standard C++ Library v3 (documentation files)
  alphabetical list, compound list, file list, namespace members,
  compound members and file members.
 
-Package: gnat-541
+Package: gnat-54
 Architecture: any
 Priority: optional
 Pre-Depends: ${misc:Pre-Depends}
-Depends: gcc-541-base (= ${gcc:Version}), gcc-541 (>= ${gcc:SoftVersion}), ${dep:libgnat}, ${dep:libcdev}, ${shlibs:Depends}, ${misc:Depends}
-Suggests: gnat-541-doc, ada-reference-manual-2012, gnat-541-sjlj
+Depends: gcc-54-base (= ${gcc:Version}), gcc-54 (>= ${gcc:SoftVersion}), ${dep:libgnat}, ${dep:libcdev}, ${shlibs:Depends}, ${misc:Depends}
+Suggests: gnat-54-doc, ada-reference-manual-2012, gnat-54-sjlj
 Breaks:   gnat (<< 4.6.1), dh-ada-library (<< 6.0), gnat-4.6-base (= 4.6.4-2),
  gnat-4.9-base (= 4.9-20140330-1)
 Replaces: gnat (<< 4.6.1), dh-ada-library (<< 6.0), gnat-4.6-base (= 4.6.4-2),
@@ -1099,11 +1099,11 @@ Description: GNU Ada compiler
  This package provides the compiler, tools and runtime library that handles
  exceptions using the default zero-cost mechanism.
 
-Package: gnat-541-sjlj
+Package: gnat-54-sjlj
 Architecture: any
 Priority: extra
 Pre-Depends: ${misc:Pre-Depends}
-Depends: gcc-541-base (= ${gcc:Version}), gnat-541 (= ${gnat:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gnat-54 (= ${gnat:Version}), ${misc:Depends}
 Description: GNU Ada compiler (setjump/longjump runtime library)
  GNAT is a compiler for the Ada programming language. It produces optimized
  code on platforms supported by the GNU Compiler Collection (GCC).
@@ -1112,13 +1112,13 @@ Description: GNU Ada compiler (setjump/longjump runtime library)
  exceptions using the setjump/longjump mechanism (as a static library
  only).  You can install it to supplement the normal compiler.
 
-Package: libgnat-541
+Package: libgnat-54
 Section: libs
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: runtime for applications compiled with GNAT (shared library)
  GNAT is a compiler for the Ada programming language. It produces optimized
  code on platforms supported by the GNU Compiler Collection (GCC).
@@ -1128,13 +1128,13 @@ Description: runtime for applications compiled with GNAT (shared library)
  .
  This package contains the runtime shared library.
 
-Package: libgnat-541-dbg
+Package: libgnat-54-dbg
 Section: debug
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), libgnat-541 (= ${gnat:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libgnat-54 (= ${gnat:Version}), ${misc:Depends}
 Description: runtime for applications compiled with GNAT (debugging symbols)
  GNAT is a compiler for the Ada programming language. It produces optimized
  code on platforms supported by the GNU Compiler Collection (GCC).
@@ -1144,12 +1144,12 @@ Description: runtime for applications compiled with GNAT (debugging symbols)
  .
  This package contains the debugging symbols.
 
-Package: libgnatvsn541-dev
+Package: libgnatvsn54-dev
 Section: libdevel
 Architecture: any
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), gnat-541 (= ${gnat:Version}),
- libgnatvsn541 (= ${gnat:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gnat-54 (= ${gnat:Version}),
+ libgnatvsn54 (= ${gnat:Version}), ${misc:Depends}
 Conflicts: libgnatvsn-dev (<< 5),
  libgnatvsn4.1-dev, libgnatvsn4.3-dev, libgnatvsn4.4-dev,
  libgnatvsn4.5-dev, libgnatvsn4.6-dev, libgnatvsn4.9-dev,
@@ -1163,13 +1163,13 @@ Description: GNU Ada compiler selected components (development files)
  .
  This package contains the development files and static library.
 
-Package: libgnatvsn541
+Package: libgnatvsn54
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: optional
 Section: libs
-Depends: gcc-541-base (= ${gcc:Version}), libgnat-541 (= ${gnat:Version}),
+Depends: gcc-54-base (= ${gcc:Version}), libgnat-54 (= ${gnat:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 Description: GNU Ada compiler selected components (shared library)
  GNAT is a compiler for the Ada programming language. It produces optimized
@@ -1181,13 +1181,13 @@ Description: GNU Ada compiler selected components (shared library)
  .
  This package contains the runtime shared library.
 
-Package: libgnatvsn541-dbg
+Package: libgnatvsn54-dbg
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: extra
 Section: debug
-Depends: gcc-541-base (= ${gcc:Version}), libgnatvsn541 (= ${gnat:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libgnatvsn54 (= ${gnat:Version}), ${misc:Depends}
 Suggests: gnat
 Description: GNU Ada compiler selected components (debugging symbols)
  GNAT is a compiler for the Ada programming language. It produces optimized
@@ -1199,13 +1199,13 @@ Description: GNU Ada compiler selected components (debugging symbols)
  .
  This package contains the debugging symbols.
 
-Package: libgnatprj541-dev
+Package: libgnatprj54-dev
 Section: libdevel
 Architecture: any
 Priority: extra
-Depends: gcc-541-base (= ${gcc:Version}), gnat-541 (= ${gnat:Version}),
- libgnatprj541 (= ${gnat:Version}),
- libgnatvsn541-dev (= ${gnat:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), gnat-54 (= ${gnat:Version}),
+ libgnatprj54 (= ${gnat:Version}),
+ libgnatvsn54-dev (= ${gnat:Version}), ${misc:Depends}
 Conflicts: libgnatprj-dev (<< 5),
  libgnatprj4.1-dev, libgnatprj4.3-dev, libgnatprj4.4-dev,
  libgnatprj4.5-dev, libgnatprj4.6-dev, libgnatprj4.9-dev,
@@ -1222,14 +1222,14 @@ Description: GNU Ada compiler Project Manager (development files)
  .
  This package contains the development files and static library.
 
-Package: libgnatprj541
+Package: libgnatprj54
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: optional
 Section: libs
-Depends: gcc-541-base (= ${gcc:Version}), libgnat-541 (= ${gnat:Version}),
- libgnatvsn541 (= ${gnat:Version}),
+Depends: gcc-54-base (= ${gcc:Version}), libgnat-54 (= ${gnat:Version}),
+ libgnatvsn54 (= ${gnat:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 Description: GNU Ada compiler Project Manager (shared library)
  GNAT is a compiler for the Ada programming language. It produces optimized
@@ -1244,13 +1244,13 @@ Description: GNU Ada compiler Project Manager (shared library)
  .
  This package contains the runtime shared library.
 
-Package: libgnatprj541-dbg
+Package: libgnatprj54-dbg
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Priority: extra
 Section: debug
-Depends: gcc-541-base (= ${gcc:Version}), libgnatprj541 (= ${gnat:Version}), ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libgnatprj54 (= ${gnat:Version}), ${misc:Depends}
 Suggests: gnat
 Description: GNU Ada compiler Project Manager (debugging symbols)
  GNAT is a compiler for the Ada programming language. It produces optimized
@@ -1265,10 +1265,10 @@ Description: GNU Ada compiler Project Manager (debugging symbols)
  .
  This package contains the debugging symbols.
 
-Package: gdc-541
+Package: gdc-54
 Architecture: any
 Priority: optional
-Depends: gcc-541-base (>= ${gcc:SoftVersion}), g++-541 (>= ${gcc:SoftVersion}), ${dep:gdccross}, ${dep:phobosdev}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (>= ${gcc:SoftVersion}), g++-54 (>= ${gcc:SoftVersion}), ${dep:gdccross}, ${dep:phobosdev}, ${shlibs:Depends}, ${misc:Depends}
 Provides: gdc, d-compiler, d-v2-compiler
 Replaces: gdc (<< 4.4.6-5),
   libphobos-5-dev (<< 5.4.0-1~)
@@ -1278,10 +1278,10 @@ Description: GNU D compiler (version 2)
  .
  This compiler supports D language version 2.
 
-Package: gdc-541-multilib
+Package: gdc-54-multilib
 Architecture: any
 Priority: optional
-Depends: gcc-541-base (>= ${gcc:SoftVersion}), gdc-541 (= ${gcc:Version}), gcc-541-multilib (= ${gcc:Version}), ${dep:libphobosbiarchdev}${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (>= ${gcc:SoftVersion}), gdc-54 (= ${gcc:Version}), gcc-54-multilib (= ${gcc:Version}), ${dep:libphobosbiarchdev}${shlibs:Depends}, ${misc:Depends}
 Replaces: lib32phobos-5-dev (<< 5.4.0-1~),
   lib64phobos-5-dev (<< 5.4.0-1~), 
   libx32phobos-5-dev (<< 5.4.0-1~), 
@@ -1295,11 +1295,11 @@ Description: GNU D compiler (version 2, multilib support)
  This is a dependency package, depending on development packages
  for the non-default multilib architecture(s).
 
-Package: libphobos-541-dev
+Package: libphobos-54-dev
 Architecture: amd64 armel armhf i386 x32 kfreebsd-amd64 kfreebsd-i386
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), zlib1g-dev, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), zlib1g-dev, ${shlibs:Depends}, ${misc:Depends}
 Description: Phobos D standard library
  This is the Phobos standard library that comes with the D2 compiler.
  .
@@ -1317,31 +1317,31 @@ Description: Phobos D standard library
 # .
 # For more information check http://www.dlang.org/phobos/
 
-Package: lib64phobos-541-dev
+Package: lib64phobos-54-dev
 Architecture: i386 powerpc sparc s390 mips mipsel mipsn32 mipsn32el x32
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), lib64gcc-541-dev (= ${gcc:Version}), lib64z1-dev, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib64gcc-54-dev (= ${gcc:Version}), lib64z1-dev, ${shlibs:Depends}, ${misc:Depends}
 Description: Phobos D standard library (64bit development files)
  This is the Phobos standard library that comes with the D2 compiler.
  .
  For more information check http://www.dlang.org/phobos/
 
-Package: lib32phobos-541-dev
+Package: lib32phobos-54-dev
 Architecture: amd64 ppc64 kfreebsd-amd64 s390x sparc64 x32 mipsn32 mipsn32el mips64 mips64el
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), lib32gcc-541-dev (= ${gcc:Version}), lib32z1-dev, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), lib32gcc-54-dev (= ${gcc:Version}), lib32z1-dev, ${shlibs:Depends}, ${misc:Depends}
 Description: Phobos D standard library (64bit development files)
  This is the Phobos standard library that comes with the D2 compiler.
  .
  For more information check http://www.dlang.org/phobos/
 
-Package: libx32phobos-541-dev
+Package: libx32phobos-54-dev
 Architecture: amd64 i386
 Section: libdevel
 Priority: optional
-Depends: gcc-541-base (= ${gcc:Version}), libx32gcc-541-dev (= ${gcc:Version}), ${dep:libx32z}, ${shlibs:Depends}, ${misc:Depends}
+Depends: gcc-54-base (= ${gcc:Version}), libx32gcc-54-dev (= ${gcc:Version}), ${dep:libx32z}, ${shlibs:Depends}, ${misc:Depends}
 Description: Phobos D standard library (x32 development files)
  This is the Phobos standard library that comes with the D2 compiler.
  .
@@ -1357,7 +1357,7 @@ Description: Phobos D standard library (x32 development files)
 # These are versions of basic static libraries such as libgcc.a compiled
 # with the -msoft-float option, for CPUs without a floating-point unit.
 
-Package: gcc-541-source
+Package: gcc-54-source
 Architecture: all
 Priority: optional
 Depends: make, autoconf2.64, quilt, patchutils, gawk, ${misc:Depends}

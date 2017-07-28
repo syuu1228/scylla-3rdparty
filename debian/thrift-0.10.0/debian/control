@@ -1,4 +1,4 @@
-Source: thrift0100
+Source: thrift010
 Section: devel
 Priority: extra
 Build-Depends: debhelper (>= 9), build-essential, autoconf, automake,
@@ -13,7 +13,7 @@ Standards-Version: 3.9.7
 X-Python-Version: >= 2.6
 X-Python3-Version: >= 3.3
 
-Package: libthrift0100
+Package: libthrift010
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Thrift C++ library
@@ -24,10 +24,10 @@ Description: Thrift C++ library
  This package contains the runtime libraries needed for C++ applications
  using Thrift.
 
-Package: libthrift0100-dev
+Package: libthrift010-dev
 Architecture: any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libthrift0100 (= ${binary:Version}), libglib2.0-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, libthrift010 (= ${binary:Version}), libglib2.0-dev
 Description: Thrift C++ library (development headers)
  Thrift is a software framework for scalable cross-language services
  development. It combines a software stack with a code generation engine to
