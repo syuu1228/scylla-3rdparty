@@ -47,10 +47,6 @@ if [ ! -f boost-1.58.0-11.fc23.src.rpm ]; then
     wget https://kojipkgs.fedoraproject.org//packages/boost/1.58.0/11.fc23/src/boost-1.58.0-11.fc23.src.rpm
 fi
 
-if [ ! -f ragel-6.8-5.fc23.src.rpm ]; then
-   wget https://kojipkgs.fedoraproject.org//packages/ragel/6.8/5.fc23/src/ragel-6.8-5.fc23.src.rpm
-fi
-
 if [ ! -f gdb-7.10.1-30.fc23.src.rpm ]; then
    wget https://kojipkgs.fedoraproject.org//packages/gdb/7.10.1/30.fc23/src/gdb-7.10.1-30.fc23.src.rpm
 fi
@@ -86,11 +82,6 @@ fi
 if [ ! -f build/srpms/scylla-boost158-1.58.0-11.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/boost-1.58.0-11.fc23.src.rpm
     sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-boost158.spec --sources=$RPMBUILD/SOURCES
-fi
-
-if [ ! -f build/srpms/scylla-ragel-6.8-5.el7*.src.rpm ]; then
-    rpm --define "_topdir $RPMBUILD" -ivh build/downloads/ragel-6.8-5.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-ragel68.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-gdb-7.10.1-30.el7*.src.rpm ]; then
