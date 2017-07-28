@@ -1,4 +1,4 @@
-thrift0100 (0.10.0-ubuntu1) stable; urgency=low
+thrift010 (0.10.0-ubuntu1) stable; urgency=low
   * update to 0.10.0
 
  -- Takuya ASADA <syuu@scylladb.com>  Mon, 19 Jun 2017 23:08:43 +0000
