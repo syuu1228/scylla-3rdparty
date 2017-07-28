@@ -16,7 +16,7 @@
 }
 
 Summary: A GNU source-level debugger for C, C++, Fortran, Go and other languages
-Name: %{?scl_prefix}scylla-gdb7101
+Name: %{?scl_prefix}scylla-gdb
 %define orig_name gdb
 Requires:	scylla-env
 %define _prefix /opt/scylladb

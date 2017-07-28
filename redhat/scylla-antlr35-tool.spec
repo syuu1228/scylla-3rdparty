@@ -1,6 +1,6 @@
 %global antlr_version 3.5.2
 
-Name:		scylla-antlr352-tool
+Name:		scylla-antlr35-tool
 Version:	%{antlr_version}
 Release:	1%{?dist}
 Summary:	ANother Tool for Language Recognition
