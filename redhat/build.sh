@@ -89,9 +89,9 @@ if [ ! -f build/srpms/scylla-gdb-7.10.1-30.el7*.src.rpm ]; then
     sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-gdb.spec --sources=$RPMBUILD/SOURCES
 fi
 
-if [ ! -f build/srpms/pyparsing20-2.0.3-2.el7*.src.rpm ]; then
+if [ ! -f build/srpms/scylla-pyparsing20-2.0.3-2.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/pyparsing-2.0.3-2.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/pyparsing20.spec --sources=$RPMBUILD/SOURCES
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-pyparsing20.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-antlr35-tool-3.5.2-1.el7*.src.rpm ]; then
