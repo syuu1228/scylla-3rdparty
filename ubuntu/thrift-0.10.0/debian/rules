@@ -117,8 +117,7 @@ binary-common:
 	dh_installexamples
 	dh_installman
 	dh_link
-	dh_strip -pthrift-compiler -plibthrift0
-	dh_strip
+	dh_strip -pscylla-libthrift010
 	dh_compress
 	dh_fixperms
 	dh_makeshlibs

@@ -73,19 +73,9 @@ rm -rf build
 mkdir -p build
 
 if [ "$TARGET" = "trusty" ]; then
-    cp -a common/antlr3-3.5.2 build/
-    cp -a debian/antlr3-3.5.2/debian build/antlr3-3.5.2/
+    cp -a ubuntu/antlr3-3.5.2 build/
     cd build/antlr3-3.5.2
     wget http://www.antlr3.org/download/antlr-3.5.2-complete-no-st3.jar
-    for ((i=0; i < $COUNT; i++)); do
-        dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
-    done
-    debuild -r fakeroot --no-tgz-check -S -sa
-    cd -
-
-    cp -a common/scylla-env-1.0 build/
-    cp -a debian/scylla-env-1.0/debian build/scylla-env-1.0/
-    cd build/scylla-env-1.0
     for ((i=0; i < $COUNT; i++)); do
         dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
     done
@@ -100,7 +90,7 @@ if [ "$TARGET" = "trusty" ]; then
     mv gdb_7.11.orig.tar.xz scylla-gdb_7.11.orig.tar.xz
     cd -
     rm -rf build/gdb-7.11/debian
-    cp -a debian/gdb-7.11/debian build/gdb-7.11/
+    cp -a ubuntu/gdb-7.11/debian build/gdb-7.11/
     cd build/gdb-7.11
     for ((i=0; i < $COUNT; i++)); do
         dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
@@ -109,12 +99,21 @@ if [ "$TARGET" = "trusty" ]; then
     cd -
 fi
 
+cp -a common/scylla-env-1.0 build/
+cp -a ubuntu/scylla-env-1.0/debian build/scylla-env-1.0/
+cd build/scylla-env-1.0
+for ((i=0; i < $COUNT; i++)); do
+    dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
+done
+debuild -r fakeroot --no-tgz-check -S -sa
+cd -
+
 wget -O build/3.5.2.tar.gz https://github.com/antlr/antlr3/archive/3.5.2.tar.gz
 cd build
 tar xpf 3.5.2.tar.gz
 cp -a antlr3-3.5.2 antlr3-c++-dev-3.5.2
 cd -
-cp -a debian/antlr3-c++-dev-3.5.2/debian build/antlr3-c++-dev-3.5.2
+cp -a ubuntu/antlr3-c++-dev-3.5.2/debian build/antlr3-c++-dev-3.5.2
 cd build/antlr3-c++-dev-3.5.2
 for ((i=0; i < $COUNT; i++)); do
     dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
@@ -126,7 +125,7 @@ wget -O build/thrift-0.10.0.tar.gz http://archive.apache.org/dist/thrift/0.10.0/
 cd build
 tar xpf thrift-0.10.0.tar.gz
 cd -
-cp -a debian/thrift-0.10.0/debian build/thrift-0.10.0/
+cp -a ubuntu/thrift-0.10.0/debian build/thrift-0.10.0/
 cd build/thrift-0.10.0
 for ((i=0; i < $COUNT; i++)); do
     dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."

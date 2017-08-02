@@ -1,12 +1,12 @@
 #!/usr/bin/make -f
 
 override_dh_auto_install:
-	mkdir -p $(CURDIR)/debian/antlr3/opt/scylladb/share/java
+	mkdir -p $(CURDIR)/debian/scylla-antlr35/opt/scylladb/share/java
 	cp $(CURDIR)/antlr-3.5.2-complete-no-st3.jar \
-		$(CURDIR)/debian/antlr3/opt/scylladb/share/java
+		$(CURDIR)/debian/scylla-antlr35/opt/scylladb/share/java
 
-	mkdir -p $(CURDIR)/debian/antlr3/opt/scylladb/bin
+	mkdir -p $(CURDIR)/debian/scylla-antlr35/opt/scylladb/bin
 	cp $(CURDIR)/antlr3 \
-		$(CURDIR)/debian/antlr3/opt/scylladb/bin
+		$(CURDIR)/debian/scylla-antlr35/opt/scylladb/bin
 %:
 	dh $@
