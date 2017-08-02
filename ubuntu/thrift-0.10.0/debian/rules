@@ -66,8 +66,6 @@ clean:
 	dh_testroot
 	rm -f build-arch-stamp build-indep-stamp configure-stamp
 
-	cd $(CURDIR)/lib/py && python setup.py clean --all
-
 	# Add here commands to clean up after the build process.
 	-$(MAKE) clean
 
