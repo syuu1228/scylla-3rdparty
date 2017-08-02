@@ -1,2 +1,2 @@
-usr/bin
-usr/sbin
+opt/scylladb/bin
+opt/scylladb/sbin

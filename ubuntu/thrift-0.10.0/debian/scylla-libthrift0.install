@@ -1,0 +1,4 @@
+opt/scylladb/lib/libthrift.so*
+opt/scylladb/lib/libthrift-*.so*
+opt/scylladb/lib/libthriftnb*.so*
+opt/scylladb/lib/libthriftz*.so*

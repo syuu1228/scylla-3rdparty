@@ -1,0 +1,4 @@
+opt/scylladb/lib/*.a
+opt/scylladb/lib/*.la
+opt/scylladb/lib/pkgconfig
+opt/scylladb/include

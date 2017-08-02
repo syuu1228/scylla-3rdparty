@@ -29,7 +29,7 @@ configure-stamp:
 
 	# Add here commands to configure the package.
 	if [ -f bootstrap.sh ]; then $(CURDIR)/bootstrap.sh; fi
-	$(CURDIR)/configure --prefix=/usr
+	$(CURDIR)/configure --prefix=/opt/scylladb
 
 	touch configure-stamp
 
