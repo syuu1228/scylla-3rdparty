@@ -95,7 +95,7 @@ if [ ! -f build/srpms/scylla-pyparsing20-2.0.3-2.el7*.src.rpm ]; then
 fi
 
 if [ ! -f build/srpms/scylla-antlr35-tool-3.5.2-1.el7*.src.rpm ]; then
-    cp -a common/antlr3-3.5.2 build/scylla-antlr35-tool-3.5.2
+    cp -a redhat/scylla-antlr35-tool-3.5.2 build/
     cd build/scylla-antlr35-tool-3.5.2
     wget http://www.antlr3.org/download/antlr-3.5.2-complete-no-st3.jar
     cd -
