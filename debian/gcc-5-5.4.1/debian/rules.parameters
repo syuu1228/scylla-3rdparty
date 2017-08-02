@@ -41,3 +41,4 @@ GO_SONAME		:= 7
 CC1_SONAME	:= 0
 GCCJIT_SONAME	:= 0
 LIBC_DEP		:= libc6
+PF		:= /opt/scylladb

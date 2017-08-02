@@ -1,4 +1,4 @@
-antlr35 (3.5.2-1) stable; urgency=medium
+scylla-antlr35 (3.5.2-1) stable; urgency=medium
 
   * Initial release.
 

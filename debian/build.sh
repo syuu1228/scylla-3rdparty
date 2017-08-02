@@ -61,8 +61,7 @@ rm -rf build
 mkdir -p build
 
 if [ "$TARGET" = "jessie" ]; then
-    cp -a common/antlr3-3.5.2 build/
-    cp -a debian/antlr3-3.5.2/debian build/antlr3-3.5.2/
+    cp -a debian/antlr3-3.5.2 build/
     cd build/antlr3-3.5.2
     wget http://www.antlr3.org/download/antlr-3.5.2-complete-no-st3.jar
     debuild -r fakeroot --no-tgz-check -S -sa
