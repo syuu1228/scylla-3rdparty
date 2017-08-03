@@ -83,7 +83,7 @@ Summary: Various compilers (C, C++, Objective-C, Java, ...)
 Name: scylla-gcc53
 %define orig_name gcc
 Version: %{gcc_version}
-Release: %{gcc_release}%{?dist}
+Release: %{gcc_release}.1%{?dist}
 # libgcc, libgfortran, libgomp, libstdc++ and crtstuff have
 # GCC Runtime Exception.
 License: GPLv3+ and GPLv3+ with exceptions and GPLv2+ with exceptions and LGPLv2+ and BSD
@@ -204,6 +204,7 @@ Patch13: gcc5-aarch64-async-unw-tables.patch
 Patch14: gcc5-libsanitize-aarch64-va42.patch
 Patch15: gcc5-pr65689.patch
 Patch16: gcc5-rh1279639.patch
+Patch17: unwind_dw2_fde_nolock.patch
 
 # On ARM EABI systems, we do want -gnueabi to be part of the
 # target triple.
@@ -818,6 +819,7 @@ rm -f libgo/go/crypto/elliptic/p224{,_test}.go
 %patch14 -p0 -b .libsanitize-aarch64-va42~
 %patch15 -p0 -b .pr65689~
 %patch16 -p0 -b .rh1279639~
+%patch17 -p1 -b .unwind_dw2_fde_nolock~
 sed -i -e 's/ -Wl,-z,nodlopen//g' gcc/ada/gcc-interface/Makefile.in
 
 %if 0%{?_enable_debug_packages}

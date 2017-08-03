@@ -74,8 +74,9 @@ if [ ! -f build/srpms/scylla-isl014-0.14-4.el7*.src.rpm ]; then
     sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-isl014.spec --sources=$RPMBUILD/SOURCES
 fi
 
-if [ ! -f build/srpms/scylla-gcc53-5.3.1-2.el7*.src.rpm ]; then
+if [ ! -f build/srpms/scylla-gcc53-5.3.1-2.1.el7*.src.rpm ]; then
     rpm --define "_topdir $RPMBUILD" -ivh build/downloads/gcc-5.3.1-2.fc23.src.rpm
+    cp redhat/scylla-gcc53-5.3.1/unwind_dw2_fde_nolock.patch $RPMBUILD/SOURCES/
     sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-gcc53.spec --sources=$RPMBUILD/SOURCES
 fi
 
