@@ -67,9 +67,8 @@ if [ "$TARGET" = "jessie" ]; then
     debuild -r fakeroot --no-tgz-check -S -sa
     cd -
 
-    cp -a common/scylla-env-1.0 build/
-    cp -a debian/scylla-env-1.0/debian build/scylla-env-1.0/
-    cd build/scylla-env-1.0
+    cp -a debian/scylla-env-1.1 build/
+    cd build/scylla-env-1.1
     debuild -r fakeroot --no-tgz-check -S -sa
     cd -
 
