@@ -1,0 +1,11 @@
+scylla-env (1.1-ubuntu1) trusty; urgency=medium
+
+  * Fixed /opt/scylladb library path.
+
+ -- Takuya ASADA <syuu@scylladb.com>  Fri, 04 Aug 2017 07:38:29 +0900
+
+scylla-env (1.0-ubuntu1) trusty; urgency=medium
+
+  * Initial release.
+
+ -- Takuya ASADA <syuu@scylladb.com>  Mon, 09 May 2016 18:32:52 +0000

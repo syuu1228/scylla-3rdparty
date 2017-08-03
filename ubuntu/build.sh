@@ -99,9 +99,8 @@ if [ "$TARGET" = "trusty" ]; then
     cd -
 fi
 
-cp -a common/scylla-env-1.0 build/
-cp -a ubuntu/scylla-env-1.0/debian build/scylla-env-1.0/
-cd build/scylla-env-1.0
+cp -a ubuntu/scylla-env-1.1 build/
+cd build/scylla-env-1.1
 for ((i=0; i < $COUNT; i++)); do
     dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
 done
