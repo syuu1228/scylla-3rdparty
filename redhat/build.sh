@@ -58,7 +58,7 @@ fi
 cd -
 
 if [ ! -f build/srpms/scylla-env-1.0-1.el7*.src.rpm ]; then
-    cd common
+    cd redhat
     tar cpf ../build/scylla-env-1.0.tar scylla-env-1.0
     cd -
     sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-env.spec --sources=build/
