@@ -83,7 +83,7 @@ Summary: Various compilers (C, C++, Objective-C, Java, ...)
 Name: scylla-gcc53
 %define orig_name gcc
 Version: %{gcc_version}
-Release: %{gcc_release}.1%{?dist}
+Release: %{gcc_release}.2%{?dist}
 # libgcc, libgfortran, libgomp, libstdc++ and crtstuff have
 # GCC Runtime Exception.
 License: GPLv3+ and GPLv3+ with exceptions and GPLv2+ with exceptions and LGPLv2+ and BSD
@@ -230,7 +230,7 @@ Summary: GCC version 5 shared support library
 Group: System Environment/Libraries
 Autoreq: false
 %if !%{build_ada}
-Obsoletes: scylla-libgnat < %{version}-%{release}
+Obsoletes: libgnat < %{version}-%{release}
 %endif
 Obsoletes: libmudflap
 Obsoletes: libmudflap-devel
@@ -250,7 +250,7 @@ Group: Development/Languages
 Requires: scylla-env
 Requires: scylla-gcc53 = %{version}-%{release}
 Requires: scylla-libstdc++53 = %{version}-%{release}
-Requires: scylla-libstdc++-devel53 = %{version}-%{release}
+Requires: scylla-libstdc++53-devel = %{version}-%{release}
 Autoreq: true
 
 %description c++
@@ -269,35 +269,35 @@ Requires: glibc >= 2.10.90-7
 The libstdc++ package contains a rewritten standard compliant GCC Standard
 C++ Library.
 
-%package -n scylla-libstdc++-devel53
+%package -n scylla-libstdc++53-devel
 Summary: Header files and libraries for C++ development
 Group: Development/Libraries
 Requires: scylla-libstdc++53%{?_isa} = %{version}-%{release}
 Autoreq: true
 Requires: scylla-env
 
-%description -n scylla-libstdc++-devel53
+%description -n scylla-libstdc++53-devel
 This is the GNU implementation of the standard C++ libraries.  This
 package includes the header files and libraries needed for C++
 development. This includes rewritten implementation of STL.
 
-%package -n scylla-libstdc++-static53
+%package -n scylla-libstdc++53-static
 Summary: Static libraries for the GNU standard C++ library
 Group: Development/Libraries
-Requires: scylla-libstdc++-devel53 = %{version}-%{release}
+Requires: scylla-libstdc++53-devel = %{version}-%{release}
 Autoreq: true
 Requires: scylla-env
 
-%description -n scylla-libstdc++-static53
+%description -n scylla-libstdc++53-static
 Static libraries for the GNU standard C++ library.
 
-%package -n scylla-libstdc++-docs53
+%package -n scylla-libstdc++53-docs
 Summary: Documentation for the GNU standard C++ library
 Group: Development/Libraries
 Autoreq: true
 Requires: scylla-env
 
-%description -n scylla-libstdc++-docs53
+%description -n scylla-libstdc++53-docs
 Manual, doxygen generated API information and Frequently Asked Questions
 for the GNU standard C++ library.
 
@@ -318,7 +318,7 @@ object-oriented derivative of the C language.
 Summary: Objective-C++ support for GCC
 Group: Development/Languages
 Requires: scylla-env
-Requires: scylla-gcc53-c++ = %{version}-%{release}, scylla-gcc-objc = %{version}-%{release}
+Requires: scylla-gcc53-c++ = %{version}-%{release}, scylla-gcc53-objc = %{version}-%{release}
 Autoreq: true
 
 %description objc++
@@ -342,7 +342,7 @@ Requires: scylla-gcc53 = %{version}-%{release}
 Requires: scylla-libgfortran53 = %{version}-%{release}
 %if %{build_libquadmath}
 Requires: scylla-libquadmath53 = %{version}-%{release}
-Requires: scylla-libquadmath-devel53 = %{version}-%{release}
+Requires: scylla-libquadmath53-devel = %{version}-%{release}
 %endif
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
@@ -365,17 +365,17 @@ Requires: scylla-libquadmath53 = %{version}-%{release}
 This package contains Fortran shared library which is needed to run
 Fortran dynamically linked programs.
 
-%package -n scylla-libgfortran-static53
+%package -n scylla-libgfortran53-static
 Summary: Static Fortran libraries
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-libgfortran53 = %{version}-%{release}
 Requires: scylla-gcc53 = %{version}-%{release}
 %if %{build_libquadmath}
-Requires: scylla-libquadmath-static53 = %{version}-%{release}
+Requires: scylla-libquadmath53-static = %{version}-%{release}
 %endif
 
-%description -n scylla-libgfortran-static53
+%description -n scylla-libgfortran53-static
 This package contains static Fortran libraries.
 
 %package -n scylla-libgomp53
@@ -407,7 +407,7 @@ Requires: scylla-gcc53 = %{version}-%{release}
 %description -n scylla-libgccjit53
 This package contains shared library with GCC JIT front-end.
 
-%package -n scylla-libgccjit-devel53
+%package -n scylla-libgccjit53-devel
 Summary: Support for embedding GCC inside programs and libraries
 Group: Development/Libraries
 BuildRequires: python-sphinx
@@ -416,7 +416,7 @@ Requires: scylla-libgccjit53 = %{version}-%{release}
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n scylla-libgccjit-devel53
+%description -n scylla-libgccjit53-devel
 This package contains header files and documentation for GCC JIT front-end.
 
 %package -n scylla-libquadmath53
@@ -430,24 +430,24 @@ Requires(preun): /sbin/install-info
 This package contains GCC shared support library which is needed
 for __float128 math support and for Fortran REAL*16 support.
 
-%package -n scylla-libquadmath-devel53
+%package -n scylla-libquadmath53-devel
 Summary: GCC __float128 support
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-libquadmath53 = %{version}-%{release}
 Requires: scylla-gcc53 = %{version}-%{release}
 
-%description -n scylla-libquadmath-devel53
+%description -n scylla-libquadmath53-devel
 This package contains headers for building Fortran programs using
 REAL*16 and programs using __float128 math.
 
-%package -n scylla-libquadmath-static53
+%package -n scylla-libquadmath53-static
 Summary: Static libraries for __float128 support
 Group: Development/Libraries
 Requires: scylla-env
-Requires: scylla-libquadmath-devel53 = %{version}-%{release}
+Requires: scylla-libquadmath53-devel = %{version}-%{release}
 
-%description -n scylla-libquadmath-static53
+%description -n scylla-libquadmath53-static
 This package contains static libraries for building Fortran programs
 using REAL*16 and programs using __float128 math.
 
@@ -462,24 +462,24 @@ Requires(preun): /sbin/install-info
 This package contains the GNU Transactional Memory library
 which is a GCC transactional memory support runtime library.
 
-%package -n scylla-libitm-devel53
+%package -n scylla-libitm53-devel
 Summary: The GNU Transactional Memory support
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-libitm53 = %{version}-%{release}
 Requires: scylla-gcc53 = %{version}-%{release}
 
-%description -n scylla-libitm-devel53
+%description -n scylla-libitm53-devel
 This package contains headers and support files for the
 GNU Transactional Memory library.
 
-%package -n scylla-libitm-static53
+%package -n scylla-libitm53-static
 Summary: The GNU Transactional Memory static library
 Group: Development/Libraries
 Requires: scylla-env
-Requires: scylla-libitm-devel53 = %{version}-%{release}
+Requires: scylla-libitm53-devel = %{version}-%{release}
 
-%description -n scylla-libitm-static53
+%description -n scylla-libitm53-static
 This package contains GNU Transactional Memory static libraries.
 
 %package -n scylla-libatomic53
@@ -494,13 +494,13 @@ This package contains the GNU Atomic library
 which is a GCC support runtime library for atomic operations not supported
 by hardware.
 
-%package -n scylla-libatomic-static53
+%package -n scylla-libatomic53-static
 Summary: The GNU Atomic static library
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-libatomic53 = %{version}-%{release}
 
-%description -n scylla-libatomic-static53
+%description -n scylla-libatomic53-static
 This package contains GNU Atomic static libraries.
 
 %package -n scylla-libasan53
@@ -514,13 +514,13 @@ Requires(preun): /sbin/install-info
 This package contains the Address Sanitizer library
 which is used for -fsanitize=address instrumented programs.
 
-%package -n scylla-libasan-static53
+%package -n scylla-libasan53-static
 Summary: The Address Sanitizer static library
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-libasan53 = %{version}-%{release}
 
-%description -n scylla-libasan-static53
+%description -n scylla-libasan53-static
 This package contains Address Sanitizer static runtime library.
 
 %package -n scylla-libtsan53
@@ -534,13 +534,13 @@ Requires(preun): /sbin/install-info
 This package contains the Thread Sanitizer library
 which is used for -fsanitize=thread instrumented programs.
 
-%package -n scylla-libtsan-static53
+%package -n scylla-libtsan53-static
 Summary: The Thread Sanitizer static library
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-libtsan53 = %{version}-%{release}
 
-%description -n scylla-libtsan-static53
+%description -n scylla-libtsan53-static
 This package contains Thread Sanitizer static runtime library.
 
 %package -n scylla-libubsan53
@@ -554,12 +554,12 @@ Requires(preun): /sbin/install-info
 This package contains the Undefined Behavior Sanitizer library
 which is used for -fsanitize=undefined instrumented programs.
 
-%package -n scylla-libubsan-static53
+%package -n scylla-libubsan53-static
 Summary: The Undefined Behavior Sanitizer static library
 Group: Development/Libraries
 Requires: scylla-libubsan53 = %{version}-%{release}
 
-%description -n scylla-libubsan-static53
+%description -n scylla-libubsan53-static
 This package contains Undefined Behavior Sanitizer static runtime library.
 
 %package -n scylla-liblsan53
@@ -573,13 +573,13 @@ Requires(preun): /sbin/install-info
 This package contains the Leak Sanitizer library
 which is used for -fsanitize=leak instrumented programs.
 
-%package -n scylla-liblsan-static53
+%package -n scylla-liblsan53-static
 Summary: The Leak Sanitizer static library
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-liblsan53 = %{version}-%{release}
 
-%description -n scylla-liblsan-static53
+%description -n scylla-liblsan53-static
 This package contains Leak Sanitizer static runtime library.
 
 %package -n scylla-libcilkrts53
@@ -592,13 +592,13 @@ Requires(preun): /sbin/install-info
 %description -n scylla-libcilkrts53
 This package contains the Cilk+ runtime library.
 
-%package -n scylla-libcilkrts-static53
+%package -n scylla-libcilkrts53-static
 Summary: The Cilk+ static runtime library
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-libcilkrts53 = %{version}-%{release}
 
-%description -n scylla-libcilkrts-static53
+%description -n scylla-libcilkrts53-static
 This package contains the Cilk+ static runtime library.
 
 %package -n scylla-libmpx53
@@ -612,13 +612,13 @@ Requires(preun): /sbin/install-info
 This package contains the Memory Protection Extensions runtime libraries
 which is used for -fcheck-pointer-bounds -mmpx instrumented programs.
 
-%package -n scylla-libmpx-static53
+%package -n scylla-libmpx53-static
 Summary: The Memory Protection Extensions static libraries
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-libmpx53 = %{version}-%{release}
 
-%description -n scylla-libmpx-static53
+%description -n scylla-libmpx53-static
 This package contains the Memory Protection Extensions static runtime libraries.
 
 %package -n scylla-cpp53
@@ -658,7 +658,7 @@ Summary: Ada 83, 95, 2005 and 2012 support for GCC
 Group: Development/Languages
 Requires: scylla-env
 Requires: scylla-gcc53 = %{version}-%{release}
-Requires: scylla-libgnat53 = %{version}-%{release}, scylla-libgnat-devel = %{version}-%{release}
+Requires: scylla-libgnat53 = %{version}-%{release}, scylla-libgnat53-devel = %{version}-%{release}
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 Autoreq: true
@@ -677,24 +677,24 @@ Requires: scylla-env
 GNAT is a GNU Ada 83, 95, 2005 and 2012 front-end to GCC. This package includes
 shared libraries, which are required to run programs compiled with the GNAT.
 
-%package -n scylla-libgnat-devel53
+%package -n scylla-libgnat53-devel
 Summary: GNU Ada 83, 95, 2005 and 2012 libraries
 Group: Development/Languages
 Autoreq: true
 Requires: scylla-env
 
-%description -n scylla-libgnat-devel53
+%description -n scylla-libgnat53-devel
 GNAT is a GNU Ada 83, 95, 2005 and 2012 front-end to GCC. This package includes
 libraries, which are required to compile with the GNAT.
 
-%package -n scylla-libgnat-static53
+%package -n scylla-libgnat53-static
 Summary: GNU Ada 83, 95, 2005 and 2012 static libraries
 Group: Development/Languages
 Requires: scylla-env
-Requires: scylla-libgnat-devel53 = %{version}-%{release}
+Requires: scylla-libgnat53-devel = %{version}-%{release}
 Autoreq: true
 
-%description -n scylla-libgnat-static53
+%description -n scylla-libgnat53-static
 GNAT is a GNU Ada 83, 95, 2005 and 2012 front-end to GCC. This package includes
 static libraries.
 
@@ -704,7 +704,7 @@ Group: Development/Languages
 Requires: scylla-env
 Requires: scylla-gcc53 = %{version}-%{release}
 Requires: scylla-libgo53 = %{version}-%{release}
-Requires: scylla-libgo-devel53 = %{version}-%{release}
+Requires: scylla-libgo53-devel = %{version}-%{release}
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 Requires(post): /sbin/update-alternatives
@@ -725,25 +725,25 @@ Requires: scylla-env
 This package contains Go shared library which is needed to run
 Go dynamically linked programs.
 
-%package -n scylla-libgo-devel53
+%package -n scylla-libgo53-devel
 Summary: Go development libraries
 Group: Development/Languages
 Requires: scylla-env
 Requires: scylla-libgo53 = %{version}-%{release}
 Autoreq: true
 
-%description -n scylla-libgo-devel53
+%description -n scylla-libgo53-devel
 This package includes libraries and support files for compiling
 Go programs.
 
-%package -n scylla-libgo-static53
+%package -n scylla-libgo53-static
 Summary: Static Go libraries
 Group: Development/Libraries
 Requires: scylla-env
 Requires: scylla-libgo53 = %{version}-%{release}
 Requires: scylla-gcc53 = %{version}-%{release}
 
-%description -n scylla-libgo-static53
+%description -n scylla-libgo53-static
 This package contains static Go libraries.
 
 %package plugin-devel
@@ -751,7 +751,7 @@ Summary: Support for compiling GCC plugins
 Group: Development/Languages
 Requires: scylla-env
 Requires: scylla-gcc53 = %{version}-%{release}
-Requires: gmp-devel53 >= 4.1.2-8, mpfr-devel53 >= 2.2.1, libmpc-devel53 >= 0.8.1
+Requires: gmp-devel >= 4.1.2-8, mpfr-devel >= 2.2.1, libmpc-devel >= 0.8.1
 
 %description plugin-devel
 This package contains header files and other support files
@@ -2092,13 +2092,13 @@ fi
 
 %postun -n scylla-libgccjit53 -p /sbin/ldconfig
 
-%post -n scylla-libgccjit-devel53
+%post -n scylla-libgccjit53-devel
 if [ -f %{_infodir}/libgccjit.info.gz ]; then
   /sbin/install-info \
     --info-dir=%{_infodir} %{_infodir}/libgccjit.info.gz || :
 fi
 
-%preun -n scylla-libgccjit-devel53
+%preun -n scylla-libgccjit53-devel
 if [ $1 = 0 -a -f %{_infodir}/libgccjit.info.gz ]; then
   /sbin/install-info --delete \
     --info-dir=%{_infodir} %{_infodir}/libgccjit.info.gz || :
@@ -2557,7 +2557,7 @@ fi
 %dir %{_prefix}/share/gcc-%{gcc_version}/python
 %{_prefix}/share/gcc-%{gcc_version}/python/libstdcxx
 
-%files -n scylla-libstdc++-devel53
+%files -n scylla-libstdc++53-devel
 %defattr(-,root,root,-)
 %dir %{_prefix}/include/c++
 %dir %{_prefix}/include/c++/%{gcc_version}
@@ -2583,7 +2583,7 @@ fi
 %endif
 %doc rpm.doc/changelogs/libstdc++-v3/ChangeLog* libstdc++-v3/README*
 
-%files -n scylla-libstdc++-static53
+%files -n scylla-libstdc++53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2604,7 +2604,7 @@ fi
 %endif
 
 %if %{build_libstdcxx_docs}
-%files -n scylla-libstdc++-docs53
+%files -n scylla-libstdc++53-docs
 %defattr(-,root,root)
 %{_mandir}/man3/*
 %doc rpm.doc/libstdc++-v3/html
@@ -2821,7 +2821,7 @@ fi
 %{!?_licensedir:%global license %%doc}
 %license rpm.doc/libquadmath/COPYING*
 
-%files -n scylla-libquadmath-devel53
+%files -n scylla-libquadmath53-devel
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2834,7 +2834,7 @@ fi
 %endif
 %doc rpm.doc/libquadmath/ChangeLog*
 
-%files -n scylla-libquadmath-static53
+%files -n scylla-libquadmath53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2858,7 +2858,7 @@ fi
 %{_prefix}/%{_lib}/libitm.so.1*
 %{_infodir}/libitm.info*
 
-%files -n scylla-libitm-devel53
+%files -n scylla-libitm53-devel
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2871,7 +2871,7 @@ fi
 %endif
 %doc rpm.doc/libitm/ChangeLog*
 
-%files -n scylla-libitm-static53
+%files -n scylla-libitm53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2894,7 +2894,7 @@ fi
 %defattr(-,root,root,-)
 %{_prefix}/%{_lib}/libatomic.so.1*
 
-%files -n scylla-libatomic-static53
+%files -n scylla-libatomic53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2918,7 +2918,7 @@ fi
 %defattr(-,root,root,-)
 %{_prefix}/%{_lib}/libasan.so.2*
 
-%files -n scylla-libasan-static53
+%files -n scylla-libasan53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2944,7 +2944,7 @@ fi
 %defattr(-,root,root,-)
 %{_prefix}/%{_lib}/libubsan.so.0*
 
-%files -n scylla-libubsan-static53
+%files -n scylla-libubsan53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2970,7 +2970,7 @@ fi
 %defattr(-,root,root,-)
 %{_prefix}/%{_lib}/libtsan.so.0*
 
-%files -n scylla-libtsan-static53
+%files -n scylla-libtsan53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2986,7 +2986,7 @@ fi
 %defattr(-,root,root,-)
 %{_prefix}/%{_lib}/liblsan.so.0*
 
-%files -n scylla-liblsan-static53
+%files -n scylla-liblsan53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -3002,7 +3002,7 @@ fi
 %defattr(-,root,root,-)
 %{_prefix}/%{_lib}/libcilkrts.so.5*
 
-%files -n scylla-libcilkrts-static53
+%files -n scylla-libcilkrts53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -3027,7 +3027,7 @@ fi
 %{_prefix}/%{_lib}/libmpx.so.0*
 %{_prefix}/%{_lib}/libmpxwrappers.so.0*
 
-%files -n scylla-libmpx-static53
+%files -n scylla-libmpx53-static
 %defattr(-,root,root,-)
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
