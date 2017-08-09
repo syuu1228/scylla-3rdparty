@@ -32,10 +32,6 @@ mkdir -p $RPMBUILD
 mkdir -p build/downloads
 cd build/downloads
 
-if [ ! -f binutils-2.25-15.fc23.src.rpm ]; then
-    wget https://kojipkgs.fedoraproject.org//packages/binutils/2.25/15.fc23/src/binutils-2.25-15.fc23.src.rpm
-fi
-
 if [ ! -f isl-0.14-4.fc23.src.rpm ]; then
     wget https://kojipkgs.fedoraproject.org//packages/isl/0.14/4.fc23/src/isl-0.14-4.fc23.src.rpm
 fi
@@ -62,11 +58,6 @@ if [ ! -f build/srpms/scylla-env-1.0-1.el7*.src.rpm ]; then
     tar cpf ../build/scylla-env-1.0.tar scylla-env-1.0
     cd -
     sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-env.spec --sources=build/
-fi
-
-if [ ! -f build/srpms/scylla-binutils225-2.25-15.el7*.src.rpm ]; then
-    rpm --define "_topdir $RPMBUILD" -ivh build/downloads/binutils-2.25-15.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-binutils225.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-isl014-0.14-4.el7*.src.rpm ]; then

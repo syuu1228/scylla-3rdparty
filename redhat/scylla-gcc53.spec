@@ -108,7 +108,7 @@ Requires: scylla-env
 # Need binutils which support .cfi_sections >= 2.19.51.0.14-33
 # Need binutils which support --no-add-needed >= 2.20.51.0.2-12
 # Need binutils which support -plugin
-BuildRequires: scylla-binutils225 >= 2.24
+BuildRequires: binutils >= 2.24
 # While gcc doesn't include statically linked binaries, during testing
 # -static is used several times.
 BuildRequires: glibc-static
@@ -166,7 +166,7 @@ Requires: scylla-cpp53 = %{version}-%{release}
 # Need binutils that support .cfi_sections
 # Need binutils that support --no-add-needed
 # Need binutils that support -plugin
-Requires: scylla-binutils225 >= 2.24
+Requires: binutils >= 2.24
 # Make sure gdb will understand DW_FORM_strp
 Conflicts: gdb < 5.1-2
 Requires: glibc-devel >= 2.2.90-12
