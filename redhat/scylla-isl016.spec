@@ -1,5 +1,5 @@
 Summary: Integer point manipulation library
-Name: isl
+Name: scylla-isl016
 Version: 0.16.1
 License: MIT
 Group: System Environment/Libraries
@@ -8,9 +8,7 @@ URL: http://isl.gforge.inria.fr/
 %global libmajor 15
 %global libversion %{libmajor}.1.1
 
-%global oldversion 0.14
-%global oldlibmajor 13
-%global oldlibversion %{oldlibmajor}.1.0
+%define _prefix /opt/scylladb
 
 # Please set buildid below when building a private version of this rpm to
 # differentiate it from the stock rpm.
@@ -21,12 +19,9 @@ Release: 1%{?buildid}%{?dist}
 
 BuildRequires: gmp-devel
 BuildRequires: pkgconfig
-Provides: isl = %{oldversion}
+Requires: scylla-env
 
 Source0: http://isl.gforge.inria.fr/isl-%{version}.tar.xz
-
-# Current gcc requires exactly 0.14
-Source1: http://isl.gforge.inria.fr/isl-%{oldversion}.tar.xz
 
 %description
 isl is a library for manipulating sets and relations of integer points
@@ -40,7 +35,7 @@ graphs), dependence analysis and bounds on piecewise step-polynomials.
 
 %package devel
 Summary: Development for building integer point manipulation library
-Requires: isl%{?_isa} == %{version}-%{release}
+Requires: scylla-isl016%{?_isa} == %{version}-%{release}
 Requires: gmp-devel%{?_isa}
 Group: Development/Libraries
 
@@ -57,23 +52,13 @@ graphs), dependence analysis and bounds on piecewise step-polynomials.
 %prep
 %global docdir isl-%{version}
 %setup -q -n isl -c
-%setup -b 1 -q -n isl -c
 
 %build
-cd isl-%{oldversion}
-%configure
-make %{?_smp_mflags} V=1
-cd ..
-
 cd isl-%{version}
 %configure
 make %{?_smp_mflags} V=1
 
 %install
-cd isl-%{oldversion}
-%make_install INSTALL="install -p" install-libLTLIBRARIES
-cd ..
-
 cd isl-%{version}
 %make_install INSTALL="install -p"
 rm -f %{buildroot}/%{_libdir}/libisl.a
@@ -84,10 +69,6 @@ mkdir -p %{buildroot}/%{gdbprettydir}
 mv %{buildroot}/%{_libdir}/*-gdb.py* %{buildroot}/%{gdbprettydir}
 
 %check
-cd isl-%{oldversion}
-#make check
-cd ..
-
 cd isl-%{version}
 #make check
 
@@ -97,8 +78,6 @@ cd isl-%{version}
 %files
 %{_libdir}/libisl.so.%{libmajor}
 %{_libdir}/libisl.so.%{libversion}
-%{_libdir}/libisl.so.%{oldlibmajor}
-%{_libdir}/libisl.so.%{oldlibversion}
 %{gdbprettydir}/*
 %license %{docdir}/LICENSE
 %doc %{docdir}/AUTHORS %{docdir}/ChangeLog %{docdir}/README

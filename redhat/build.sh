@@ -32,8 +32,8 @@ mkdir -p $RPMBUILD
 mkdir -p build/downloads
 cd build/downloads
 
-if [ ! -f isl-0.14-4.fc23.src.rpm ]; then
-    wget https://kojipkgs.fedoraproject.org//packages/isl/0.14/4.fc23/src/isl-0.14-4.fc23.src.rpm
+if [ ! -f isl-0.16.1-1.fc26.src.rpm ]; then
+    wget https://kojipkgs.fedoraproject.org//packages/isl/0.16.1/1.fc26/src/isl-0.16.1-1.fc26.src.rpm
 fi
 
 if [ ! -f gcc-5.3.1-2.fc23.src.rpm ]; then
@@ -60,9 +60,9 @@ if [ ! -f build/srpms/scylla-env-1.0-1.el7*.src.rpm ]; then
     sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-env.spec --sources=build/
 fi
 
-if [ ! -f build/srpms/scylla-isl014-0.14-4.el7*.src.rpm ]; then
-    rpm --define "_topdir $RPMBUILD" -ivh build/downloads/isl-0.14-4.fc23.src.rpm
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-isl014.spec --sources=$RPMBUILD/SOURCES
+if [ ! -f build/srpms/scylla-isl016-0.16.1-1.el7*.src.rpm ]; then
+    rpm --define "_topdir $RPMBUILD" -ivh build/downloads/isl-0.16.1-1.fc26.src.rpm
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-isl016.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-gcc53-5.3.1-2.1.el7*.src.rpm ]; then
