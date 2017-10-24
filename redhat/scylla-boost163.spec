@@ -1,3 +1,6 @@
+%define _prefix /opt/scylladb
+%define orig_name boost
+
 # Support for documentation installation As the %%doc macro erases the
 # target directory ($RPM_BUILD_ROOT%%{_docdir}/%%{name}), manually
 # installed documentation must be saved into a temporary dedicated
@@ -31,14 +34,14 @@
   %bcond_without quadmath
 %endif
 
-Name: boost
+Name: scylla-boost163
 Summary: The free peer-reviewed portable C++ source libraries
 Version: 1.63.0
 %global version_enc 1_63_0
 Release: 6%{?dist}
 License: Boost and MIT and Python
 
-%global toplev_dirname %{name}_%{version_enc}
+%global toplev_dirname %{orig_name}_%{version_enc}
 URL: http://www.boost.org
 Group: System Environment/Libraries
 
@@ -54,43 +57,43 @@ Source2: libboost_thread.so
 # components, except for MPI and Python 3 sub-packages.  Those are
 # special in that they are rarely necessary, and it's not a big burden
 # to have interested parties install them explicitly.
-Requires: boost-atomic%{?_isa} = %{version}-%{release}
-Requires: boost-chrono%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-atomic%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-chrono%{?_isa} = %{version}-%{release}
 %if %{with context}
-Requires: boost-context%{?_isa} = %{version}-%{release}
-Requires: boost-coroutine%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-context%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-coroutine%{?_isa} = %{version}-%{release}
 %endif
-Requires: boost-date-time%{?_isa} = %{version}-%{release}
-%if %{with context}
-Requires: boost-fiber%{?_isa} = %{version}-%{release}
-%endif
-Requires: boost-filesystem%{?_isa} = %{version}-%{release}
-Requires: boost-graph%{?_isa} = %{version}-%{release}
-Requires: boost-iostreams%{?_isa} = %{version}-%{release}
-Requires: boost-locale%{?_isa} = %{version}-%{release}
-Requires: boost-log%{?_isa} = %{version}-%{release}
-Requires: boost-math%{?_isa} = %{version}-%{release}
-Requires: boost-program-options%{?_isa} = %{version}-%{release}
-Requires: boost-python%{?_isa} = %{version}-%{release}
-Requires: boost-random%{?_isa} = %{version}-%{release}
-Requires: boost-regex%{?_isa} = %{version}-%{release}
-Requires: boost-serialization%{?_isa} = %{version}-%{release}
-Requires: boost-signals%{?_isa} = %{version}-%{release}
-Requires: boost-system%{?_isa} = %{version}-%{release}
-Requires: boost-test%{?_isa} = %{version}-%{release}
-Requires: boost-thread%{?_isa} = %{version}-%{release}
-Requires: boost-timer%{?_isa} = %{version}-%{release}
-Requires: boost-type_erasure%{?_isa} = %{version}-%{release}
-Requires: boost-wave%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-date-time%{?_isa} = %{version}-%{release}
+#%if %{with context}
+#Requires: boost-fiber%{?_isa} = %{version}-%{release}
+#%endif
+Requires: scylla-boost163-filesystem%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-graph%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-iostreams%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-locale%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-log%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-math%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-program-options%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-python%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-random%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-regex%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-serialization%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-signals%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-test%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-thread%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-timer%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-type_erasure%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-wave%{?_isa} = %{version}-%{release}
 
 BuildRequires: m4
 BuildRequires: libstdc++-devel
 BuildRequires: bzip2-devel
 BuildRequires: zlib-devel
 BuildRequires: python-devel
-%if %{with python3}
-BuildRequires: python3-devel
-%endif
+#%if %{with python3}
+#BuildRequires: python3-devel
+#%endif
 BuildRequires: libicu-devel
 %if %{with quadmath}
 BuildRequires: libquadmath-devel
@@ -160,7 +163,7 @@ variables.
 %package chrono
 Summary: Run-time component of boost chrono library
 Group: System Environment/Libraries
-Requires: boost-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-system%{?_isa} = %{version}-%{release}
 
 %description chrono
 
@@ -207,21 +210,21 @@ Group: System Environment/Libraries
 Run-time support for Boost Date Time, a set of date-time libraries based
 on generic programming concepts.
 
-%if %{with context}
-%package fiber
-Summary: Run-time component of boost fiber library
-Group: System Environment/Libraries
-
-%description fiber
-
-Run-time support for the Boost Fiber library, a framework for
-micro-/userland-threads (fibers) scheduled cooperatively.
-%endif
+#%if %{with context}
+#%package fiber
+#Summary: Run-time component of boost fiber library
+#Group: System Environment/Libraries
+#
+#%description fiber
+#
+#Run-time support for the Boost Fiber library, a framework for
+#micro-/userland-threads (fibers) scheduled cooperatively.
+#%endif
 
 %package filesystem
 Summary: Run-time component of boost filesystem library
 Group: System Environment/Libraries
-Requires: boost-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-system%{?_isa} = %{version}-%{release}
 
 %description filesystem
 
@@ -232,7 +235,7 @@ directories.
 %package graph
 Summary: Run-time component of boost graph library
 Group: System Environment/Libraries
-Requires: boost-regex%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-regex%{?_isa} = %{version}-%{release}
 
 %description graph
 
@@ -252,9 +255,9 @@ stream buffers and i/o filters.
 %package locale
 Summary: Run-time component of boost locale library
 Group: System Environment/Libraries
-Requires: boost-chrono%{?_isa} = %{version}-%{release}
-Requires: boost-system%{?_isa} = %{version}-%{release}
-Requires: boost-thread%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-chrono%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-thread%{?_isa} = %{version}-%{release}
 
 %description locale
 
@@ -305,31 +308,31 @@ functions and objects to Python, and vice versa, using no special
 tools -- just your C++ compiler.  This package contains run-time
 support for Boost Python Library.
 
-%if %{with python3}
-
-%package python3
-Summary: Run-time component of boost python library for Python 3
-Group: System Environment/Libraries
-
-%description python3
-
-The Boost Python Library is a framework for interfacing Python and
-C++. It allows you to quickly and seamlessly expose C++ classes,
-functions and objects to Python, and vice versa, using no special
-tools -- just your C++ compiler.  This package contains run-time
-support for Boost Python Library compiled for Python 3.
-
-%package python3-devel
-Summary: Shared object symbolic links for Boost.Python 3
-Group: System Environment/Libraries
-Requires: boost-python3%{?_isa} = %{version}-%{release}
-Requires: boost-devel%{?_isa} = %{version}-%{release}
-
-%description python3-devel
-
-Shared object symbolic links for Python 3 variant of Boost.Python.
-
-%endif
+#%if %{with python3}
+#
+#%package python3
+#Summary: Run-time component of boost python library for Python 3
+#Group: System Environment/Libraries
+#
+#%description python3
+#
+#The Boost Python Library is a framework for interfacing Python and
+#C++. It allows you to quickly and seamlessly expose C++ classes,
+#functions and objects to Python, and vice versa, using no special
+#tools -- just your C++ compiler.  This package contains run-time
+#support for Boost Python Library compiled for Python 3.
+#
+#%package python3-devel
+#Summary: Shared object symbolic links for Boost.Python 3
+#Group: System Environment/Libraries
+#Requires: boost-python3%{?_isa} = %{version}-%{release}
+#Requires: boost-devel%{?_isa} = %{version}-%{release}
+#
+#%description python3-devel
+#
+#Shared object symbolic links for Python 3 variant of Boost.Python.
+#
+#%endif
 
 %package random
 Summary: Run-time component of boost random library
@@ -384,7 +387,7 @@ program execution monitoring.
 %package thread
 Summary: Run-time component of boost thread library
 Group: System Environment/Libraries
-Requires: boost-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-system%{?_isa} = %{version}-%{release}
 
 %description thread
 
@@ -396,8 +399,8 @@ data specific to individual threads.
 %package timer
 Summary: Run-time component of boost timer library
 Group: System Environment/Libraries
-Requires: boost-chrono%{?_isa} = %{version}-%{release}
-Requires: boost-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-chrono%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-system%{?_isa} = %{version}-%{release}
 
 %description timer
 
@@ -408,8 +411,8 @@ with as little as one #include and one additional line of code.
 %package type_erasure
 Summary: Run-time component of boost type erasure library
 Group: System Environment/Libraries
-Requires: boost-chrono%{?_isa} = %{version}-%{release}
-Requires: boost-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-chrono%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-system%{?_isa} = %{version}-%{release}
 
 %description type_erasure
 
@@ -419,11 +422,11 @@ that is more flexible than that provided by the core language.
 %package wave
 Summary: Run-time component of boost C99/C++ pre-processing library
 Group: System Environment/Libraries
-Requires: boost-chrono%{?_isa} = %{version}-%{release}
-Requires: boost-date-time%{?_isa} = %{version}-%{release}
-Requires: boost-filesystem%{?_isa} = %{version}-%{release}
-Requires: boost-system%{?_isa} = %{version}-%{release}
-Requires: boost-thread%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-chrono%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-date-time%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-filesystem%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-system%{?_isa} = %{version}-%{release}
+Requires: scylla-boost163-thread%{?_isa} = %{version}-%{release}
 
 %description wave
 
@@ -434,20 +437,12 @@ pre-processor functionality.
 %package devel
 Summary: The Boost C++ headers and shared development libraries
 Group: Development/Libraries
-Requires: boost%{?_isa} = %{version}-%{release}
-Provides: boost-python-devel
+Requires: scylla-boost163%{?_isa} = %{version}-%{release}
+Provides: scylla-boost163-python-devel
 Requires: libicu-devel%{?_isa}
 %if %{with quadmath}
 Requires: libquadmath-devel%{?_isa}
 %endif
-
-# Odeint was shipped in Fedora 18, but later became part of Boost.
-# Note we also obsolete odeint-doc down there.
-# https://bugzilla.redhat.com/show_bug.cgi?id=892850
-Provides: odeint = 2.2-5
-Obsoletes: odeint < 2.2-5
-Provides: odeint-devel = 2.2-5
-Obsoletes: odeint-devel < 2.2-5
 
 %description devel
 Headers and shared object symbolic links for the Boost C++ libraries.
@@ -455,9 +450,8 @@ Headers and shared object symbolic links for the Boost C++ libraries.
 %package static
 Summary: The Boost C++ static development libraries
 Group: Development/Libraries
-Requires: boost-devel%{?_isa} = %{version}-%{release}
-Obsoletes: boost-devel-static < 1.34.1-14
-Provides: boost-devel-static = %{version}-%{release}
+Requires: scylla-boost163-devel%{?_isa} = %{version}-%{release}
+Provides: scylla-boost163-devel-static = %{version}-%{release}
 
 %description static
 Static Boost C++ libraries.
@@ -468,11 +462,6 @@ Group: Documentation
 %if 0%{?rhel} >= 6
 BuildArch: noarch
 %endif
-Provides: boost-python-docs = %{version}-%{release}
-
-# See the description above.
-Provides: odeint-doc = 2.2-5
-Obsoletes: odeint-doc < 2.2-5
 
 %description doc
 This package contains the documentation in the HTML format of the Boost C++
@@ -485,131 +474,131 @@ Group: Documentation
 %if 0%{?rhel} >= 6
 BuildArch: noarch
 %endif
-Requires: boost-devel = %{version}-%{release}
+Requires: scylla-boost163-devel = %{version}-%{release}
 
 %description examples
 This package contains example source files distributed with boost.
 
 
-%if %{with openmpi}
+#%if %{with openmpi}
+#
+#%package openmpi
+#Summary: Run-time component of Boost.MPI library
+#Group: System Environment/Libraries
+#BuildRequires: openmpi-devel
+#Requires: boost-serialization%{?_isa} = %{version}-%{release}
+#
+#%description openmpi
+#
+#Run-time support for Boost.MPI-OpenMPI, a library providing a clean C++
+#API over the OpenMPI implementation of MPI.
+#
+#%package openmpi-devel
+#Summary: Shared library symbolic links for Boost.MPI
+#Group: System Environment/Libraries
+#Requires: boost-devel%{?_isa} = %{version}-%{release}
+#Requires: boost-openmpi%{?_isa} = %{version}-%{release}
+#Requires: boost-openmpi-python%{?_isa} = %{version}-%{release}
+#Requires: boost-graph-openmpi%{?_isa} = %{version}-%{release}
+#
+#%description openmpi-devel
+#
+#Devel package for Boost.MPI-OpenMPI, a library providing a clean C++
+#API over the OpenMPI implementation of MPI.
+#
+#%package openmpi-python
+#Summary: Python run-time component of Boost.MPI library
+#Group: System Environment/Libraries
+#Requires: boost-openmpi%{?_isa} = %{version}-%{release}
+#Requires: boost-python%{?_isa} = %{version}-%{release}
+#Requires: boost-serialization%{?_isa} = %{version}-%{release}
+#
+#%description openmpi-python
+#
+#Python support for Boost.MPI-OpenMPI, a library providing a clean C++
+#API over the OpenMPI implementation of MPI.
+#
+#%package graph-openmpi
+#Summary: Run-time component of parallel boost graph library
+#Group: System Environment/Libraries
+#Requires: boost-openmpi%{?_isa} = %{version}-%{release}
+#Requires: boost-serialization%{?_isa} = %{version}-%{release}
+#
+#%description graph-openmpi
+#
+#Run-time support for the Parallel BGL graph library.  The interface and
+#graph components are generic, in the same sense as the the Standard
+#Template Library (STL).  This libraries in this package use OpenMPI
+#back-end to do the parallel work.
+#
+#%endif
 
-%package openmpi
-Summary: Run-time component of Boost.MPI library
-Group: System Environment/Libraries
-BuildRequires: openmpi-devel
-Requires: boost-serialization%{?_isa} = %{version}-%{release}
 
-%description openmpi
-
-Run-time support for Boost.MPI-OpenMPI, a library providing a clean C++
-API over the OpenMPI implementation of MPI.
-
-%package openmpi-devel
-Summary: Shared library symbolic links for Boost.MPI
-Group: System Environment/Libraries
-Requires: boost-devel%{?_isa} = %{version}-%{release}
-Requires: boost-openmpi%{?_isa} = %{version}-%{release}
-Requires: boost-openmpi-python%{?_isa} = %{version}-%{release}
-Requires: boost-graph-openmpi%{?_isa} = %{version}-%{release}
-
-%description openmpi-devel
-
-Devel package for Boost.MPI-OpenMPI, a library providing a clean C++
-API over the OpenMPI implementation of MPI.
-
-%package openmpi-python
-Summary: Python run-time component of Boost.MPI library
-Group: System Environment/Libraries
-Requires: boost-openmpi%{?_isa} = %{version}-%{release}
-Requires: boost-python%{?_isa} = %{version}-%{release}
-Requires: boost-serialization%{?_isa} = %{version}-%{release}
-
-%description openmpi-python
-
-Python support for Boost.MPI-OpenMPI, a library providing a clean C++
-API over the OpenMPI implementation of MPI.
-
-%package graph-openmpi
-Summary: Run-time component of parallel boost graph library
-Group: System Environment/Libraries
-Requires: boost-openmpi%{?_isa} = %{version}-%{release}
-Requires: boost-serialization%{?_isa} = %{version}-%{release}
-
-%description graph-openmpi
-
-Run-time support for the Parallel BGL graph library.  The interface and
-graph components are generic, in the same sense as the the Standard
-Template Library (STL).  This libraries in this package use OpenMPI
-back-end to do the parallel work.
-
-%endif
-
-
-%if %{with mpich}
-
-%package mpich
-Summary: Run-time component of Boost.MPI library
-Group: System Environment/Libraries
-BuildRequires: mpich-devel
-Requires: boost-serialization%{?_isa} = %{version}-%{release}
-Provides: boost-mpich2 = %{version}-%{release}
-Obsoletes: boost-mpich2 < 1.53.0-9
-
-%description mpich
-
-Run-time support for Boost.MPI-MPICH, a library providing a clean C++
-API over the MPICH implementation of MPI.
-
-%package mpich-devel
-Summary: Shared library symbolic links for Boost.MPI
-Group: System Environment/Libraries
-Requires: boost-devel%{?_isa} = %{version}-%{release}
-Requires: boost-mpich%{?_isa} = %{version}-%{release}
-Requires: boost-mpich-python%{?_isa} = %{version}-%{release}
-Requires: boost-graph-mpich%{?_isa} = %{version}-%{release}
-Provides: boost-mpich2-devel = %{version}-%{release}
-Obsoletes: boost-mpich2-devel < 1.53.0-9
-
-%description mpich-devel
-
-Devel package for Boost.MPI-MPICH, a library providing a clean C++
-API over the MPICH implementation of MPI.
-
-%package mpich-python
-Summary: Python run-time component of Boost.MPI library
-Group: System Environment/Libraries
-Requires: boost-mpich%{?_isa} = %{version}-%{release}
-Requires: boost-python%{?_isa} = %{version}-%{release}
-Requires: boost-serialization%{?_isa} = %{version}-%{release}
-Provides: boost-mpich2-python = %{version}-%{release}
-Obsoletes: boost-mpich2-python < 1.53.0-9
-
-%description mpich-python
-
-Python support for Boost.MPI-MPICH, a library providing a clean C++
-API over the MPICH implementation of MPI.
-
-%package graph-mpich
-Summary: Run-time component of parallel boost graph library
-Group: System Environment/Libraries
-Requires: boost-mpich%{?_isa} = %{version}-%{release}
-Requires: boost-serialization%{?_isa} = %{version}-%{release}
-Provides: boost-graph-mpich2 = %{version}-%{release}
-Obsoletes: boost-graph-mpich2 < 1.53.0-9
-
-%description graph-mpich
-
-Run-time support for the Parallel BGL graph library.  The interface and
-graph components are generic, in the same sense as the the Standard
-Template Library (STL).  This libraries in this package use MPICH
-back-end to do the parallel work.
-
-%endif
+#%if %{with mpich}
+#
+#%package mpich
+#Summary: Run-time component of Boost.MPI library
+#Group: System Environment/Libraries
+#BuildRequires: mpich-devel
+#Requires: boost-serialization%{?_isa} = %{version}-%{release}
+#Provides: boost-mpich2 = %{version}-%{release}
+#Obsoletes: boost-mpich2 < 1.53.0-9
+#
+#%description mpich
+#
+#Run-time support for Boost.MPI-MPICH, a library providing a clean C++
+#API over the MPICH implementation of MPI.
+#
+#%package mpich-devel
+#Summary: Shared library symbolic links for Boost.MPI
+#Group: System Environment/Libraries
+#Requires: boost-devel%{?_isa} = %{version}-%{release}
+#Requires: boost-mpich%{?_isa} = %{version}-%{release}
+#Requires: boost-mpich-python%{?_isa} = %{version}-%{release}
+#Requires: boost-graph-mpich%{?_isa} = %{version}-%{release}
+#Provides: boost-mpich2-devel = %{version}-%{release}
+#Obsoletes: boost-mpich2-devel < 1.53.0-9
+#
+#%description mpich-devel
+#
+#Devel package for Boost.MPI-MPICH, a library providing a clean C++
+#API over the MPICH implementation of MPI.
+#
+#%package mpich-python
+#Summary: Python run-time component of Boost.MPI library
+#Group: System Environment/Libraries
+#Requires: boost-mpich%{?_isa} = %{version}-%{release}
+#Requires: boost-python%{?_isa} = %{version}-%{release}
+#Requires: boost-serialization%{?_isa} = %{version}-%{release}
+#Provides: boost-mpich2-python = %{version}-%{release}
+#Obsoletes: boost-mpich2-python < 1.53.0-9
+#
+#%description mpich-python
+#
+#Python support for Boost.MPI-MPICH, a library providing a clean C++
+#API over the MPICH implementation of MPI.
+#
+#%package graph-mpich
+#Summary: Run-time component of parallel boost graph library
+#Group: System Environment/Libraries
+#Requires: boost-mpich%{?_isa} = %{version}-%{release}
+#Requires: boost-serialization%{?_isa} = %{version}-%{release}
+#Provides: boost-graph-mpich2 = %{version}-%{release}
+#Obsoletes: boost-graph-mpich2 < 1.53.0-9
+#
+#%description graph-mpich
+#
+#Run-time support for the Parallel BGL graph library.  The interface and
+#graph components are generic, in the same sense as the the Standard
+#Template Library (STL).  This libraries in this package use MPICH
+#back-end to do the parallel work.
+#
+#%endif
 
 %package build
 Summary: Cross platform build system for C++ projects
 Group: Development/Tools
-Requires: boost-jam
+Requires: scylla-boost163-jam
 BuildArch: noarch
 
 %description build
@@ -658,17 +647,17 @@ a number of significant features and is now developed independently
 # At least python2_version needs to be a macro so that it's visible in
 # %%install as well.
 %global python2_version %(/usr/bin/python2 %{SOURCE1})
-%if %{with python3}
-%global python3_version %(/usr/bin/python3 %{SOURCE1})
-%global python3_abiflags %(/usr/bin/python3-config --abiflags)
-%endif
+#%if %{with python3}
+#%global python3_version %(/usr/bin/python3 %{SOURCE1})
+#%global python3_abiflags %(/usr/bin/python3-config --abiflags)
+#%endif
 
 %build
 : PYTHON2_VERSION=%{python2_version}
-%if %{with python3}
-: PYTHON3_VERSION=%{python3_version}
-: PYTHON3_ABIFLAGS=%{python3_abiflags}
-%endif
+#%if %{with python3}
+#: PYTHON3_VERSION=%{python3_version}
+#: PYTHON3_ABIFLAGS=%{python3_abiflags}
+#%endif
 
 # There are many strict aliasing warnings, and it's not feasible to go
 # through them all at this time.
@@ -680,13 +669,13 @@ import os ;
 local RPM_OPT_FLAGS = [ os.environ RPM_OPT_FLAGS ] ;
 
 using gcc : : : <compileflags>$(RPM_OPT_FLAGS) ;
-%if %{with openmpi} || %{with mpich}
-using mpi ;
-%endif
-%if %{with python3}
-using python : %{python2_version} : /usr/bin/python2 : /usr/include/python%{python2_version} : : : : ;
-using python : %{python3_version} : /usr/bin/python3 : /usr/include/python%{python3_version}%{python3_abiflags} : : : : %{python3_abiflags} ;
-%endif
+#%if %{with openmpi} || %{with mpich}
+#using mpi ;
+#%endif
+#%if %{with python3}
+#using python : %{python2_version} : /usr/bin/python2 : /usr/include/python%{python2_version} : : : : ;
+#using python : %{python3_version} : /usr/bin/python3 : /usr/include/python%{python3_version}%{python3_abiflags} : : : : %{python3_abiflags} ;
+#%endif
 EOF
 
 ./bootstrap.sh --with-toolset=gcc --with-icu
@@ -726,37 +715,37 @@ m4 -${DEF}HAS_ATOMIC_FLAG_LOCKFREE -DVERSION=%{version} \
 
 # Build MPI parts of Boost with OpenMPI support
 
-%if %{with openmpi} || %{with mpich}
-# First, purge all modules so that user environment doesn't conflict
-# with the build.
-module purge ||:
-%endif
+#%if %{with openmpi} || %{with mpich}
+## First, purge all modules so that user environment doesn't conflict
+## with the build.
+#module purge ||:
+#%endif
 
 # N.B. python=2.* here behaves differently: it exactly selects a
 # version that we want to build against.  Boost MPI is not portable to
 # Python 3 due to API changes in Python, so this suits us.
-%if %{with openmpi}
-%{_openmpi_load}
-echo ============================= build $MPI_COMPILER ==================
-./b2 -d+2 -q %{?_smp_mflags} \
-	--with-mpi --with-graph_parallel --build-dir=$MPI_COMPILER \
-	variant=release threading=multi debug-symbols=on pch=off \
-	python=%{python2_version} stage
-%{_openmpi_unload}
-export PATH=/bin${PATH:+:}$PATH
-%endif
+#%if %{with openmpi}
+#%{_openmpi_load}
+#echo ============================= build $MPI_COMPILER ==================
+#./b2 -d+2 -q %{?_smp_mflags} \
+#	--with-mpi --with-graph_parallel --build-dir=$MPI_COMPILER \
+#	variant=release threading=multi debug-symbols=on pch=off \
+#	python=%{python2_version} stage
+#%{_openmpi_unload}
+#export PATH=/bin${PATH:+:}$PATH
+#%endif
 
 # Build MPI parts of Boost with MPICH support
-%if %{with mpich}
-%{_mpich_load}
-echo ============================= build $MPI_COMPILER ==================
-./b2 -d+2 -q %{?_smp_mflags} \
-	--with-mpi --with-graph_parallel --build-dir=$MPI_COMPILER \
-	variant=release threading=multi debug-symbols=on pch=off \
-	python=%{python2_version} stage
-%{_mpich_unload}
-export PATH=/bin${PATH:+:}$PATH
-%endif
+#%if %{with mpich}
+#%{_mpich_load}
+#echo ============================= build $MPI_COMPILER ==================
+#./b2 -d+2 -q %{?_smp_mflags} \
+#	--with-mpi --with-graph_parallel --build-dir=$MPI_COMPILER \
+#	variant=release threading=multi debug-symbols=on pch=off \
+#	python=%{python2_version} stage
+#%{_mpich_unload}
+#export PATH=/bin${PATH:+:}$PATH
+#%endif
 
 echo ============================= build Boost.Build ==================
 (cd tools/build
@@ -770,45 +759,45 @@ echo ============================= build Boost.Build ==================
 rm -rf $RPM_BUILD_ROOT
 cd %{_builddir}/%{toplev_dirname}
 
-%if %{with openmpi} || %{with mpich}
-# First, purge all modules so that user environment doesn't conflict
-# with the build.
-module purge ||:
-%endif
+#%if %{with openmpi} || %{with mpich}
+## First, purge all modules so that user environment doesn't conflict
+## with the build.
+#module purge ||:
+#%endif
 
-%if %{with openmpi}
-%{_openmpi_load}
-# XXX We want to extract this from RPM flags
-# b2 instruction-set=i686 etc.
-echo ============================= install $MPI_COMPILER ==================
-./b2 -q %{?_smp_mflags} \
-	--with-mpi --with-graph_parallel --build-dir=$MPI_COMPILER \
-	--stagedir=${RPM_BUILD_ROOT}${MPI_HOME} \
-	variant=release threading=multi debug-symbols=on pch=off \
-	python=%{python2_version} stage
-
-# Remove generic parts of boost that were built for dependencies.
-rm -f ${RPM_BUILD_ROOT}${MPI_HOME}/lib/libboost_{python,{w,}serialization}*
-
-%{_openmpi_unload}
-export PATH=/bin${PATH:+:}$PATH
-%endif
-
-%if %{with mpich}
-%{_mpich_load}
-echo ============================= install $MPI_COMPILER ==================
-./b2 -q %{?_smp_mflags} \
-	--with-mpi --with-graph_parallel --build-dir=$MPI_COMPILER \
-	--stagedir=${RPM_BUILD_ROOT}${MPI_HOME} \
-	variant=release threading=multi debug-symbols=on pch=off \
-	python=%{python2_version} stage
-
-# Remove generic parts of boost that were built for dependencies.
-rm -f ${RPM_BUILD_ROOT}${MPI_HOME}/lib/libboost_{python,{w,}serialization}*
-
-%{_mpich_unload}
-export PATH=/bin${PATH:+:}$PATH
-%endif
+#%if %{with openmpi}
+#%{_openmpi_load}
+## XXX We want to extract this from RPM flags
+## b2 instruction-set=i686 etc.
+#echo ============================= install $MPI_COMPILER ==================
+#./b2 -q %{?_smp_mflags} \
+#	--with-mpi --with-graph_parallel --build-dir=$MPI_COMPILER \
+#	--stagedir=${RPM_BUILD_ROOT}${MPI_HOME} \
+#	variant=release threading=multi debug-symbols=on pch=off \
+#	python=%{python2_version} stage
+#
+## Remove generic parts of boost that were built for dependencies.
+#rm -f ${RPM_BUILD_ROOT}${MPI_HOME}/lib/libboost_{python,{w,}serialization}*
+#
+#%{_openmpi_unload}
+#export PATH=/bin${PATH:+:}$PATH
+#%endif
+#
+#%if %{with mpich}
+#%{_mpich_load}
+#echo ============================= install $MPI_COMPILER ==================
+#./b2 -q %{?_smp_mflags} \
+#	--with-mpi --with-graph_parallel --build-dir=$MPI_COMPILER \
+#	--stagedir=${RPM_BUILD_ROOT}${MPI_HOME} \
+#	variant=release threading=multi debug-symbols=on pch=off \
+#	python=%{python2_version} stage
+#
+## Remove generic parts of boost that were built for dependencies.
+#rm -f ${RPM_BUILD_ROOT}${MPI_HOME}/lib/libboost_{python,{w,}serialization}*
+#
+#%{_mpich_unload}
+#export PATH=/bin${PATH:+:}$PATH
+#%endif
 
 echo ============================= install serial ==================
 ./b2 -d+2 -q %{?_smp_mflags} \
@@ -952,11 +941,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun date-time -p /sbin/ldconfig
 
-%if %{with context}
-%post fiber -p /sbin/ldconfig
-
-%postun fiber -p /sbin/ldconfig
-%endif
+#%if %{with context}
+#%post fiber -p /sbin/ldconfig
+#
+#%postun fiber -p /sbin/ldconfig
+#%endif
 
 %post filesystem -p /sbin/ldconfig
 
@@ -1087,11 +1076,11 @@ fi
 %license LICENSE_1_0.txt
 %{_libdir}/libboost_date_time.so.%{sonamever}
 
-%if %{with context}
-%files fiber
-%license LICENSE_1_0.txt
-%{_libdir}/libboost_fiber.so.%{sonamever}
-%endif
+#%if %{with context}
+#%files fiber
+#%license LICENSE_1_0.txt
+#%{_libdir}/libboost_fiber.so.%{sonamever}
+#%endif
 
 %files filesystem
 %license LICENSE_1_0.txt
@@ -1136,15 +1125,15 @@ fi
 %license LICENSE_1_0.txt
 %{_libdir}/libboost_python.so.%{sonamever}
 
-%if %{with python3}
-%files python3
-%license LICENSE_1_0.txt
-%{_libdir}/libboost_python3.so.%{sonamever}
-
-%files python3-devel
-%license LICENSE_1_0.txt
-%{_libdir}/libboost_python3.so
-%endif
+#%if %{with python3}
+#%files python3
+#%license LICENSE_1_0.txt
+#%{_libdir}/libboost_python3.so.%{sonamever}
+#
+#%files python3-devel
+#%license LICENSE_1_0.txt
+#%{_libdir}/libboost_python3.so
+#%endif
 
 %files random
 %license LICENSE_1_0.txt
@@ -1191,7 +1180,7 @@ fi
 
 %files devel
 %license LICENSE_1_0.txt
-%{_includedir}/%{name}
+%{_includedir}/%{orig_name}
 %{_libdir}/libboost_atomic.so
 %{_libdir}/libboost_chrono.so
 %{_libdir}/libboost_container.so
@@ -1200,9 +1189,9 @@ fi
 %{_libdir}/libboost_coroutine.so
 %endif
 %{_libdir}/libboost_date_time.so
-%if %{with context}
-%{_libdir}/libboost_fiber.so
-%endif
+#%if %{with context}
+#%{_libdir}/libboost_fiber.so
+#%endif
 %{_libdir}/libboost_filesystem.so
 %{_libdir}/libboost_graph.so
 %{_libdir}/libboost_iostreams.so
@@ -1233,56 +1222,56 @@ fi
 %files static
 %license LICENSE_1_0.txt
 %{_libdir}/*.a
-%if %{with mpich}
-%{_libdir}/mpich/lib/*.a
-%endif
-%if %{with openmpi}
-%{_libdir}/openmpi/lib/*.a
-%endif
+#%if %{with mpich}
+#%{_libdir}/mpich/lib/*.a
+#%endif
+#%if %{with openmpi}
+#%{_libdir}/openmpi/lib/*.a
+#%endif
 
 # OpenMPI packages
-%if %{with openmpi}
-
-%files openmpi
-%license LICENSE_1_0.txt
-%{_libdir}/openmpi/lib/libboost_mpi.so.%{sonamever}
-
-%files openmpi-devel
-%license LICENSE_1_0.txt
-%{_libdir}/openmpi/lib/libboost_*.so
-
-%files openmpi-python
-%license LICENSE_1_0.txt
-%{_libdir}/openmpi/lib/libboost_mpi_python.so.%{sonamever}
-%{_libdir}/openmpi/lib/mpi.so
-
-%files graph-openmpi
-%license LICENSE_1_0.txt
-%{_libdir}/openmpi/lib/libboost_graph_parallel.so.%{sonamever}
-
-%endif
+#%if %{with openmpi}
+#
+#%files openmpi
+#%license LICENSE_1_0.txt
+#%{_libdir}/openmpi/lib/libboost_mpi.so.%{sonamever}
+#
+#%files openmpi-devel
+#%license LICENSE_1_0.txt
+#%{_libdir}/openmpi/lib/libboost_*.so
+#
+#%files openmpi-python
+#%license LICENSE_1_0.txt
+#%{_libdir}/openmpi/lib/libboost_mpi_python.so.%{sonamever}
+#%{_libdir}/openmpi/lib/mpi.so
+#
+#%files graph-openmpi
+#%license LICENSE_1_0.txt
+#%{_libdir}/openmpi/lib/libboost_graph_parallel.so.%{sonamever}
+#
+#%endif
 
 # MPICH packages
-%if %{with mpich}
-
-%files mpich
-%license LICENSE_1_0.txt
-%{_libdir}/mpich/lib/libboost_mpi.so.%{sonamever}
-
-%files mpich-devel
-%license LICENSE_1_0.txt
-%{_libdir}/mpich/lib/libboost_*.so
-
-%files mpich-python
-%license LICENSE_1_0.txt
-%{_libdir}/mpich/lib/libboost_mpi_python.so.%{sonamever}
-%{_libdir}/mpich/lib/mpi.so
-
-%files graph-mpich
-%license LICENSE_1_0.txt
-%{_libdir}/mpich/lib/libboost_graph_parallel.so.%{sonamever}
-
-%endif
+#%if %{with mpich}
+#
+#%files mpich
+#%license LICENSE_1_0.txt
+#%{_libdir}/mpich/lib/libboost_mpi.so.%{sonamever}
+#
+#%files mpich-devel
+#%license LICENSE_1_0.txt
+#%{_libdir}/mpich/lib/libboost_*.so
+#
+#%files mpich-python
+#%license LICENSE_1_0.txt
+#%{_libdir}/mpich/lib/libboost_mpi_python.so.%{sonamever}
+#%{_libdir}/mpich/lib/mpi.so
+#
+#%files graph-mpich
+#%license LICENSE_1_0.txt
+#%{_libdir}/mpich/lib/libboost_graph_parallel.so.%{sonamever}
+#
+#%endif
 
 %files build
 %license LICENSE_1_0.txt
