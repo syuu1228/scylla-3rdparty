@@ -83,7 +83,7 @@ Summary: Various compilers (C, C++, Objective-C, Java, ...)
 Name: scylla-gcc53
 %define orig_name gcc
 Version: %{gcc_version}
-Release: %{gcc_release}.2%{?dist}
+Release: %{gcc_release}.3%{?dist}
 # libgcc, libgfortran, libgomp, libstdc++ and crtstuff have
 # GCC Runtime Exception.
 License: GPLv3+ and GPLv3+ with exceptions and GPLv2+ with exceptions and LGPLv2+ and BSD
@@ -179,10 +179,10 @@ Requires: glibc >= 2.16
 %endif
 Requires: scylla-libgcc53 >= %{version}-%{release}
 Requires: scylla-libgomp53 = %{version}-%{release}
-%if !%{build_ada}
-Obsoletes: scylla-gcc-gnat53 < %{version}-%{release}
-%endif
-Obsoletes: scylla-gcc-java53 < %{version}-%{release}
+#%if !%{build_ada}
+#Obsoletes: scylla-gcc-gnat53 < %{version}-%{release}
+#%endif
+#Obsoletes: scylla-gcc-java53 < %{version}-%{release}
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 AutoReq: true
@@ -229,15 +229,15 @@ You'll need this package in order to compile C code.
 Summary: GCC version 5 shared support library
 Group: System Environment/Libraries
 Autoreq: false
-%if !%{build_ada}
-Obsoletes: libgnat < %{version}-%{release}
-%endif
-Obsoletes: libmudflap
-Obsoletes: libmudflap-devel
-Obsoletes: libmudflap-static
-Obsoletes: libgcj < %{version}-%{release}
-Obsoletes: libgcj-devel < %{version}-%{release}
-Obsoletes: libgcj-src < %{version}-%{release}
+#%if !%{build_ada}
+#Obsoletes: libgnat < %{version}-%{release}
+#%endif
+#Obsoletes: libmudflap
+#Obsoletes: libmudflap-devel
+#Obsoletes: libmudflap-static
+#Obsoletes: libgcj < %{version}-%{release}
+#Obsoletes: libgcj-devel < %{version}-%{release}
+#Obsoletes: libgcj-src < %{version}-%{release}
 Requires: scylla-env
 
 %description -n scylla-libgcc53
@@ -625,7 +625,7 @@ This package contains the Memory Protection Extensions static runtime libraries.
 Summary: The C Preprocessor
 Group: Development/Languages
 Requires: filesystem >= 3
-Provides: /lib/cpp
+Provides: /opt/scylladb/lib/cpp
 Requires: scylla-env
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
@@ -1001,6 +1001,7 @@ CONFIGURE_OPTS="\
 	--prefix=%{_prefix} --mandir=%{_mandir} --infodir=%{_infodir} \
 	--with-bugurl=http://bugzilla.redhat.com/bugzilla \
 	--enable-shared --enable-threads=posix --enable-checking=release \
+        --program-suffix=-5.3
 %ifarch ppc64le
 	--enable-targets=powerpcle-linux --disable-multilib \
 %else
@@ -1212,13 +1213,17 @@ FULLPATH=%{buildroot}%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_version}
 FULLEPATH=%{buildroot}%{_prefix}/libexec/gcc/%{gcc_target_platform}/%{gcc_version}
 
 # fix some things
-ln -sf gcc %{buildroot}%{_prefix}/bin/cc
+ln -sf gcc-5.3 %{buildroot}%{_prefix}/bin/cc-5.3
 rm -f %{buildroot}%{_prefix}/lib/cpp
-ln -sf ../bin/cpp %{buildroot}/%{_prefix}/lib/cpp
+ln -sf ../bin/cpp-5.3 %{buildroot}/%{_prefix}/lib/cpp
+%if %{build_fortran}
 ln -sf gfortran %{buildroot}%{_prefix}/bin/f95
+%endif
 rm -f %{buildroot}%{_infodir}/dir
 gzip -9 %{buildroot}%{_infodir}/*.info*
+%if %{build_ada}
 ln -sf gcc %{buildroot}%{_prefix}/bin/gnatgcc
+%endif
 
 %if %{build_go}
 mv %{buildroot}%{_prefix}/bin/go{,.gcc}
@@ -1872,7 +1877,7 @@ for h in `find $FULLPATH/include -name \*.h`; do
   fi
 done
 
-cat > %{buildroot}%{_prefix}/bin/c89 <<"EOF"
+cat > %{buildroot}%{_prefix}/bin/c89-5.3 <<"EOF"
 #!/bin/sh
 fl="-std=c89"
 for opt; do
@@ -1884,7 +1889,7 @@ for opt; do
 done
 exec gcc $fl ${1+"$@"}
 EOF
-cat > %{buildroot}%{_prefix}/bin/c99 <<"EOF"
+cat > %{buildroot}%{_prefix}/bin/c99-5.3 <<"EOF"
 #!/bin/sh
 fl="-std=c99"
 for opt; do
@@ -1896,7 +1901,7 @@ for opt; do
 done
 exec gcc $fl ${1+"$@"}
 EOF
-chmod 755 %{buildroot}%{_prefix}/bin/c?9
+chmod 755 %{buildroot}%{_prefix}/bin/c?9-5.3
 
 cd ..
 %find_lang %{orig_name}
@@ -1913,9 +1918,9 @@ rm -f %{buildroot}%{_prefix}/bin/gappletviewer || :
 rm -f %{buildroot}%{_prefix}/bin/%{_target_platform}-gfortran || :
 rm -f %{buildroot}%{_prefix}/bin/%{_target_platform}-gccgo || :
 rm -f %{buildroot}%{_prefix}/bin/%{_target_platform}-gcj || :
-rm -f %{buildroot}%{_prefix}/bin/%{_target_platform}-gcc-ar || :
-rm -f %{buildroot}%{_prefix}/bin/%{_target_platform}-gcc-nm || :
-rm -f %{buildroot}%{_prefix}/bin/%{_target_platform}-gcc-ranlib || :
+rm -f %{buildroot}%{_prefix}/bin/%{_target_platform}-gcc-ar-5.3 || :
+rm -f %{buildroot}%{_prefix}/bin/%{_target_platform}-gcc-nm-5.3 || :
+rm -f %{buildroot}%{_prefix}/bin/%{_target_platform}-gcc-ranlib-5.3 || :
 
 %ifarch %{multilib_64_archs}
 # Remove libraries for the other arch on multilib arches
@@ -2168,15 +2173,15 @@ fi
 
 %files -f %{orig_name}.lang
 %defattr(-,root,root,-)
-%{_prefix}/bin/cc
-%{_prefix}/bin/c89
-%{_prefix}/bin/c99
-%{_prefix}/bin/gcc
-%{_prefix}/bin/gcov
-%{_prefix}/bin/gcov-tool
-%{_prefix}/bin/gcc-ar
-%{_prefix}/bin/gcc-nm
-%{_prefix}/bin/gcc-ranlib
+%{_prefix}/bin/cc-5.3
+%{_prefix}/bin/c89-5.3
+%{_prefix}/bin/c99-5.3
+%{_prefix}/bin/gcc-5.3
+%{_prefix}/bin/gcov-5.3
+%{_prefix}/bin/gcov-tool-5.3
+%{_prefix}/bin/gcc-ar-5.3
+%{_prefix}/bin/gcc-nm-5.3
+%{_prefix}/bin/gcc-ranlib-5.3
 %ifarch ppc
 %{_prefix}/bin/%{_target_platform}-gcc
 %endif
@@ -2186,10 +2191,10 @@ fi
 %ifarch ppc64 ppc64p7
 %{_prefix}/bin/ppc-%{_vendor}-%{_target_os}-gcc
 %endif
-%{_prefix}/bin/%{gcc_target_platform}-gcc
+%{_prefix}/bin/%{gcc_target_platform}-gcc-5.3
 %{_prefix}/bin/%{gcc_target_platform}-gcc-%{version}
-%{_mandir}/man1/gcc.1*
-%{_mandir}/man1/gcov.1*
+%{_mandir}/man1/gcc-5.3.1*
+%{_mandir}/man1/gcov-5.3.1*
 %{_infodir}/gcc*
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2493,9 +2498,9 @@ fi
 %files -n scylla-cpp53 -f cpplib.lang
 %defattr(-,root,root,-)
 %{_prefix}/lib/cpp
-%{_prefix}/bin/cpp
-%{_mandir}/man1/cpp.1*
-%{_infodir}/cpp*
+%{_prefix}/bin/cpp-5.3
+/%{_mandir}/man1/cpp-5.3.1*
+/%{_infodir}/cpp*
 %dir %{_prefix}/libexec/gcc
 %dir %{_prefix}/libexec/gcc/%{gcc_target_platform}
 %dir %{_prefix}/libexec/gcc/%{gcc_target_platform}/%{gcc_version}
@@ -2510,10 +2515,10 @@ fi
 
 %files c++
 %defattr(-,root,root,-)
-%{_prefix}/bin/%{gcc_target_platform}-*++
-%{_prefix}/bin/g++
-%{_prefix}/bin/c++
-%{_mandir}/man1/g++.1*
+%{_prefix}/bin/%{gcc_target_platform}-*++-5.3
+%{_prefix}/bin/g++-5.3
+%{_prefix}/bin/c++-5.3
+%{_mandir}/man1/g++-5.3.1*
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_version}
