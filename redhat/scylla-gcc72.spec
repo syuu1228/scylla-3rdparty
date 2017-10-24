@@ -5,6 +5,7 @@
 # Note, gcc_release must be integer, if you want to add suffixes to
 # %{release}, append them after %{gcc_release} on Release: line.
 %global gcc_release 1
+%define _prefix /opt/scylladb
 %global nvptx_tools_gitrev c28050f60193b3b95a18866a96f03334e874e78f
 %global nvptx_newlib_gitrev aadc8eb0ec43b7cd0dd2dfb484bae63c8b05ef24
 %global _unpackaged_files_terminate_build 0
@@ -12,16 +13,12 @@
 # Hardening slows the compiler way too much.
 %undefine _hardened_build
 %global multilib_64_archs sparc64 ppc64 ppc64p7 s390x x86_64
-%ifarch %{ix86} x86_64 ia64 ppc %{power64} alpha s390x %{arm} aarch64
-%global build_ada 1
-%else
 %global build_ada 0
-%endif
-%ifarch %{ix86} x86_64 ppc ppc64 ppc64le ppc64p7 s390 s390x %{arm} aarch64 %{mips}
-%global build_go 1
-%else
 %global build_go 0
-%endif
+%global build_objc 0
+%global build_fortran 0
+%global build_jit 0
+%global build_offload_nvptx 0
 %ifarch %{ix86} x86_64 ia64
 %global build_libquadmath 1
 %else
@@ -74,11 +71,6 @@
 %else
 %global attr_ifunc 0
 %endif
-%ifarch x86_64 ppc64le
-%global build_offload_nvptx 1
-%else
-%global build_offload_nvptx 0
-%endif
 %ifarch s390x
 %global multilib_32_arch s390
 %endif
@@ -92,7 +84,8 @@
 %global multilib_32_arch i686
 %endif
 Summary: Various compilers (C, C++, Objective-C, Java, ...)
-Name: gcc
+Name: scylla-gcc72
+%define orig_name gcc
 Version: %{gcc_version}
 Release: %{gcc_release}%{?dist}
 # libgcc, libgfortran, libgomp, libstdc++ and crtstuff have
@@ -121,6 +114,7 @@ Source2: nvptx-newlib-%{nvptx_newlib_gitrev}.tar.bz2
 %global isl_version 0.16.1
 URL: http://gcc.gnu.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires: scylla-env
 # Need binutils with -pie support >= 2.14.90.0.4-4
 # Need binutils which can omit dot symbols and overlap .opd on ppc64 >= 2.15.91.0.2-4
 # Need binutils which handle -msecure-plt on ppc >= 2.16.91.0.2-2
@@ -140,7 +134,7 @@ BuildRequires: zlib-devel, gettext, dejagnu, bison, flex, sharutils
 BuildRequires: texinfo, texinfo-tex, /usr/bin/pod2man
 BuildRequires: systemtap-sdt-devel >= 1.3
 BuildRequires: gmp-devel >= 4.1.2-8, mpfr-devel >= 2.2.1, libmpc-devel >= 0.8.1
-BuildRequires: python2-devel, python3-devel
+BuildRequires: python2-devel, python34-devel
 %if %{build_go}
 BuildRequires: hostname, procps
 %endif
@@ -168,8 +162,8 @@ BuildRequires: gcc-gnat >= 3.1, libgnat >= 3.1
 BuildRequires: libunwind >= 0.98
 %endif
 %if %{build_isl}
-BuildRequires: isl = %{isl_version}
-BuildRequires: isl-devel = %{isl_version}
+BuildRequires: scylla-isl016 = %{isl_version}
+BuildRequires: scylla-isl016-devel = %{isl_version}
 %if 0%{?__isa_bits} == 64
 Requires: libisl.so.15()(64bit)
 %else
@@ -180,7 +174,7 @@ Requires: libisl.so.15
 BuildRequires: doxygen >= 1.7.1
 BuildRequires: graphviz, dblatex, texlive-collection-latex, docbook5-style-xsl
 %endif
-Requires: cpp = %{version}-%{release}
+Requires: scylla-cpp72 = %{version}-%{release}
 # Need .eh_frame ld optimizations
 # Need proper visibility support
 # Need -pie support
@@ -208,8 +202,8 @@ Requires: glibc >= 2.3.90-35
 Requires: glibc >= 2.16
 %endif
 %endif
-Requires: libgcc >= %{version}-%{release}
-Requires: libgomp = %{version}-%{release}
+Requires: scylla-libgcc72 >= %{version}-%{release}
+Requires: scylla-libgomp72 = %{version}-%{release}
 %if !%{build_ada}
 Obsoletes: gcc-gnat < %{version}-%{release}
 %endif
@@ -258,7 +252,7 @@ Patch1002: nvptx-tools-glibc.patch
 The gcc package contains the GNU Compiler Collection version 7.
 You'll need this package in order to compile C code.
 
-%package -n libgcc
+%package -n scylla-libgcc72
 Summary: GCC version 7 shared support library
 Group: System Environment/Libraries
 Autoreq: false
@@ -271,17 +265,19 @@ Obsoletes: libmudflap-static
 Obsoletes: libgcj < %{version}-%{release}
 Obsoletes: libgcj-devel < %{version}-%{release}
 Obsoletes: libgcj-src < %{version}-%{release}
+Requires: scylla-env
 
-%description -n libgcc
+%description -n scylla-libgcc72
 This package contains GCC shared support library which is needed
 e.g. for exception handling support.
 
 %package c++
 Summary: C++ support for GCC
 Group: Development/Languages
-Requires: gcc = %{version}-%{release}
-Requires: libstdc++ = %{version}-%{release}
-Requires: libstdc++-devel = %{version}-%{release}
+Requires: scylla-env
+Requires: scylla-gcc72 = %{version}-%{release}
+Requires: scylla-libstdc++72 = %{version}-%{release}
+Requires: scylla-libstdc++72-devel = %{version}-%{release}
 Autoreq: true
 
 %description c++
@@ -289,42 +285,46 @@ This package adds C++ support to the GNU Compiler Collection.
 It includes support for most of the current C++ specification,
 including templates and exception handling.
 
-%package -n libstdc++
+%package -n scylla-libstdc++72
 Summary: GNU Standard C++ Library
 Group: System Environment/Libraries
 Autoreq: true
+Requires: scylla-env
 Requires: glibc >= 2.10.90-7
 
-%description -n libstdc++
+%description -n scylla-libstdc++72
 The libstdc++ package contains a rewritten standard compliant GCC Standard
 C++ Library.
 
-%package -n libstdc++-devel
+%package -n scylla-libstdc++72-devel
 Summary: Header files and libraries for C++ development
 Group: Development/Libraries
-Requires: libstdc++%{?_isa} = %{version}-%{release}
+Requires: scylla-env
+Requires: scylla-libstdc++72%{?_isa} = %{version}-%{release}
 Autoreq: true
 
-%description -n libstdc++-devel
+%description -n scylla-libstdc++72-devel
 This is the GNU implementation of the standard C++ libraries.  This
 package includes the header files and libraries needed for C++
 development. This includes rewritten implementation of STL.
 
-%package -n libstdc++-static
+%package -n scylla-libstdc++72-static
 Summary: Static libraries for the GNU standard C++ library
 Group: Development/Libraries
-Requires: libstdc++-devel = %{version}-%{release}
+Requires: scylla-env
+Requires: scylla-libstdc++72-devel = %{version}-%{release}
 Autoreq: true
 
-%description -n libstdc++-static
+%description -n scylla-libstdc++72-static
 Static libraries for the GNU standard C++ library.
 
-%package -n libstdc++-docs
+%package -n scylla-libstdc++72-docs
 Summary: Documentation for the GNU standard C++ library
 Group: Development/Libraries
+Requires: scylla-env
 Autoreq: true
 
-%description -n libstdc++-docs
+%description -n scylla-libstdc++72-docs
 Manual, doxygen generated API information and Frequently Asked Questions
 for the GNU standard C++ library.
 
@@ -399,13 +399,13 @@ Requires: libquadmath-static = %{version}-%{release}
 %description -n libgfortran-static
 This package contains static Fortran libraries.
 
-%package -n libgomp
+%package -n scylla-libgomp72
 Summary: GCC OpenMP v4.5 shared support library
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n libgomp
+%description -n scylla-libgomp72
 This package contains GCC shared support library which is needed
 for OpenMP v4.5 support.
 
@@ -446,199 +446,199 @@ Requires(preun): /sbin/install-info
 %description -n libgccjit-devel
 This package contains header files and documentation for GCC JIT front-end.
 
-%package -n libquadmath
+%package -n scylla-libquadmath72
 Summary: GCC __float128 shared support library
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n libquadmath
+%description -n scylla-libquadmath72
 This package contains GCC shared support library which is needed
 for __float128 math support and for Fortran REAL*16 support.
 
-%package -n libquadmath-devel
+%package -n scylla-libquadmath72-devel
 Summary: GCC __float128 support
 Group: Development/Libraries
-Requires: libquadmath = %{version}-%{release}
-Requires: gcc = %{version}-%{release}
+Requires: scylla-libquadmath72 = %{version}-%{release}
+Requires: scylla-gcc72 = %{version}-%{release}
 
-%description -n libquadmath-devel
+%description -n scylla-libquadmath72-devel
 This package contains headers for building Fortran programs using
 REAL*16 and programs using __float128 math.
 
-%package -n libquadmath-static
+%package -n scylla-libquadmath72-static
 Summary: Static libraries for __float128 support
 Group: Development/Libraries
-Requires: libquadmath-devel = %{version}-%{release}
+Requires: scylla-libquadmath72-devel = %{version}-%{release}
 
-%description -n libquadmath-static
+%description -n scylla-libquadmath72-static
 This package contains static libraries for building Fortran programs
 using REAL*16 and programs using __float128 math.
 
-%package -n libitm
+%package -n scylla-libitm72
 Summary: The GNU Transactional Memory library
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n libitm
+%description -n scylla-libitm72
 This package contains the GNU Transactional Memory library
 which is a GCC transactional memory support runtime library.
 
-%package -n libitm-devel
+%package -n scylla-libitm72-devel
 Summary: The GNU Transactional Memory support
 Group: Development/Libraries
-Requires: libitm = %{version}-%{release}
-Requires: gcc = %{version}-%{release}
+Requires: scylla-libitm72 = %{version}-%{release}
+Requires: scylla-gcc72 = %{version}-%{release}
 
-%description -n libitm-devel
+%description -n scylla-libitm72-devel
 This package contains headers and support files for the
 GNU Transactional Memory library.
 
-%package -n libitm-static
+%package -n scylla-libitm72-static
 Summary: The GNU Transactional Memory static library
 Group: Development/Libraries
-Requires: libitm-devel = %{version}-%{release}
+Requires: scylla-libitm72-devel = %{version}-%{release}
 
-%description -n libitm-static
+%description -n scylla-libitm72-static
 This package contains GNU Transactional Memory static libraries.
 
-%package -n libatomic
+%package -n scylla-libatomic72
 Summary: The GNU Atomic library
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n libatomic
+%description -n scylla-libatomic72
 This package contains the GNU Atomic library
 which is a GCC support runtime library for atomic operations not supported
 by hardware.
 
-%package -n libatomic-static
+%package -n scylla-libatomic72-static
 Summary: The GNU Atomic static library
 Group: Development/Libraries
-Requires: libatomic = %{version}-%{release}
+Requires: scylla-libatomic72 = %{version}-%{release}
 
-%description -n libatomic-static
+%description -n scylla-libatomic72-static
 This package contains GNU Atomic static libraries.
 
-%package -n libasan
+%package -n scylla-libasan72
 Summary: The Address Sanitizer runtime library
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n libasan
+%description -n scylla-libasan72
 This package contains the Address Sanitizer library
 which is used for -fsanitize=address instrumented programs.
 
-%package -n libasan-static
+%package -n scylla-libasan72-static
 Summary: The Address Sanitizer static library
 Group: Development/Libraries
-Requires: libasan = %{version}-%{release}
+Requires: scylla-libasan72 = %{version}-%{release}
 
-%description -n libasan-static
+%description -n scylla-libasan72-static
 This package contains Address Sanitizer static runtime library.
 
-%package -n libtsan
+%package -n scylla-libtsan72
 Summary: The Thread Sanitizer runtime library
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n libtsan
+%description -n scylla-libtsan72
 This package contains the Thread Sanitizer library
 which is used for -fsanitize=thread instrumented programs.
 
-%package -n libtsan-static
+%package -n scylla-libtsan72-static
 Summary: The Thread Sanitizer static library
 Group: Development/Libraries
-Requires: libtsan = %{version}-%{release}
+Requires: scylla-libtsan72 = %{version}-%{release}
 
-%description -n libtsan-static
+%description -n scylla-libtsan72-static
 This package contains Thread Sanitizer static runtime library.
 
-%package -n libubsan
+%package -n scylla-libubsan72
 Summary: The Undefined Behavior Sanitizer runtime library
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n libubsan
+%description -n scylla-libubsan72
 This package contains the Undefined Behavior Sanitizer library
 which is used for -fsanitize=undefined instrumented programs.
 
-%package -n libubsan-static
+%package -n scylla-libubsan72-static
 Summary: The Undefined Behavior Sanitizer static library
 Group: Development/Libraries
-Requires: libubsan = %{version}-%{release}
+Requires: scylla-libubsan72 = %{version}-%{release}
 
-%description -n libubsan-static
+%description -n scylla-libubsan72-static
 This package contains Undefined Behavior Sanitizer static runtime library.
 
-%package -n liblsan
+%package -n scylla-liblsan72
 Summary: The Leak Sanitizer runtime library
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n liblsan
+%description -n scylla-liblsan72
 This package contains the Leak Sanitizer library
 which is used for -fsanitize=leak instrumented programs.
 
-%package -n liblsan-static
+%package -n scylla-liblsan72-static
 Summary: The Leak Sanitizer static library
 Group: Development/Libraries
 Requires: liblsan = %{version}-%{release}
 
-%description -n liblsan-static
+%description -n scylla-liblsan72-static
 This package contains Leak Sanitizer static runtime library.
 
-%package -n libcilkrts
+%package -n scylla-libcilkrts72
 Summary: The Cilk+ runtime library
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n libcilkrts
+%description -n scylla-libcilkrts72
 This package contains the Cilk+ runtime library.
 
-%package -n libcilkrts-static
+%package -n scylla-libcilkrts72-static
 Summary: The Cilk+ static runtime library
 Group: Development/Libraries
-Requires: libcilkrts = %{version}-%{release}
+Requires: scylla-libcilkrts72 = %{version}-%{release}
 
-%description -n libcilkrts-static
+%description -n scylla-libcilkrts72-static
 This package contains the Cilk+ static runtime library.
 
-%package -n libmpx
+%package -n scylla-libmpx72
 Summary: The Memory Protection Extensions runtime libraries
 Group: System Environment/Libraries
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
-%description -n libmpx
+%description -n scylla-libmpx72
 This package contains the Memory Protection Extensions runtime libraries
 which is used for -fcheck-pointer-bounds -mmpx instrumented programs.
 
-%package -n libmpx-static
+%package -n scylla-libmpx72-static
 Summary: The Memory Protection Extensions static libraries
 Group: Development/Libraries
-Requires: libmpx = %{version}-%{release}
+Requires: scylla-libmpx72 = %{version}-%{release}
 
-%description -n libmpx-static
+%description -n scylla-libmpx72-static
 This package contains the Memory Protection Extensions static runtime libraries.
 
-%package -n cpp
+%package -n scylla-cpp72
 Summary: The C Preprocessor
 Group: Development/Languages
 Requires: filesystem >= 3
-Provides: /lib/cpp
+Provides: /opt/scylladb/lib/cpp
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 Autoreq: true
 
-%description -n cpp
+%description -n scylla-cpp72
 Cpp is the GNU C-Compatible Compiler Preprocessor.
 Cpp is a macro processor which is used automatically
 by the C compiler to transform your program before actual
@@ -1026,16 +1026,25 @@ cd obj-%{gcc_target_platform}
 
 enablelgo=
 enablelada=
+enablelobjc=
+enablelfortran=
 %if %{build_ada}
 enablelada=,ada
 %endif
 %if %{build_go}
 enablelgo=,go
 %endif
+%if %{build_objc}
+enablelobjc=,objc,obj-c++
+%endif
+%if %{build_fortran}
+enablelfortran=,fortran
+%endif
 CONFIGURE_OPTS="\
 	--prefix=%{_prefix} --mandir=%{_mandir} --infodir=%{_infodir} \
 	--with-bugurl=http://bugzilla.redhat.com/bugzilla \
 	--enable-shared --enable-threads=posix --enable-checking=release \
+	--program-suffix=-7.2
 %ifarch ppc64le
 	--enable-targets=powerpcle-linux \
 %endif
@@ -1050,8 +1059,12 @@ CONFIGURE_OPTS="\
 	--with-linker-hash-style=gnu \
 %endif
 	--enable-plugin --enable-initfini-array \
+	--disable-libgcj \
+	--with-default-libstdcxx-abi=gcc4-compatible \
 %if %{build_isl}
 	--with-isl \
+	--with-isl-include=/opt/scylladb/include/ \
+	--with-isl-lib=/opt/scylladb/lib64/ \
 %else
 	--without-isl \
 %endif
@@ -1150,7 +1163,7 @@ CC="$CC" CXX="$CXX" CFLAGS="$OPT_FLAGS" \
 		  | sed 's/ -Wformat-security / -Wformat -Wformat-security /'`" \
 	XCFLAGS="$OPT_FLAGS" TCFLAGS="$OPT_FLAGS" \
 	../configure --enable-bootstrap \
-	--enable-languages=c,c++,objc,obj-c++,fortran${enablelada}${enablelgo},lto \
+	--enable-languages=c,c++${enablelada}${enablelgo}${enablelobjc}${enablelfortran},lto \
 	$CONFIGURE_OPTS
 
 %ifarch sparc sparcv9 sparc64
@@ -1162,6 +1175,7 @@ make %{?_smp_mflags} BOOT_CFLAGS="$OPT_FLAGS" profiledbootstrap
 CC="`%{gcc_target_platform}/libstdc++-v3/scripts/testsuite_flags --build-cc`"
 CXX="`%{gcc_target_platform}/libstdc++-v3/scripts/testsuite_flags --build-cxx` `%{gcc_target_platform}/libstdc++-v3/scripts/testsuite_flags --build-includes`"
 
+%if %{build_jit}
 # Build libgccjit separately, so that normal compiler binaries aren't -fpic
 # unnecessarily.
 mkdir objlibgccjit
@@ -1183,6 +1197,7 @@ rm Makefile.orig
 make jit.sphinx.html
 make jit.sphinx.install-html jit_htmldir=`pwd`/../../rpm.doc/libgccjit-devel/html
 cd ..
+%endif
 
 # Make generated man pages even if Pod::Man is not new enough
 perl -pi -e 's/head3/head2/' ../contrib/texi2pod.pl
@@ -1287,13 +1302,17 @@ FULLPATH=%{buildroot}%{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
 FULLEPATH=%{buildroot}%{_prefix}/libexec/gcc/%{gcc_target_platform}/%{gcc_major}
 
 # fix some things
-ln -sf gcc %{buildroot}%{_prefix}/bin/cc
+ln -sf gcc-7.2 %{buildroot}%{_prefix}/bin/cc-7.2
 rm -f %{buildroot}%{_prefix}/lib/cpp
-ln -sf ../bin/cpp %{buildroot}/%{_prefix}/lib/cpp
+ln -sf ../bin/cpp-7.2 %{buildroot}/%{_prefix}/lib/cpp
+%if %{build_fortran}
 ln -sf gfortran %{buildroot}%{_prefix}/bin/f95
+%endif
 rm -f %{buildroot}%{_infodir}/dir
 gzip -9 %{buildroot}%{_infodir}/*.info*
+%if %{build_ada}
 ln -sf gcc %{buildroot}%{_prefix}/bin/gnatgcc
+%endif
 mkdir -p %{buildroot}%{_fmoddir}
 
 %if %{build_go}
@@ -1383,7 +1402,9 @@ fi
 
 find %{buildroot} -name \*.la | xargs rm -f
 
+%if %{build_fortran}
 mv %{buildroot}%{_prefix}/%{_lib}/libgfortran.spec $FULLPATH/
+%endif
 %if %{build_libitm}
 mv %{buildroot}%{_prefix}/%{_lib}/libitm.spec $FULLPATH/
 %endif
@@ -1398,10 +1419,10 @@ mv %{buildroot}%{_prefix}/%{_lib}/libmpx.spec $FULLPATH/
 %endif
 
 mkdir -p %{buildroot}/%{_lib}
-mv -f %{buildroot}%{_prefix}/%{_lib}/libgcc_s.so.1 %{buildroot}/%{_lib}/libgcc_s-%{gcc_major}-%{DATE}.so.1
-chmod 755 %{buildroot}/%{_lib}/libgcc_s-%{gcc_major}-%{DATE}.so.1
-ln -sf libgcc_s-%{gcc_major}-%{DATE}.so.1 %{buildroot}/%{_lib}/libgcc_s.so.1
-ln -sf /%{_lib}/libgcc_s.so.1 $FULLPATH/libgcc_s.so
+mv -f %{buildroot}%{_prefix}/%{_lib}/libgcc_s.so.1 %{buildroot}%{_prefix}/%{_lib}/libgcc_s-%{gcc_major}-%{DATE}.so.1
+chmod 755 %{buildroot}%{_prefix}/%{_lib}/libgcc_s-%{gcc_major}-%{DATE}.so.1
+ln -sf libgcc_s-%{gcc_major}-%{DATE}.so.1 %{buildroot}%{_prefix}/%{_lib}/libgcc_s.so.1
+ln -sf %{_prefix}/%{_lib}/libgcc_s.so.1 $FULLPATH/libgcc_s.so
 %ifarch sparcv9 ppc
 ln -sf /lib64/libgcc_s.so.1 $FULLPATH/64/libgcc_s.so
 %endif
@@ -1464,17 +1485,23 @@ for f in `find %{buildroot}%{_prefix}/share/gcc-%{gcc_major}/python/ \
   %{__python3} -O -c 'import py_compile; py_compile.compile("'$f'", dfile="'$r'")'
 done
 
+%if %{build_jit}
 rm -f $FULLEPATH/libgccjit.so
 cp -a objlibgccjit/gcc/libgccjit.so* %{buildroot}%{_prefix}/%{_lib}/
 cp -a ../gcc/jit/libgccjit*.h %{buildroot}%{_prefix}/include/
 /usr/bin/install -c -m 644 objlibgccjit/gcc/doc/libgccjit.info %{buildroot}/%{_infodir}/
 gzip -9 %{buildroot}/%{_infodir}/libgccjit.info
+%endif
 
 pushd $FULLPATH
 if [ "%{_lib}" = "lib" ]; then
+%if %{build_objc}
 ln -sf ../../../libobjc.so.4 libobjc.so
+%endif
 ln -sf ../../../libstdc++.so.6.*[0-9] libstdc++.so
+%if %{build_fortran}
 ln -sf ../../../libgfortran.so.4.* libgfortran.so
+%endif
 ln -sf ../../../libgomp.so.1.* libgomp.so
 %if %{build_go}
 ln -sf ../../../libgo.so.11.* libgo.so
@@ -1503,9 +1530,13 @@ ln -sf ../../../libmpx.so.2.* libmpx.so
 ln -sf ../../../libmpxwrappers.so.2.* libmpxwrappers.so
 %endif
 else
+%if %{build_objc}
 ln -sf ../../../../%{_lib}/libobjc.so.4 libobjc.so
+%endif
 ln -sf ../../../../%{_lib}/libstdc++.so.6.*[0-9] libstdc++.so
+%if %{build_fortran}
 ln -sf ../../../../%{_lib}/libgfortran.so.4.* libgfortran.so
+%endif
 ln -sf ../../../../%{_lib}/libgomp.so.1.* libgomp.so
 %if %{build_go}
 ln -sf ../../../../%{_lib}/libgo.so.11.* libgo.so
@@ -1546,8 +1577,12 @@ fi
 mv -f %{buildroot}%{_prefix}/%{_lib}/libstdc++.*a $FULLLPATH/
 mv -f %{buildroot}%{_prefix}/%{_lib}/libstdc++fs.*a $FULLLPATH/
 mv -f %{buildroot}%{_prefix}/%{_lib}/libsupc++.*a $FULLLPATH/
+%if %{build_fortran}
 mv -f %{buildroot}%{_prefix}/%{_lib}/libgfortran.*a $FULLLPATH/
+%endif
+%if %{build_objc}
 mv -f %{buildroot}%{_prefix}/%{_lib}/libobjc.*a .
+%endif
 mv -f %{buildroot}%{_prefix}/%{_lib}/libgomp.*a .
 %if %{build_libquadmath}
 mv -f %{buildroot}%{_prefix}/%{_lib}/libquadmath.*a $FULLLPATH/
@@ -1671,9 +1706,13 @@ rm -f libmpxwrappers.so
 echo 'INPUT ( %{_prefix}/lib/'`echo ../../../../lib/libmpxwrappers.so.2.* | sed 's,^.*libm,libm,'`' )' > libmpxwrappers.so
 echo 'INPUT ( %{_prefix}/lib64/'`echo ../../../../lib/libmpxwrappers.so.2.* | sed 's,^.*libm,libm,'`' )' > 64/libmpxwrappers.so
 %endif
+%if %{build_fortran}
 ln -sf lib32/libgfortran.a libgfortran.a
 ln -sf ../lib64/libgfortran.a 64/libgfortran.a
+%endif
+%if %{build_objc}
 mv -f %{buildroot}%{_prefix}/lib64/libobjc.*a 64/
+%endif
 mv -f %{buildroot}%{_prefix}/lib64/libgomp.*a 64/
 ln -sf lib32/libstdc++.a libstdc++.a
 ln -sf ../lib64/libstdc++.a 64/libstdc++.a
@@ -1776,7 +1815,9 @@ rm -f libmpxwrappers.so
 echo 'INPUT ( %{_prefix}/lib64/'`echo ../../../../lib64/libmpxwrappers.so.2.* | sed 's,^.*libm,libm,'`' )' > libmpxwrappers.so
 echo 'INPUT ( %{_prefix}/lib/'`echo ../../../../lib64/libmpxwrappers.so.2.* | sed 's,^.*libm,libm,'`' )' > 32/libmpxwrappers.so
 %endif
+%if %{build_objc}
 mv -f %{buildroot}%{_prefix}/lib/libobjc.*a 32/
+%endif
 mv -f %{buildroot}%{_prefix}/lib/libgomp.*a 32/
 %endif
 %ifarch sparc64 ppc64 ppc64p7
@@ -1834,7 +1875,9 @@ ln -sf lib64/adalib adalib
 %endif
 %else
 %ifarch %{multilib_64_archs}
+%if %{build_fortran}
 ln -sf ../../../%{multilib_32_arch}-%{_vendor}-%{_target_os}/%{gcc_major}/libgfortran.a 32/libgfortran.a
+%endif
 ln -sf ../../../%{multilib_32_arch}-%{_vendor}-%{_target_os}/%{gcc_major}/libstdc++.a 32/libstdc++.a
 ln -sf ../../../%{multilib_32_arch}-%{_vendor}-%{_target_os}/%{gcc_major}/libstdc++fs.a 32/libstdc++fs.a
 ln -sf ../../../%{multilib_32_arch}-%{_vendor}-%{_target_os}/%{gcc_major}/libsupc++.a 32/libsupc++.a
@@ -1904,7 +1947,9 @@ strip -g `find . \( -name libgfortran.a -o -name libobjc.a -o -name libgomp.a \
 		    -o -name libmpx.a -o -name libmpxwrappers.a -o -name libcc1.a \) \
 		 -a -type f`
 popd
+%if %{build_fortran}
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libgfortran.so.4.*
+%endif
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libgomp.so.1.*
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libcc1.so.0.*
 %if %{build_libquadmath}
@@ -1938,7 +1983,9 @@ chmod 755 %{buildroot}%{_prefix}/%{_lib}/liblsan.so.0.*
 %if %{build_go}
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libgo.so.11.*
 %endif
+%if %{build_objc}
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libobjc.so.4.*
+%endif
 
 %if %{build_ada}
 chmod 755 %{buildroot}%{_prefix}/%{_lib}/libgnarl*so*
@@ -1955,7 +2002,7 @@ for h in `find $FULLPATH/include -name \*.h`; do
   fi
 done
 
-cat > %{buildroot}%{_prefix}/bin/c89 <<"EOF"
+cat > %{buildroot}%{_prefix}/bin/c89-7.2 <<"EOF"
 #!/bin/sh
 fl="-std=c89"
 for opt; do
@@ -1967,7 +2014,7 @@ for opt; do
 done
 exec gcc $fl ${1+"$@"}
 EOF
-cat > %{buildroot}%{_prefix}/bin/c99 <<"EOF"
+cat > %{buildroot}%{_prefix}/bin/c99-7.2 <<"EOF"
 #!/bin/sh
 fl="-std=c99"
 for opt; do
@@ -1979,10 +2026,10 @@ for opt; do
 done
 exec gcc $fl ${1+"$@"}
 EOF
-chmod 755 %{buildroot}%{_prefix}/bin/c?9
+chmod 755 %{buildroot}%{_prefix}/bin/c?9-7.2
 
 cd ..
-%find_lang %{name}
+%find_lang %{orig_name}
 %find_lang cpplib
 
 # Remove binaries we will not be including, so that they don't end up in
@@ -2063,13 +2110,13 @@ if [ $1 = 0 -a -f %{_infodir}/gcc.info.gz ]; then
     --info-dir=%{_infodir} %{_infodir}/gcc.info.gz || :
 fi
 
-%post -n cpp
+%post -n scylla-cpp72
 if [ -f %{_infodir}/cpp.info.gz ]; then
   /sbin/install-info \
     --info-dir=%{_infodir} %{_infodir}/cpp.info.gz || :
 fi
 
-%preun -n cpp
+%preun -n scylla-cpp72
 if [ $1 = 0 -a -f %{_infodir}/cpp.info.gz ]; then
   /sbin/install-info --delete \
     --info-dir=%{_infodir} %{_infodir}/cpp.info.gz || :
@@ -2120,7 +2167,7 @@ fi
 # Because glibc Prereq's libgcc and /sbin/ldconfig
 # comes from glibc, it might not exist yet when
 # libgcc is installed
-%post -n libgcc -p <lua>
+%post -n scylla-libgcc72 -p <lua>
 if posix.access ("/sbin/ldconfig", "x") then
   local pid = posix.fork ()
   if pid == 0 then
@@ -2130,7 +2177,7 @@ if posix.access ("/sbin/ldconfig", "x") then
   end
 end
 
-%postun -n libgcc -p <lua>
+%postun -n scylla-libgcc72 -p <lua>
 if posix.access ("/sbin/ldconfig", "x") then
   local pid = posix.fork ()
   if pid == 0 then
@@ -2140,9 +2187,9 @@ if posix.access ("/sbin/ldconfig", "x") then
   end
 end
 
-%post -n libstdc++ -p /sbin/ldconfig
+%post -n scylla-libstdc++72 -p /sbin/ldconfig
 
-%postun -n libstdc++ -p /sbin/ldconfig
+%postun -n scylla-libstdc++72 -p /sbin/ldconfig
 
 %post -n libobjc -p /sbin/ldconfig
 
@@ -2156,20 +2203,20 @@ end
 
 %postun -n libgnat -p /sbin/ldconfig
 
-%post -n libgomp
+%post -n scylla-libgomp72
 /sbin/ldconfig
 if [ -f %{_infodir}/libgomp.info.gz ]; then
   /sbin/install-info \
     --info-dir=%{_infodir} %{_infodir}/libgomp.info.gz || :
 fi
 
-%preun -n libgomp
+%preun -n scylla-libgomp72
 if [ $1 = 0 -a -f %{_infodir}/libgomp.info.gz ]; then
   /sbin/install-info --delete \
     --info-dir=%{_infodir} %{_infodir}/libgomp.info.gz || :
 fi
 
-%postun -n libgomp -p /sbin/ldconfig
+%postun -n scylla-libgomp72 -p /sbin/ldconfig
 
 %post gdb-plugin -p /sbin/ldconfig
 
@@ -2191,78 +2238,78 @@ if [ $1 = 0 -a -f %{_infodir}/libgccjit.info.gz ]; then
     --info-dir=%{_infodir} %{_infodir}/libgccjit.info.gz || :
 fi
 
-%post -n libquadmath
+%post -n scylla-libquadmath72
 /sbin/ldconfig
 if [ -f %{_infodir}/libquadmath.info.gz ]; then
   /sbin/install-info \
     --info-dir=%{_infodir} %{_infodir}/libquadmath.info.gz || :
 fi
 
-%preun -n libquadmath
+%preun -n scylla-libquadmath72
 if [ $1 = 0 -a -f %{_infodir}/libquadmath.info.gz ]; then
   /sbin/install-info --delete \
     --info-dir=%{_infodir} %{_infodir}/libquadmath.info.gz || :
 fi
 
-%postun -n libquadmath -p /sbin/ldconfig
+%postun -n scylla-libquadmath72 -p /sbin/ldconfig
 
-%post -n libitm
+%post -n scylla-libitm72
 /sbin/ldconfig
 if [ -f %{_infodir}/libitm.info.gz ]; then
   /sbin/install-info \
     --info-dir=%{_infodir} %{_infodir}/libitm.info.gz || :
 fi
 
-%preun -n libitm
+%preun -n scylla-libitm72
 if [ $1 = 0 -a -f %{_infodir}/libitm.info.gz ]; then
   /sbin/install-info --delete \
     --info-dir=%{_infodir} %{_infodir}/libitm.info.gz || :
 fi
 
-%postun -n libitm -p /sbin/ldconfig
+%postun -n scylla-libitm72 -p /sbin/ldconfig
 
-%post -n libatomic -p /sbin/ldconfig
+%post -n scylla-libatomic72 -p /sbin/ldconfig
 
-%postun -n libatomic -p /sbin/ldconfig
+%postun -n scylla-libatomic72 -p /sbin/ldconfig
 
-%post -n libasan -p /sbin/ldconfig
+%post -n scylla-libasan72 -p /sbin/ldconfig
 
-%postun -n libasan -p /sbin/ldconfig
+%postun -n scylla-libasan72 -p /sbin/ldconfig
 
-%post -n libubsan -p /sbin/ldconfig
+%post -n scylla-libubsan72 -p /sbin/ldconfig
 
-%postun -n libubsan -p /sbin/ldconfig
+%postun -n scylla-libubsan72 -p /sbin/ldconfig
 
-%post -n libtsan -p /sbin/ldconfig
+%post -n scylla-libtsan72 -p /sbin/ldconfig
 
-%postun -n libtsan -p /sbin/ldconfig
+%postun -n scylla-libtsan72 -p /sbin/ldconfig
 
-%post -n liblsan -p /sbin/ldconfig
+%post -n scylla-liblsan72 -p /sbin/ldconfig
 
-%postun -n liblsan -p /sbin/ldconfig
+%postun -n scylla-liblsan72 -p /sbin/ldconfig
 
-%post -n libcilkrts -p /sbin/ldconfig
+%post -n scylla-libcilkrts72 -p /sbin/ldconfig
 
-%postun -n libcilkrts -p /sbin/ldconfig
+%postun -n scylla-libcilkrts72 -p /sbin/ldconfig
 
-%post -n libmpx -p /sbin/ldconfig
+%post -n scylla-libmpx72 -p /sbin/ldconfig
 
-%postun -n libmpx -p /sbin/ldconfig
+%postun -n scylla-libmpx72 -p /sbin/ldconfig
 
 %post -n libgo -p /sbin/ldconfig
 
 %postun -n libgo -p /sbin/ldconfig
 
-%files -f %{name}.lang
-%{_prefix}/bin/cc
-%{_prefix}/bin/c89
-%{_prefix}/bin/c99
-%{_prefix}/bin/gcc
-%{_prefix}/bin/gcov
-%{_prefix}/bin/gcov-tool
-%{_prefix}/bin/gcc-ar
-%{_prefix}/bin/gcc-nm
-%{_prefix}/bin/gcc-ranlib
+%files -f %{orig_name}.lang
+%{_prefix}/bin/cc-7.2
+%{_prefix}/bin/c89-7.2
+%{_prefix}/bin/c99-7.2
+%{_prefix}/bin/gcc-7.2
+%{_prefix}/bin/gcov-7.2
+%{_prefix}/bin/gcov-tool-7.2
+%{_prefix}/bin/gcc-ar-7.2
+%{_prefix}/bin/gcc-nm-7.2
+%{_prefix}/bin/gcc-ranlib-7.2
 %ifarch ppc
 %{_prefix}/bin/%{_target_platform}-gcc
 %endif
@@ -2272,10 +2319,10 @@ fi
 %ifarch ppc64 ppc64p7
 %{_prefix}/bin/ppc-%{_vendor}-%{_target_os}-gcc
 %endif
-%{_prefix}/bin/%{gcc_target_platform}-gcc
+%{_prefix}/bin/%{gcc_target_platform}-gcc-7.2
 %{_prefix}/bin/%{gcc_target_platform}-gcc-%{gcc_major}
-%{_mandir}/man1/gcc.1*
-%{_mandir}/man1/gcov.1*
+%{_mandir}/man1/gcc-7.2.1*
+%{_mandir}/man1/gcov-7.2.1*
 %{_infodir}/gcc*
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2576,27 +2623,27 @@ fi
 %{!?_licensedir:%global license %%doc}
 %license gcc/COPYING* COPYING.RUNTIME
 
-%files -n cpp -f cpplib.lang
+%files -n scylla-cpp72 -f cpplib.lang
 %{_prefix}/lib/cpp
-%{_prefix}/bin/cpp
-%{_mandir}/man1/cpp.1*
+%{_prefix}/bin/cpp-7.2
+%{_mandir}/man1/cpp-7.2.1*
 %{_infodir}/cpp*
 %dir %{_prefix}/libexec/gcc
 %dir %{_prefix}/libexec/gcc/%{gcc_target_platform}
 %dir %{_prefix}/libexec/gcc/%{gcc_target_platform}/%{gcc_major}
 %{_prefix}/libexec/gcc/%{gcc_target_platform}/%{gcc_major}/cc1
 
-%files -n libgcc
-/%{_lib}/libgcc_s-%{gcc_major}-%{DATE}.so.1
-/%{_lib}/libgcc_s.so.1
+%files -n scylla-libgcc72
+%{_prefix}/%{_lib}/libgcc_s-%{gcc_major}-%{DATE}.so.1
+%{_prefix}/%{_lib}/libgcc_s.so.1
 %{!?_licensedir:%global license %%doc}
 %license gcc/COPYING* COPYING.RUNTIME
 
 %files c++
-%{_prefix}/bin/%{gcc_target_platform}-*++
-%{_prefix}/bin/g++
-%{_prefix}/bin/c++
-%{_mandir}/man1/g++.1*
+%{_prefix}/bin/%{gcc_target_platform}-*++-7.2
+%{_prefix}/bin/g++-7.2
+%{_prefix}/bin/c++-7.2
+%{_mandir}/man1/g++-7.2.1*
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -2628,7 +2675,7 @@ fi
 %endif
 %doc rpm.doc/changelogs/gcc/cp/ChangeLog*
 
-%files -n libstdc++
+%files -n scylla-libstdc++72
 %{_prefix}/%{_lib}/libstdc++.so.6*
 %dir %{_datadir}/gdb
 %dir %{_datadir}/gdb/auto-load
@@ -2640,7 +2687,7 @@ fi
 %dir %{_prefix}/share/gcc-%{gcc_major}/python
 %{_prefix}/share/gcc-%{gcc_major}/python/libstdcxx
 
-%files -n libstdc++-devel
+%files -n scylla-libstdc++72-devel
 %dir %{_prefix}/include/c++
 %{_prefix}/include/c++/%{gcc_major}
 %dir %{_prefix}/lib/gcc
@@ -2662,7 +2709,7 @@ fi
 %endif
 %doc rpm.doc/changelogs/libstdc++-v3/ChangeLog* libstdc++-v3/README*
 
-%files -n libstdc++-static
+%files -n scylla-libstdc++72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -2682,11 +2729,12 @@ fi
 %endif
 
 %if %{build_libstdcxx_docs}
-%files -n libstdc++-docs
+%files -n scylla-libstdc++72-docs
 %{_mandir}/man3/*
 %doc rpm.doc/libstdc++-v3/html
 %endif
 
+%if %{build_objc}
 %files objc
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
@@ -2720,7 +2768,9 @@ fi
 
 %files -n libobjc
 %{_prefix}/%{_lib}/libobjc.so.4*
+%endif
 
+%if %{build_fortran}
 %files gfortran
 %{_prefix}/bin/gfortran
 %{_prefix}/bin/f95
@@ -2785,6 +2835,7 @@ fi
 %endif
 %ifnarch sparcv9 sparc64 ppc ppc64 ppc64p7
 %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}/libgfortran.a
+%endif
 %endif
 
 %if %{build_ada}
@@ -2867,19 +2918,19 @@ fi
 %endif
 %endif
 
-%files -n libgomp
+%files -n scylla-libgomp72
 %{_prefix}/%{_lib}/libgomp.so.1*
 %{_infodir}/libgomp.info*
 %doc rpm.doc/changelogs/libgomp/ChangeLog*
 
 %if %{build_libquadmath}
-%files -n libquadmath
+%files -n scylla-libquadmath72
 %{_prefix}/%{_lib}/libquadmath.so.0*
 %{_infodir}/libquadmath.info*
 %{!?_licensedir:%global license %%doc}
 %license rpm.doc/libquadmath/COPYING*
 
-%files -n libquadmath-devel
+%files -n scylla-libquadmath72-devel
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -2891,7 +2942,7 @@ fi
 %endif
 %doc rpm.doc/libquadmath/ChangeLog*
 
-%files -n libquadmath-static
+%files -n scylla-libquadmath72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -2909,11 +2960,11 @@ fi
 %endif
 
 %if %{build_libitm}
-%files -n libitm
+%files -n scylla-libitm72
 %{_prefix}/%{_lib}/libitm.so.1*
 %{_infodir}/libitm.info*
 
-%files -n libitm-devel
+%files -n scylla-libitm72-devel
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -2925,7 +2976,7 @@ fi
 %endif
 %doc rpm.doc/libitm/ChangeLog*
 
-%files -n libitm-static
+%files -n scylla-libitm72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -2943,10 +2994,10 @@ fi
 %endif
 
 %if %{build_libatomic}
-%files -n libatomic
+%files -n scylla-libatomic72
 %{_prefix}/%{_lib}/libatomic.so.1*
 
-%files -n libatomic-static
+%files -n scylla-libatomic72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -2965,10 +3016,10 @@ fi
 %endif
 
 %if %{build_libasan}
-%files -n libasan
+%files -n scylla-libasan72
 %{_prefix}/%{_lib}/libasan.so.4*
 
-%files -n libasan-static
+%files -n scylla-libasan72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -2989,10 +3040,10 @@ fi
 %endif
 
 %if %{build_libubsan}
-%files -n libubsan
+%files -n scylla-libubsan72
 %{_prefix}/%{_lib}/libubsan.so.0*
 
-%files -n libubsan-static
+%files -n scylla-libubsan72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -3013,10 +3064,10 @@ fi
 %endif
 
 %if %{build_libtsan}
-%files -n libtsan
+%files -n scylla-libtsan72
 %{_prefix}/%{_lib}/libtsan.so.0*
 
-%files -n libtsan-static
+%files -n scylla-libtsan72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -3027,10 +3078,10 @@ fi
 %endif
 
 %if %{build_liblsan}
-%files -n liblsan
+%files -n scylla-liblsan72
 %{_prefix}/%{_lib}/liblsan.so.0*
 
-%files -n liblsan-static
+%files -n scylla-liblsan72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -3041,10 +3092,10 @@ fi
 %endif
 
 %if %{build_libcilkrts}
-%files -n libcilkrts
+%files -n scylla-libcilkrts72
 %{_prefix}/%{_lib}/libcilkrts.so.5*
 
-%files -n libcilkrts-static
+%files -n scylla-libcilkrts72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -3063,11 +3114,11 @@ fi
 %endif
 
 %if %{build_libmpx}
-%files -n libmpx
+%files -n scylla-libmpx72
 %{_prefix}/%{_lib}/libmpx.so.2*
 %{_prefix}/%{_lib}/libmpxwrappers.so.2*
 
-%files -n libmpx-static
+%files -n scylla-libmpx72-static
 %dir %{_prefix}/lib/gcc
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}
 %dir %{_prefix}/lib/gcc/%{gcc_target_platform}/%{gcc_major}
@@ -3181,6 +3232,7 @@ fi
 %endif
 %endif
 
+%if %{build_jit}
 %files -n libgccjit
 %{_prefix}/%{_lib}/libgccjit.so.*
 %doc rpm.doc/changelogs/gcc/jit/ChangeLog*
@@ -3191,6 +3243,7 @@ fi
 %{_infodir}/libgccjit.info*
 %doc rpm.doc/libgccjit-devel/*
 %doc gcc/jit/docs/examples
+%endif
 
 %files plugin-devel
 %dir %{_prefix}/lib/gcc

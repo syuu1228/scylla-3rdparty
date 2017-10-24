@@ -36,8 +36,8 @@ if [ ! -f isl-0.16.1-1.fc26.src.rpm ]; then
     wget https://kojipkgs.fedoraproject.org//packages/isl/0.16.1/1.fc26/src/isl-0.16.1-1.fc26.src.rpm
 fi
 
-if [ ! -f gcc-5.3.1-2.fc23.src.rpm ]; then
-    wget https://kojipkgs.fedoraproject.org//packages/gcc/5.3.1/2.fc23/src/gcc-5.3.1-2.fc23.src.rpm
+if [ ! -f gcc-7.2.1-1.fc28.src.rpm ]; then
+    wget https://kojipkgs.fedoraproject.org//packages/gcc/7.2.1/1.fc28/src/gcc-7.2.1-1.fc28.src.rpm
 fi 
 if [ ! -f boost-1.58.0-11.fc23.src.rpm ]; then
     wget https://kojipkgs.fedoraproject.org//packages/boost/1.58.0/11.fc23/src/boost-1.58.0-11.fc23.src.rpm
@@ -65,10 +65,9 @@ if [ ! -f build/srpms/scylla-isl016-0.16.1-1.el7*.src.rpm ]; then
     sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-isl016.spec --sources=$RPMBUILD/SOURCES
 fi
 
-if [ ! -f build/srpms/scylla-gcc53-5.3.1-2.1.el7*.src.rpm ]; then
-    rpm --define "_topdir $RPMBUILD" -ivh build/downloads/gcc-5.3.1-2.fc23.src.rpm
-    cp redhat/scylla-gcc53-5.3.1/unwind_dw2_fde_nolock.patch $RPMBUILD/SOURCES/
-    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-gcc53.spec --sources=$RPMBUILD/SOURCES
+if [ ! -f build/srpms/scylla-gcc72-7.2.1-1.el7*.src.rpm ]; then
+    rpm --define "_topdir $RPMBUILD" -ivh build/downloads/gcc-7.2.1-1.fc28.src.rpm
+    sudo mock --buildsrpm --root=$TARGET --resultdir=`pwd`/build/srpms --spec=redhat/scylla-gcc72.spec --sources=$RPMBUILD/SOURCES
 fi
 
 if [ ! -f build/srpms/scylla-boost158-1.58.0-11.el7*.src.rpm ]; then
