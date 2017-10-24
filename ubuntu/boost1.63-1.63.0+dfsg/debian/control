@@ -1,4 +1,4 @@
-Source: boost1.63
+Source: scylla-boost163
 Homepage: http://www.boost.org/
 Section: libs
 Priority: optional
@@ -7,53 +7,49 @@ XSBC-Original-Maintainer: Debian Boost Team <pkg-boost-devel@lists.alioth.debian
 Uploaders: Steve M. Robbins <smr@debian.org>
 Build-Depends: debhelper (>= 9), dpkg-dev (>= 1.16.1~), dctrl-tools, chrpath,
  zlib1g-dev, libbz2-dev, libicu-dev, mpi-default-dev,
- bison, flex, docbook-to-man, help2man, xsltproc, doxygen, 
- dh-python,
+ bison, flex, docbook-to-man, help2man, xsltproc, doxygen, scylla-env,
  g++ (>= 4:5-0), g++-7,
- python, python-all-dev | python-dev, 
- python3, python3-all-dev (>= 3.1) | python3-dev (>= 3.1)
+# g++-5, g++-7,
 Build-Conflicts: libopenmpi-dev (= 1.3.2-2)
 Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-boost/boost/
 Vcs-Svn: svn://anonscm.debian.org/pkg-boost/boost/
 Standards-Version: 3.9.8
 
-Package: libboost1.63-dev
+Package: scylla-libboost163-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends}, ${shlibs:Depends}, libstdc++-4.8-dev | libstdc++-dev
-Suggests: libboost1.63-doc,
- libboost-atomic1.63-dev,
- libboost-chrono1.63-dev,
- libboost-context1.63-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
- libboost-coroutine1.63-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
- libboost-date-time1.63-dev,
- libboost-exception1.63-dev,
- libboost-fiber1.63-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
- libboost-filesystem1.63-dev,
- libboost-graph1.63-dev,
- libboost-graph-parallel1.63-dev,
- libboost-iostreams1.63-dev,
- libboost-locale1.63-dev,
- libboost-log1.63-dev,
- libboost-math1.63-dev,
- libboost-mpi1.63-dev,
- libboost-mpi-python1.63-dev,
- libboost-program-options1.63-dev,
- libboost-python1.63-dev,
- libboost-random1.63-dev,
- libboost-regex1.63-dev,
- libboost-serialization1.63-dev,
- libboost-signals1.63-dev,
- libboost-system1.63-dev,
- libboost-test1.63-dev,
- libboost-thread1.63-dev,
- libboost-timer1.63-dev,
- libboost-type-erasure1.63-dev,
- libboost-wave1.63-dev,
- libboost1.63-tools-dev,
+Suggests: scylla-libboost163-doc,
+ scylla-libboost-atomic163-dev,
+ scylla-libboost-chrono163-dev,
+ scylla-libboost-context163-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
+ scylla-libboost-coroutine163-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
+ scylla-libboost-date-time163-dev,
+ scylla-libboost-exception163-dev,
+ scylla-libboost-fiber163-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
+ scylla-libboost-filesystem163-dev,
+ scylla-libboost-graph163-dev,
+ scylla-libboost-graph-parallel163-dev,
+ scylla-libboost-iostreams163-dev,
+ scylla-libboost-locale163-dev,
+ scylla-libboost-log163-dev,
+ scylla-libboost-math163-dev,
+ scylla-libboost-mpi163-dev,
+ scylla-libboost-program-options163-dev,
+ scylla-libboost-random163-dev,
+ scylla-libboost-regex163-dev,
+ scylla-libboost-serialization163-dev,
+ scylla-libboost-signals163-dev,
+ scylla-libboost-system163-dev,
+ scylla-libboost-test163-dev,
+ scylla-libboost-thread163-dev,
+ scylla-libboost-timer163-dev,
+ scylla-libboost-type-erasure163-dev,
+ scylla-libboost-wave163-dev,
+ scylla-libboost163-tools-dev,
  libmpfrc++-dev, libntl-dev
-Conflicts: bjam, boost-build, libboost1.42-dev, libboost1.46-dev, libboost1.48-dev, libboost1.49-dev, libboost1.50-dev, libboost1.52-dev, libboost1.53-dev, libboost1.54-dev, libboost1.55-dev, libboost1.57-dev, libboost1.58-dev, libboost1.60-dev, libboost1.61-dev, libboost1.62-dev
+#Conflicts: bjam, boost-build, scylla-libboost1.42-dev, scylla-libboost1.46-dev, scylla-libboost1.48-dev, scylla-libboost1.49-dev, scylla-libboost1.50-dev, scylla-libboost1.52-dev, scylla-libboost1.53-dev, scylla-libboost1.54-dev, scylla-libboost1.55-dev, scylla-libboost1.57-dev, scylla-libboost1.58-dev, scylla-libboost1.60-dev, scylla-libboost1.61-dev, scylla-libboost1.62-dev
 Description: Boost C++ Libraries development files
  The Boost web site provides free, peer-reviewed, portable C++ source
  libraries. The emphasis is on libraries which work well with the C++
@@ -69,7 +65,7 @@ Description: Boost C++ Libraries development files
  required to use the Boost.Multiprecision wrapping of the respective
  library.
 
-Package: libboost1.63-tools-dev
+Package: scylla-libboost163-tools-dev
 Architecture: any
 Multi-Arch: foreign
 Section: libdevel
@@ -80,8 +76,8 @@ Suggests: xsltproc,
  docbook-xsl (>= 1.73.2),
  default-jdk (>= 1.4),
  fop (>= 0.94)
-Conflicts: bjam, boost-build, libboost1.49-dev, libboost1.53-tools-dev, libboost1.54-tools-dev, libboost1.55-tools-dev, libboost1.57-tools-dev, libboost1.58-tools-dev, libboost1.60-tools-dev, libboost1.61-tools-dev, libboost1.62-tools-dev
-Replaces: bjam, boost-build, libboost1.49-dev, libboost1.53-dev, libboost1.53-tools-dev
+#Conflicts: bjam, boost-build, scylla-libboost1.49-dev, scylla-libboost1.53-tools-dev, scylla-libboost1.54-tools-dev, scylla-libboost1.55-tools-dev, scylla-libboost1.57-tools-dev, scylla-libboost1.58-tools-dev, scylla-libboost1.60-tools-dev, scylla-libboost1.61-tools-dev, scylla-libboost1.62-tools-dev
+#Replaces: bjam, boost-build, scylla-libboost1.49-dev, scylla-libboost1.53-dev, scylla-libboost1.53-tools-dev
 Description: Boost C++ Libraries development tools
  The Boost web site provides free, peer-reviewed, portable C++ source
  libraries. The emphasis is on libraries which work well with the C++
@@ -94,40 +90,38 @@ Description: Boost C++ Libraries development tools
  This package provides the auxiliary tools bjam, Boost.Build, bcp,
  inspect, boostbook and quickbook.
 
-Package: libboost1.63-all-dev
+Package: scylla-libboost163-all-dev
 Architecture: any
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev,
- libboost1.63-tools-dev,
- libboost-atomic1.63-dev,
- libboost-chrono1.63-dev,
- libboost-context1.63-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
- libboost-coroutine1.63-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
- libboost-date-time1.63-dev,
- libboost-exception1.63-dev,
- libboost-fiber1.63-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
- libboost-filesystem1.63-dev,
- libboost-graph1.63-dev,
- libboost-graph-parallel1.63-dev,
- libboost-iostreams1.63-dev,
- libboost-locale1.63-dev,
- libboost-log1.63-dev,
- libboost-math1.63-dev,
- libboost-mpi1.63-dev,
- libboost-mpi-python1.63-dev,
- libboost-program-options1.63-dev,
- libboost-python1.63-dev,
- libboost-random1.63-dev,
- libboost-regex1.63-dev,
- libboost-serialization1.63-dev,
- libboost-signals1.63-dev,
- libboost-system1.63-dev,
- libboost-test1.63-dev,
- libboost-thread1.63-dev,
- libboost-timer1.63-dev,
- libboost-type-erasure1.63-dev,
- libboost-wave1.63-dev
+ scylla-libboost163-dev,
+ scylla-libboost163-tools-dev,
+ scylla-libboost-atomic163-dev,
+ scylla-libboost-chrono163-dev,
+ scylla-libboost-context163-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
+ scylla-libboost-coroutine163-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
+ scylla-libboost-date-time163-dev,
+ scylla-libboost-exception163-dev,
+ scylla-libboost-fiber163-dev [any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el],
+ scylla-libboost-filesystem163-dev,
+ scylla-libboost-graph163-dev,
+ scylla-libboost-graph-parallel163-dev,
+ scylla-libboost-iostreams163-dev,
+ scylla-libboost-locale163-dev,
+ scylla-libboost-log163-dev,
+ scylla-libboost-math163-dev,
+ scylla-libboost-mpi163-dev,
+ scylla-libboost-program-options163-dev,
+ scylla-libboost-random163-dev,
+ scylla-libboost-regex163-dev,
+ scylla-libboost-serialization163-dev,
+ scylla-libboost-signals163-dev,
+ scylla-libboost-system163-dev,
+ scylla-libboost-test163-dev,
+ scylla-libboost-thread163-dev,
+ scylla-libboost-timer163-dev,
+ scylla-libboost-type-erasure163-dev,
+ scylla-libboost-wave163-dev
 Description: Boost C++ Libraries development files (ALL)
  The Boost web site provides free, peer-reviewed, portable C++ source
  libraries. The emphasis is on libraries which work well with the C++
@@ -140,24 +134,24 @@ Description: Boost C++ Libraries development files (ALL)
  This metapackage provides the complete Boost development environment,
  including all separately-packaged libraries.
 
-Package: libboost1.63-doc
+Package: scylla-libboost163-doc
 Homepage: http://www.boost.org/libs/
 Architecture: all
 Section: doc
 Depends: ${misc:Depends}
-Suggests: libboost1.63-dev (>= ${source:Version})
-Conflicts: libboost1.42-doc, libboost1.46-doc, libboost1.48-doc, libboost1.49-doc, libboost1.50-doc, libboost1.52-doc, libboost1.53-doc, libboost1.54-doc, libboost1.55-doc, libboost1.57-doc, libboost1.58-doc, libboost1.60-doc, libboost1.61-doc, libboost1.62-doc
+Suggests: scylla-libboost163-dev (>= ${source:Version})
+#Conflicts: scylla-libboost1.42-doc, scylla-libboost1.46-doc, scylla-libboost1.48-doc, scylla-libboost1.49-doc, scylla-libboost1.50-doc, scylla-libboost1.52-doc, scylla-libboost1.53-doc, scylla-libboost1.54-doc, scylla-libboost1.55-doc, scylla-libboost1.57-doc, scylla-libboost1.58-doc, scylla-libboost1.60-doc, scylla-libboost1.61-doc, scylla-libboost1.62-doc
 Description: Boost.org libraries documentation placeholder
  This package originally provided documentation, but has since fallen
  into disrepair and presently provides no documentation.  Please
  use documentation at www.boost.org.
 
-Package: libboost-atomic1.63.0
+Package: scylla-libboost-atomic163.0
 Homepage: http://www.boost.org/libs/atomic/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: atomic data types, operations, and memory ordering constraints
  This package forms part of the Boost C++ Libraries collection.
@@ -177,14 +171,14 @@ Description: atomic data types, operations, and memory ordering constraints
  intrinsics), and falls back to "emulating" atomic operations through
  locking.
 
-Package: libboost-atomic1.63-dev
+Package: scylla-libboost-atomic163-dev
 Homepage: http://www.boost.org/libs/atomic/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-atomic1.63.0 (= ${binary:Version})
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-atomic163.0 (= ${binary:Version})
 Description: atomic data types, operations, and memory ordering constraints
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -202,14 +196,14 @@ Description: atomic data types, operations, and memory ordering constraints
  possible (via inline assembler, platform libraries or compiler
  intrinsics), and falls back to "emulating" atomic operations through
  locking.
-Conflicts: libboost-atomic1.53-dev, libboost-atomic1.54-dev, libboost-atomic1.55-dev, libboost-atomic1.57-dev, libboost-atomic1.58-dev, libboost-atomic1.60-dev, libboost-atomic1.61-dev, libboost-atomic1.62-dev
+#Conflicts: scylla-libboost-atomic1.53-dev, scylla-libboost-atomic1.54-dev, scylla-libboost-atomic1.55-dev, scylla-libboost-atomic1.57-dev, scylla-libboost-atomic1.58-dev, scylla-libboost-atomic1.60-dev, scylla-libboost-atomic1.61-dev, scylla-libboost-atomic1.62-dev
 
-Package: libboost-chrono1.63.0
+Package: scylla-libboost-chrono163.0
 Homepage: http://www.boost.org/libs/chrono/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: C++ representation of time duration, time point, and clocks
  This package forms part of the Boost C++ Libraries collection.
@@ -248,15 +242,15 @@ Description: C++ representation of time duration, time point, and clocks
  Lastly, Boost.Chrono includes typeof registration for duration and
  time_point to permit using emulated auto with C++03 compilers.
 
-Package: libboost-chrono1.63-dev
+Package: scylla-libboost-chrono163-dev
 Homepage: http://www.boost.org/libs/chrono/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-chrono1.63.0 (= ${binary:Version})
-Conflicts: libboost-chrono1.48-dev, libboost-chrono1.49-dev, libboost-chrono1.50-dev, libboost-chrono1.52-dev, libboost-chrono1.53-dev, libboost-chrono1.54-dev, libboost-chrono1.55-dev, libboost-chrono1.57-dev, libboost-chrono1.58-dev, libboost-chrono1.60-dev, libboost-chrono1.61-dev, libboost-chrono1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-chrono163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-chrono1.48-dev, scylla-libboost-chrono1.49-dev, scylla-libboost-chrono1.50-dev, scylla-libboost-chrono1.52-dev, scylla-libboost-chrono1.53-dev, scylla-libboost-chrono1.54-dev, scylla-libboost-chrono1.55-dev, scylla-libboost-chrono1.57-dev, scylla-libboost-chrono1.58-dev, scylla-libboost-chrono1.60-dev, scylla-libboost-chrono1.61-dev, scylla-libboost-chrono1.62-dev
 Description: C++ representation of time duration, time point, and clocks
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -295,12 +289,12 @@ Description: C++ representation of time duration, time point, and clocks
  Lastly, Boost.Chrono includes typeof registration for duration and
  time_point to permit using emulated auto with C++03 compilers.
 
-Package: libboost-context1.63.0
+Package: scylla-libboost-context163.0
 Homepage: http://www.boost.org/libs/context/
 Architecture: any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: provides a sort of cooperative multitasking on a single thread
  This package forms part of the Boost C++ Libraries collection.
@@ -315,14 +309,14 @@ Description: provides a sort of cooperative multitasking on a single thread
  coroutines, cooperative threads (userland threads) or an equivalent
  to C# keyword yield in C++.
 
-Package: libboost-context1.63-dev
+Package: scylla-libboost-context163-dev
 Homepage: http://www.boost.org/libs/context/
 Architecture: any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-context1.63.0 (= ${binary:Version})
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-context163.0 (= ${binary:Version})
 Description: provides a sort of cooperative multitasking on a single thread
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -335,14 +329,14 @@ Description: provides a sort of cooperative multitasking on a single thread
  path. This is useful for building higher-level abstractions, like
  coroutines, cooperative threads (userland threads) or an equivalent
  to C# keyword yield in C++.
-Conflicts: libboost-context1.53-dev, libboost-context1.54-dev, libboost-context1.55-dev, libboost-context1.57-dev, libboost-context1.58-dev, libboost-context1.60-dev, libboost-context1.61-dev, libboost-context1.62-dev
+#Conflicts: scylla-libboost-context1.53-dev, scylla-libboost-context1.54-dev, scylla-libboost-context1.55-dev, scylla-libboost-context1.57-dev, scylla-libboost-context1.58-dev, scylla-libboost-context1.60-dev, scylla-libboost-context1.61-dev, scylla-libboost-context1.62-dev
 
-Package: libboost-coroutine1.63.0
+Package: scylla-libboost-coroutine163.0
 Homepage: http://www.boost.org/libs/coroutine/
 Architecture: any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: provides a sort of cooperative multitasking on a single thread
  This package forms part of the Boost C++ Libraries collection.
@@ -362,15 +356,15 @@ Description: provides a sort of cooperative multitasking on a single thread
  .
  The implementation uses Boost.Context for context switching.
 
-Package: libboost-coroutine1.63-dev
+Package: scylla-libboost-coroutine163-dev
 Homepage: http://www.boost.org/libs/coroutine/
 Architecture: any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-context1.63-dev (= ${binary:Version}),
- libboost-coroutine1.63.0 (= ${binary:Version})
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-context163-dev (= ${binary:Version}),
+ scylla-libboost-coroutine163.0 (= ${binary:Version})
 Description: provides a sort of cooperative multitasking on a single thread
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -388,14 +382,14 @@ Description: provides a sort of cooperative multitasking on a single thread
  kernel is not involved in the coroutine switches.
  .
  The implementation uses Boost.Context for context switching.
-Conflicts: libboost-coroutine1.54-dev, libboost-coroutine1.55-dev, libboost-coroutine1.57-dev, libboost-coroutine1.58-dev, libboost-coroutine1.60-dev, libboost-coroutine1.61-dev, libboost-coroutine1.62-dev
+#Conflicts: scylla-libboost-coroutine1.54-dev, scylla-libboost-coroutine1.55-dev, scylla-libboost-coroutine1.57-dev, scylla-libboost-coroutine1.58-dev, scylla-libboost-coroutine1.60-dev, scylla-libboost-coroutine1.61-dev, scylla-libboost-coroutine1.62-dev
 
-Package: libboost-date-time1.63.0
+Package: scylla-libboost-date-time163.0
 Homepage: http://www.boost.org/libs/date_time/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: set of date-time libraries based on generic programming concepts
  This package forms part of the Boost C++ Libraries collection.
@@ -403,43 +397,43 @@ Description: set of date-time libraries based on generic programming concepts
  These libraries are intended to make programming with dates and times
  almost as simple and natural as programming with strings and integers.
 
-Package: libboost-date-time1.63-dev
+Package: scylla-libboost-date-time163-dev
 Homepage: http://www.boost.org/libs/date_time/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-date-time1.63.0 (= ${binary:Version}),
- libboost-serialization1.63-dev (= ${binary:Version})
-Conflicts: libboost-date-time1.42-dev, libboost-date-time1.46-dev, libboost-date-time1.48-dev, libboost-date-time1.49-dev, libboost-date-time1.50-dev, libboost-date-time1.52-dev, libboost-date-time1.53-dev, libboost-date-time1.54-dev, libboost-date-time1.55-dev, libboost-date-time1.57-dev, libboost-date-time1.58-dev, libboost-date-time1.60-dev, libboost-date-time1.61-dev, libboost-date-time1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-date-time163.0 (= ${binary:Version}),
+ scylla-libboost-serialization163-dev (= ${binary:Version})
+#Conflicts: scylla-libboost-date-time1.42-dev, scylla-libboost-date-time1.46-dev, scylla-libboost-date-time1.48-dev, scylla-libboost-date-time1.49-dev, scylla-libboost-date-time1.50-dev, scylla-libboost-date-time1.52-dev, scylla-libboost-date-time1.53-dev, scylla-libboost-date-time1.54-dev, scylla-libboost-date-time1.55-dev, scylla-libboost-date-time1.57-dev, scylla-libboost-date-time1.58-dev, scylla-libboost-date-time1.60-dev, scylla-libboost-date-time1.61-dev, scylla-libboost-date-time1.62-dev
 Description: set of date-time libraries based on generic programming concepts
  This package forms part of the Boost C++ Libraries collection.
  .
  These libraries are intended to make programming with dates and times
  almost as simple and natural as programming with strings and integers.
 
-Package: libboost-exception1.63-dev
+Package: scylla-libboost-exception163-dev
 Homepage: http://www.boost.org/libs/exception/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version})
+ scylla-libboost163-dev (= ${binary:Version})
 Description: library to help write exceptions and handlers
  This package forms part of the Boost C++ Libraries collection.
  .
  The purpose of Boost Exception is to ease the design of exception
  class hierarchies and to help write exception handling and error
  reporting code.
-Conflicts: libboost-exception1.50-dev, libboost-exception1.52-dev, libboost-exception1.53-dev, libboost-exception1.54-dev, libboost-exception1.55-dev, libboost-exception1.57-dev, libboost-exception1.58-dev, libboost-exception1.60-dev, libboost-exception1.61-dev, libboost-exception1.62-dev
+#Conflicts: scylla-libboost-exception1.50-dev, scylla-libboost-exception1.52-dev, scylla-libboost-exception1.53-dev, scylla-libboost-exception1.54-dev, scylla-libboost-exception1.55-dev, scylla-libboost-exception1.57-dev, scylla-libboost-exception1.58-dev, scylla-libboost-exception1.60-dev, scylla-libboost-exception1.61-dev, scylla-libboost-exception1.62-dev
 
-Package: libboost-fiber1.63.0
+Package: scylla-libboost-fiber163.0
 Homepage: http://www.boost.org/libs/fiber/
 Architecture: any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: cooperatively-scheduled micro-/userland-threads
  This package forms part of the Boost C++ Libraries collection.
@@ -464,15 +458,15 @@ Description: cooperatively-scheduled micro-/userland-threads
  compared to a fiber switch with less than a hundred cycles. A fiber
  runs on a single thread at any point in time.
 
-Package: libboost-fiber1.63-dev
+Package: scylla-libboost-fiber163-dev
 Homepage: http://www.boost.org/libs/fiber/
 Architecture: any-i386 any-amd64 armel armhf arm64 mips mipsel powerpc ppc64el
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-context1.63-dev (= ${binary:Version}),
- libboost-fiber1.63.0 (= ${binary:Version})
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-context163-dev (= ${binary:Version}),
+ scylla-libboost-fiber163.0 (= ${binary:Version})
 Description: cooperatively-scheduled micro-/userland-threads
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -495,14 +489,14 @@ Description: cooperatively-scheduled micro-/userland-threads
  between threads usually costs thousands of CPU cycles on x86,
  compared to a fiber switch with less than a hundred cycles. A fiber
  runs on a single thread at any point in time.
-Conflicts: libboost-fiber1.62-dev
+#Conflicts: scylla-libboost-fiber1.62-dev
 
-Package: libboost-filesystem1.63.0
+Package: scylla-libboost-filesystem163.0
 Homepage: http://boost.org/libs/filesystem/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: filesystem operations (portable paths, iteration over directories, etc) in C++
  This package forms part of the Boost C++ Libraries collection.
@@ -511,16 +505,16 @@ Description: filesystem operations (portable paths, iteration over directories, 
  manipulate paths, files, and directories.  The goal is to
  facilitate portable script-like operations from within C++ programs.
 
-Package: libboost-filesystem1.63-dev
+Package: scylla-libboost-filesystem163-dev
 Homepage: http://boost.org/libs/filesystem/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-filesystem1.63.0 (= ${binary:Version}),
- libboost-system1.63-dev (= ${binary:Version})
-Conflicts: libboost-filesystem1.42-dev, libboost-filesystem1.46-dev, libboost-filesystem1.48-dev, libboost-filesystem1.49-dev, libboost-filesystem1.50-dev, libboost-filesystem1.52-dev, libboost-filesystem1.53-dev, libboost-filesystem1.54-dev, libboost-filesystem1.55-dev, libboost-filesystem1.57-dev, libboost-filesystem1.58-dev, libboost-filesystem1.60-dev, libboost-filesystem1.61-dev, libboost-filesystem1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-filesystem163.0 (= ${binary:Version}),
+ scylla-libboost-system163-dev (= ${binary:Version})
+#Conflicts: scylla-libboost-filesystem1.42-dev, scylla-libboost-filesystem1.46-dev, scylla-libboost-filesystem1.48-dev, scylla-libboost-filesystem1.49-dev, scylla-libboost-filesystem1.50-dev, scylla-libboost-filesystem1.52-dev, scylla-libboost-filesystem1.53-dev, scylla-libboost-filesystem1.54-dev, scylla-libboost-filesystem1.55-dev, scylla-libboost-filesystem1.57-dev, scylla-libboost-filesystem1.58-dev, scylla-libboost-filesystem1.60-dev, scylla-libboost-filesystem1.61-dev, scylla-libboost-filesystem1.62-dev
 Description: filesystem operations (portable paths, iteration over directories, etc) in C++
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -528,12 +522,12 @@ Description: filesystem operations (portable paths, iteration over directories, 
  manipulate paths, files, and directories.  The goal is to
  facilitate portable script-like operations from within C++ programs.
 
-Package: libboost-graph1.63.0
+Package: scylla-libboost-graph163.0
 Homepage: http://www.boost.org/libs/graph/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Suggests: graphviz
 Description: generic graph components and algorithms in C++
@@ -545,17 +539,17 @@ Description: generic graph components and algorithms in C++
  standardized generic interface for traversing graphs is of utmost
  importance to encourage reuse of graph algorithms and data structures.
 
-Package: libboost-graph1.63-dev
+Package: scylla-libboost-graph163-dev
 Homepage: http://www.boost.org/libs/graph/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-graph1.63.0 (= ${binary:Version}),
- libboost-serialization1.63-dev (= ${binary:Version}),
- libboost-test1.63-dev (= ${binary:Version})
-Conflicts: libboost-graph1.42-dev, libboost-graph1.46-dev, libboost-graph1.48-dev, libboost-graph1.49-dev, libboost-graph1.50-dev, libboost-graph1.52-dev, libboost-graph1.53-dev, libboost-graph1.54-dev, libboost-graph1.55-dev, libboost-graph1.57-dev, libboost-graph1.58-dev, libboost-graph1.60-dev, libboost-graph1.61-dev, libboost-graph1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-graph163.0 (= ${binary:Version}),
+ scylla-libboost-serialization163-dev (= ${binary:Version}),
+ scylla-libboost-test163-dev (= ${binary:Version})
+#Conflicts: scylla-libboost-graph1.42-dev, scylla-libboost-graph1.46-dev, scylla-libboost-graph1.48-dev, scylla-libboost-graph1.49-dev, scylla-libboost-graph1.50-dev, scylla-libboost-graph1.52-dev, scylla-libboost-graph1.53-dev, scylla-libboost-graph1.54-dev, scylla-libboost-graph1.55-dev, scylla-libboost-graph1.57-dev, scylla-libboost-graph1.58-dev, scylla-libboost-graph1.60-dev, scylla-libboost-graph1.61-dev, scylla-libboost-graph1.62-dev
 Description: generic graph components and algorithms in C++
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -565,11 +559,11 @@ Description: generic graph components and algorithms in C++
  standardized generic interface for traversing graphs is of utmost
  importance to encourage reuse of graph algorithms and data structures.
 
-Package: libboost-graph-parallel1.63.0
+Package: scylla-libboost-graph-parallel163.0
 Homepage: http://www.boost.org/libs/graph_parallel/
 Architecture: any
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Suggests: graphviz
 Description: generic graph components and algorithms in C++
@@ -582,16 +576,16 @@ Description: generic graph components and algorithms in C++
  the same interfaces as the (sequential) BGL. Code written using the sequential
  BGL should be easy to parallelize with the parallel BGL.
 
-Package: libboost-graph-parallel1.63-dev
+Package: scylla-libboost-graph-parallel163-dev
 Homepage: http://www.boost.org/libs/graph_parallel/
 Architecture: any
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-graph-parallel1.63.0 (= ${binary:Version}),
- libboost-serialization1.63-dev (= ${binary:Version}),
- libboost-test1.63-dev (= ${binary:Version})
-Conflicts: libboost-graph-parallel1.42-dev, libboost-graph-parallel1.46-dev, libboost-graph-parallel1.48-dev, libboost-graph-parallel1.49-dev, libboost-graph-parallel1.50-dev, libboost-graph-parallel1.52-dev, libboost-graph-parallel1.53-dev, libboost-graph-parallel1.54-dev, libboost-graph-parallel1.55-dev, libboost-graph-parallel1.57-dev, libboost-graph-parallel1.58-dev, libboost-graph-parallel1.60-dev, libboost-graph-parallel1.61-dev, libboost-graph-parallel1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-graph-parallel163.0 (= ${binary:Version}),
+ scylla-libboost-serialization163-dev (= ${binary:Version}),
+ scylla-libboost-test163-dev (= ${binary:Version})
+#Conflicts: scylla-libboost-graph-parallel1.42-dev, scylla-libboost-graph-parallel1.46-dev, scylla-libboost-graph-parallel1.48-dev, scylla-libboost-graph-parallel1.49-dev, scylla-libboost-graph-parallel1.50-dev, scylla-libboost-graph-parallel1.52-dev, scylla-libboost-graph-parallel1.53-dev, scylla-libboost-graph-parallel1.54-dev, scylla-libboost-graph-parallel1.55-dev, scylla-libboost-graph-parallel1.57-dev, scylla-libboost-graph-parallel1.58-dev, scylla-libboost-graph-parallel1.60-dev, scylla-libboost-graph-parallel1.61-dev, scylla-libboost-graph-parallel1.62-dev
 Description: generic graph components and algorithms in C++
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -602,12 +596,12 @@ Description: generic graph components and algorithms in C++
  the same interfaces as the (sequential) BGL. Code written using the sequential
  BGL should be easy to parallelize with the parallel BGL.
 
-Package: libboost-iostreams1.63.0
+Package: scylla-libboost-iostreams163.0
 Homepage: http://www.boost.org/libs/iostreams/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: Boost.Iostreams Library
  This package forms part of the Boost C++ Libraries collection.
@@ -616,16 +610,16 @@ Description: Boost.Iostreams Library
  which turn models of these concepts into C++ standard library streams
  and stream buffers.
 
-Package: libboost-iostreams1.63-dev
+Package: scylla-libboost-iostreams163-dev
 Homepage: http://www.boost.org/libs/iostreams/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-regex1.63-dev (= ${binary:Version}),
- libboost-iostreams1.63.0 (= ${binary:Version})
-Conflicts: libboost-iostreams1.42-dev, libboost-iostreams1.46-dev, libboost-iostreams1.48-dev, libboost-iostreams1.49-dev, libboost-iostreams1.50-dev, libboost-iostreams1.52-dev, libboost-iostreams1.53-dev, libboost-iostreams1.54-dev, libboost-iostreams1.55-dev, libboost-iostreams1.57-dev, libboost-iostreams1.58-dev, libboost-iostreams1.60-dev, libboost-iostreams1.61-dev, libboost-iostreams1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-regex163-dev (= ${binary:Version}),
+ scylla-libboost-iostreams163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-iostreams1.42-dev, scylla-libboost-iostreams1.46-dev, scylla-libboost-iostreams1.48-dev, scylla-libboost-iostreams1.49-dev, scylla-libboost-iostreams1.50-dev, scylla-libboost-iostreams1.52-dev, scylla-libboost-iostreams1.53-dev, scylla-libboost-iostreams1.54-dev, scylla-libboost-iostreams1.55-dev, scylla-libboost-iostreams1.57-dev, scylla-libboost-iostreams1.58-dev, scylla-libboost-iostreams1.60-dev, scylla-libboost-iostreams1.61-dev, scylla-libboost-iostreams1.62-dev
 Description: Boost.Iostreams Library development files
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -633,12 +627,12 @@ Description: Boost.Iostreams Library development files
  which turn models of these concepts into C++ standard library streams
  and stream buffers.
 
-Package: libboost-locale1.63.0
+Package: scylla-libboost-locale163.0
 Homepage: http://www.boost.org/libs/locale/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: C++ facilities for localization
  This package forms part of the Boost C++ Libraries collection.
@@ -663,15 +657,15 @@ Description: C++ facilities for localization
   * Support for char and wchar_t
   * Experimental support for C++0x char16_t and char32_t strings and streams.
 
-Package: libboost-locale1.63-dev
+Package: scylla-libboost-locale163-dev
 Homepage: http://www.boost.org/libs/math/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-locale1.63.0 (= ${binary:Version})
-Conflicts: libboost-locale1.48-dev, libboost-locale1.49-dev, libboost-locale1.50-dev, libboost-locale1.52-dev, libboost-locale1.53-dev, libboost-locale1.54-dev, libboost-locale1.55-dev, libboost-locale1.57-dev, libboost-locale1.58-dev, libboost-locale1.60-dev, libboost-locale1.61-dev, libboost-locale1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-locale163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-locale1.48-dev, scylla-libboost-locale1.49-dev, scylla-libboost-locale1.50-dev, scylla-libboost-locale1.52-dev, scylla-libboost-locale1.53-dev, scylla-libboost-locale1.54-dev, scylla-libboost-locale1.55-dev, scylla-libboost-locale1.57-dev, scylla-libboost-locale1.58-dev, scylla-libboost-locale1.60-dev, scylla-libboost-locale1.61-dev, scylla-libboost-locale1.62-dev
 Description: C++ facilities for localization
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -695,11 +689,11 @@ Description: C++ facilities for localization
   * Support for char and wchar_t
   * Experimental support for C++0x char16_t and char32_t strings and streams.
 
-Package: libboost-log1.63.0
+Package: scylla-libboost-log163.0
 Homepage: http://www.boost.org/libs/log/
 Architecture: any
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Description: C++ logging library
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -715,17 +709,17 @@ Description: C++ logging library
   * Performance. The library should have as little performance impact on
  the user's application as possible.
 
-Package: libboost-log1.63-dev
+Package: scylla-libboost-log163-dev
 Homepage: http://www.boost.org/libs/log/
 Architecture: any
 Section: libdevel
 Depends: ${misc:Depends},
- libboost-log1.63.0 (= ${binary:Version}),
- libboost1.63-dev (= ${binary:Version}),
- libboost-filesystem1.63-dev (= ${binary:Version}),
- libboost-system1.63-dev (= ${binary:Version}),
- libboost-date-time1.63-dev (= ${binary:Version}),
- libboost-thread1.63-dev (= ${binary:Version})
+ scylla-libboost-log163.0 (= ${binary:Version}),
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-filesystem163-dev (= ${binary:Version}),
+ scylla-libboost-system163-dev (= ${binary:Version}),
+ scylla-libboost-date-time163-dev (= ${binary:Version}),
+ scylla-libboost-thread163-dev (= ${binary:Version})
 Description: C++ logging library
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -740,14 +734,14 @@ Description: C++ logging library
  library for collecting and storing information into logs.
   * Performance. The library should have as little performance impact on
  the user's application as possible.
-Conflicts: libboost-log1.54-dev, libboost-log1.55-dev, libboost-log1.57-dev, libboost-log1.58-dev, libboost-log1.60-dev, libboost-log1.61-dev, libboost-log1.62-dev
+#Conflicts: scylla-libboost-log1.54-dev, scylla-libboost-log1.55-dev, scylla-libboost-log1.57-dev, scylla-libboost-log1.58-dev, scylla-libboost-log1.60-dev, scylla-libboost-log1.61-dev, scylla-libboost-log1.62-dev
 
-Package: libboost-math1.63.0
+Package: scylla-libboost-math163.0
 Homepage: http://www.boost.org/libs/math/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: Boost.Math Library
  This package forms part of the Boost C++ Libraries collection.
@@ -763,15 +757,15 @@ Description: Boost.Math Library
   * Implementation Toolkit: Provides many of the tools required to implement 
     mathematical special functions.
 
-Package: libboost-math1.63-dev
+Package: scylla-libboost-math163-dev
 Homepage: http://www.boost.org/libs/math/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-math1.63.0 (= ${binary:Version})
-Conflicts: libboost-math1.42-dev, libboost-math1.46-dev, libboost-math1.48-dev, libboost-math1.49-dev, libboost-math1.50-dev, libboost-math1.52-dev, libboost-math1.53-dev, libboost-math1.54-dev, libboost-math1.55-dev, libboost-math1.57-dev, libboost-math1.58-dev, libboost-math1.60-dev, libboost-math1.61-dev, libboost-math1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-math163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-math1.42-dev, scylla-libboost-math1.46-dev, scylla-libboost-math1.48-dev, scylla-libboost-math1.49-dev, scylla-libboost-math1.50-dev, scylla-libboost-math1.52-dev, scylla-libboost-math1.53-dev, scylla-libboost-math1.54-dev, scylla-libboost-math1.55-dev, scylla-libboost-math1.57-dev, scylla-libboost-math1.58-dev, scylla-libboost-math1.60-dev, scylla-libboost-math1.61-dev, scylla-libboost-math1.62-dev
 Description: Boost.Math Library development files
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -786,11 +780,11 @@ Description: Boost.Math Library development files
   * Implementation Toolkit: Provides many of the tools required to implement 
     mathematical special functions.
 
-Package: libboost-mpi1.63.0
+Package: scylla-libboost-mpi163.0
 Homepage: http://www.boost.org/doc/html/mpi.html
 Architecture: any
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: C++ interface to the Message Passing Interface (MPI)
  This package forms part of the Boost C++ Libraries collection.
@@ -801,17 +795,17 @@ Description: C++ interface to the Message Passing Interface (MPI)
  objects for collective algorithms, and the use of modern C++ library
  techniques to maintain maximal efficiency.
 
-Package: libboost-mpi1.63-dev
+Package: scylla-libboost-mpi163-dev
 Homepage: http://www.boost.org/doc/html/mpi.html
 Architecture: any
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-serialization1.63-dev (= ${binary:Version}),
- libboost-mpi1.63.0 (= ${binary:Version}),
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-serialization163-dev (= ${binary:Version}),
+ scylla-libboost-mpi163.0 (= ${binary:Version}),
  mpi-default-dev
-Suggests: libboost-graph1.63-dev
-Conflicts: libboost-mpi1.42-dev, libboost-mpi1.46-dev, libboost-mpi1.48-dev, libboost-mpi1.49-dev, libboost-mpi1.50-dev, libboost-mpi1.52-dev, libboost-mpi1.53-dev, libboost-mpi1.54-dev, libboost-mpi1.55-dev, libboost-mpi1.57-dev, libboost-mpi1.58-dev, libboost-mpi1.60-dev, libboost-mpi1.61-dev, libboost-mpi1.62-dev
+Suggests: scylla-libboost-graph163-dev
+#Conflicts: scylla-libboost-mpi1.42-dev, scylla-libboost-mpi1.46-dev, scylla-libboost-mpi1.48-dev, scylla-libboost-mpi1.49-dev, scylla-libboost-mpi1.50-dev, scylla-libboost-mpi1.52-dev, scylla-libboost-mpi1.53-dev, scylla-libboost-mpi1.54-dev, scylla-libboost-mpi1.55-dev, scylla-libboost-mpi1.57-dev, scylla-libboost-mpi1.58-dev, scylla-libboost-mpi1.60-dev, scylla-libboost-mpi1.61-dev, scylla-libboost-mpi1.62-dev
 Description: C++ interface to the Message Passing Interface (MPI)
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -821,56 +815,12 @@ Description: C++ interface to the Message Passing Interface (MPI)
  objects for collective algorithms, and the use of modern C++ library
  techniques to maintain maximal efficiency.
 
-Package: libboost-mpi-python1.63.0
-Homepage: http://www.boost.org/doc/html/mpi/python.html
-Architecture: any
-Section: python
-Depends: ${misc:Depends}, ${shlibs:Depends}, ${python:Depends}, ${python3:Depends}, mpi-default-bin
-Pre-Depends: ${misc:Pre-Depends}
-Suggests: python, python3
-Breaks: ${python:Breaks}
-Conflicts: libboost-mpi-python1.40.0,
- libboost-mpi-python1.41.0,
- libboost-mpi-python1.42.0,
- libboost-mpi-python1.46.0, libboost-mpi-python1.46.1, libboost-mpi-python1.48.0, libboost-mpi-python1.49.0, libboost-mpi-python1.50.0, libboost-mpi-python1.52.0, libboost-mpi-python1.53.0, libboost-mpi-python1.54.0, libboost-mpi-python1.55.0, libboost-mpi-python1.57.0, libboost-mpi-python1.58.0, libboost-mpi-python1.60.0, libboost-mpi-python1.61.0, libboost-mpi-python1.62.0
-Description: C++ interface to the Message Passing Interface (MPI), Python Bindings
- This package forms part of the Boost C++ Libraries collection.
- .
- The Boost.MPI library provides a C++ interface to MPI that
- supports modern C++ development styles, including complete support for
- user-defined data types and C++ Standard Library types, arbitrary function
- objects for collective algorithms, and the use of modern C++ library
- techniques to maintain maximal efficiency.
- .
- This package provides Python Bindings to the C++ interface.
- .
- One of the python interpreter packages is required to use the bindings.
-
-Package: libboost-mpi-python1.63-dev
-Homepage: http://www.boost.org/doc/html/mpi/python.html
-Architecture: any
-Section: libdevel
-Depends: ${misc:Depends},
- libboost-mpi1.63-dev (= ${binary:Version}),
- libboost-mpi-python1.63.0 (= ${binary:Version})
-Conflicts: libboost-mpi-python1.42-dev, libboost-mpi-python1.46-dev, libboost-mpi-python1.48-dev, libboost-mpi-python1.49-dev, libboost-mpi-python1.50-dev, libboost-mpi-python1.52-dev, libboost-mpi-python1.53-dev, libboost-mpi-python1.54-dev, libboost-mpi-python1.55-dev, libboost-mpi-python1.57-dev, libboost-mpi-python1.58-dev, libboost-mpi-python1.60-dev, libboost-mpi-python1.61-dev, libboost-mpi-python1.62-dev
-Description: C++ interface to the Message Passing Interface (MPI), Python Bindings
- This package forms part of the Boost C++ Libraries collection.
- .
- The Boost.MPI library provides a C++ interface to MPI that
- supports modern C++ development styles, including complete support for
- user-defined data types and C++ Standard Library types, arbitrary function
- objects for collective algorithms, and the use of modern C++ library
- techniques to maintain maximal efficiency.
- .
- This package provides Python Bindings to the C++ interface.
-
-Package: libboost-program-options1.63.0
+Package: scylla-libboost-program-options163.0
 Homepage: http://www.boost.org/libs/program_options/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: program options library for C++
  This package forms part of the Boost C++ Libraries collection.
@@ -879,15 +829,15 @@ Description: program options library for C++
  (name, value) pairs from the user, via conventional methods such as
  command line and config file.
 
-Package: libboost-program-options1.63-dev
+Package: scylla-libboost-program-options163-dev
 Homepage: http://www.boost.org/libs/program_options/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-program-options1.63.0 (= ${binary:Version})
-Conflicts: libboost-program-options1.42-dev, libboost-program-options1.46-dev, libboost-program-options1.48-dev, libboost-program-options1.49-dev, libboost-program-options1.50-dev, libboost-program-options1.52-dev, libboost-program-options1.53-dev, libboost-program-options1.54-dev, libboost-program-options1.55-dev, libboost-program-options1.57-dev, libboost-program-options1.58-dev, libboost-program-options1.60-dev, libboost-program-options1.61-dev, libboost-program-options1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-program-options163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-program-options1.42-dev, scylla-libboost-program-options1.46-dev, scylla-libboost-program-options1.48-dev, scylla-libboost-program-options1.49-dev, scylla-libboost-program-options1.50-dev, scylla-libboost-program-options1.52-dev, scylla-libboost-program-options1.53-dev, scylla-libboost-program-options1.54-dev, scylla-libboost-program-options1.55-dev, scylla-libboost-program-options1.57-dev, scylla-libboost-program-options1.58-dev, scylla-libboost-program-options1.60-dev, scylla-libboost-program-options1.61-dev, scylla-libboost-program-options1.62-dev
 Description: program options library for C++
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -895,66 +845,13 @@ Description: program options library for C++
  (name, value) pairs from the user, via conventional methods such as
  command line and config file.
 
-Package: libboost-python1.63.0
-Homepage: http://www.boost.org/libs/python/
-Architecture: any
-Section: python
-Depends: ${misc:Depends}, ${shlibs:Depends}, ${python:Depends}
-Pre-Depends: ${misc:Pre-Depends}
-Suggests: python, python3
-Breaks: ${python:Breaks}
-Description: Boost.Python Library
- This package forms part of the Boost C++ Libraries collection.
- .
- The Boost Python Library is used to quickly and easily export a C++
- library to Python such that the Python interface is very similar to
- the C++ interface. It is designed to be minimally intrusive on your
- C++ design. In most cases, you should not have to alter your C++
- classes in any way in order to use them with Boost.Python.  The
- system should simply "reflect" your C++ classes and functions into
- Python. The major features of Boost.Python include support for:
- Subclassing extension types in Python, Overriding virtual functions
- in Python, Member function Overloading, Automatic wrapping of
- numeric operators among others.
- .
- One of the python interpreter packages is required to use the
- created extensions.
 
-Package: libboost-python1.63-dev
-Homepage: http://www.boost.org/libs/python/
-Architecture: any
-Section: libdevel
-Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-python1.63.0 (= ${binary:Version}),
- python-dev, ${python:Depends},
- python3-dev, ${python3:Depends},
-Suggests: libboost1.63-doc, gccxml
-Conflicts: libboost-python1.42-dev, libboost-python1.46-dev, libboost-python1.48-dev, libboost-python1.49-dev, libboost-python1.50-dev, libboost-python1.52-dev, libboost-python1.53-dev, libboost-python1.54-dev, libboost-python1.55-dev, libboost-python1.57-dev, libboost-python1.58-dev, libboost-python1.60-dev, libboost-python1.61-dev, libboost-python1.62-dev
-Description: Boost.Python Library development files
- This package forms part of the Boost C++ Libraries collection.
- .
- The Boost Python Library is used to quickly and easily export a C++
- library to Python such that the Python interface is very similar to
- the C++ interface. It is designed to be minimally intrusive on your
- C++ design. In most cases, you should not have to alter your C++
- classes in any way in order to use them with Boost.Python.  The
- system should simply "reflect" your C++ classes and functions into
- Python. The major features of Boost.Python include support for:
- Subclassing extension types in Python, Overriding virtual functions
- in Python, Member function Overloading, Automatic wrapping of
- numeric operators among others.
- .
- This package allows development of a Python interface for all current
- versions of Python in Debian.  Code using this library will need also
- one of the Python development packages.
-
-Package: libboost-random1.63.0
+Package: scylla-libboost-random163.0
 Homepage: http://www.boost.org/libs/random/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: Boost Random Number Library
  This package forms part of the Boost C++ Libraries collection.
@@ -963,15 +860,15 @@ Description: Boost Random Number Library
  variety of generators and distributions to produce random numbers
  having useful properties, such as uniform distribution.
 
-Package: libboost-random1.63-dev
+Package: scylla-libboost-random163-dev
 Homepage: http://www.boost.org/libs/random/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-random1.63.0 (= ${binary:Version})
-Conflicts: libboost-random1.42-dev, libboost-random1.46-dev, libboost-random1.48-dev, libboost-random1.49-dev, libboost-random1.50-dev, libboost-random1.52-dev, libboost-random1.53-dev, libboost-random1.54-dev, libboost-random1.55-dev, libboost-random1.57-dev, libboost-random1.58-dev, libboost-random1.60-dev, libboost-random1.61-dev, libboost-random1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-random163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-random1.42-dev, scylla-libboost-random1.46-dev, scylla-libboost-random1.48-dev, scylla-libboost-random1.49-dev, scylla-libboost-random1.50-dev, scylla-libboost-random1.52-dev, scylla-libboost-random1.53-dev, scylla-libboost-random1.54-dev, scylla-libboost-random1.55-dev, scylla-libboost-random1.57-dev, scylla-libboost-random1.58-dev, scylla-libboost-random1.60-dev, scylla-libboost-random1.61-dev, scylla-libboost-random1.62-dev
 Description: Boost Random Number Library
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -979,12 +876,12 @@ Description: Boost Random Number Library
  variety of generators and distributions to produce random numbers
  having useful properties, such as uniform distribution.
 
-Package: libboost-regex1.63.0
+Package: scylla-libboost-regex163.0
 Homepage: http://www.boost.org/libs/regex/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: regular expression library for C++
  This package forms part of the Boost C++ Libraries collection.
@@ -1000,16 +897,16 @@ Description: regular expression library for C++
  manner analogous to either sed or perl), something that traditional C
  libraries can not do.
 
-Package: libboost-regex1.63-dev
+Package: scylla-libboost-regex163-dev
 Homepage: http://www.boost.org/libs/regex/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-regex1.63.0 (= ${binary:Version}),
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-regex163.0 (= ${binary:Version}),
  libicu-dev
-Conflicts: libboost-regex1.42-dev, libboost-regex1.46-dev, libboost-regex1.48-dev, libboost-regex1.49-dev, libboost-regex1.50-dev, libboost-regex1.52-dev, libboost-regex1.53-dev, libboost-regex1.54-dev, libboost-regex1.55-dev, libboost-regex1.57-dev, libboost-regex1.58-dev, libboost-regex1.60-dev, libboost-regex1.61-dev, libboost-regex1.62-dev
+#Conflicts: scylla-libboost-regex1.42-dev, scylla-libboost-regex1.46-dev, scylla-libboost-regex1.48-dev, scylla-libboost-regex1.49-dev, scylla-libboost-regex1.50-dev, scylla-libboost-regex1.52-dev, scylla-libboost-regex1.53-dev, scylla-libboost-regex1.54-dev, scylla-libboost-regex1.55-dev, scylla-libboost-regex1.57-dev, scylla-libboost-regex1.58-dev, scylla-libboost-regex1.60-dev, scylla-libboost-regex1.61-dev, scylla-libboost-regex1.62-dev
 Description: regular expression library for C++
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -1024,12 +921,12 @@ Description: regular expression library for C++
  manner analogous to either sed or perl), something that traditional C
  libraries can not do.
 
-Package: libboost-serialization1.63.0
+Package: scylla-libboost-serialization163.0
 Homepage: http://www.boost.org/libs/serialization/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: serialization library for C++
  This package forms part of the Boost C++ Libraries collection,
@@ -1046,15 +943,15 @@ Description: serialization library for C++
  arbitrary set of C++ data structures to a sequence of bytes.
  archive: to refer to a specific rendering of this stream of bytes.
 
-Package: libboost-serialization1.63-dev
+Package: scylla-libboost-serialization163-dev
 Homepage: http://www.boost.org/libs/serialization/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-serialization1.63.0 (= ${binary:Version})
-Conflicts: libboost-serialization1.42-dev, libboost-serialization1.46-dev, libboost-serialization1.48-dev, libboost-serialization1.49-dev, libboost-serialization1.50-dev, libboost-serialization1.52-dev, libboost-serialization1.53-dev, libboost-serialization1.54-dev, libboost-serialization1.55-dev, libboost-serialization1.57-dev, libboost-serialization1.58-dev, libboost-serialization1.60-dev, libboost-serialization1.61-dev, libboost-serialization1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-serialization163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-serialization1.42-dev, scylla-libboost-serialization1.46-dev, scylla-libboost-serialization1.48-dev, scylla-libboost-serialization1.49-dev, scylla-libboost-serialization1.50-dev, scylla-libboost-serialization1.52-dev, scylla-libboost-serialization1.53-dev, scylla-libboost-serialization1.54-dev, scylla-libboost-serialization1.55-dev, scylla-libboost-serialization1.57-dev, scylla-libboost-serialization1.58-dev, scylla-libboost-serialization1.60-dev, scylla-libboost-serialization1.61-dev, scylla-libboost-serialization1.62-dev
 Description: serialization library for C++
  This package forms part of the Boost C++ Libraries collection,
  containing the following functionalities:
@@ -1070,12 +967,12 @@ Description: serialization library for C++
  arbitrary set of C++ data structures to a sequence of bytes.
  archive: to refer to a specific rendering of this stream of bytes.
 
-Package: libboost-signals1.63.0
+Package: scylla-libboost-signals163.0
 Homepage: http://www.boost.org/libs/signals/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: managed signals and slots library for C++
  This package forms part of the Boost C++ Libraries collection.
@@ -1086,15 +983,15 @@ Description: managed signals and slots library for C++
  targets or subscribers), which are called when the signal is
  "emitted."
 
-Package: libboost-signals1.63-dev
+Package: scylla-libboost-signals163-dev
 Homepage: http://www.boost.org/libs/signals/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-signals1.63.0 (= ${binary:Version})
-Conflicts: libboost-signals1.42-dev, libboost-signals1.46-dev, libboost-signals1.48-dev, libboost-signals1.49-dev, libboost-signals1.50-dev, libboost-signals1.52-dev, libboost-signals1.53-dev, libboost-signals1.54-dev, libboost-signals1.55-dev, libboost-signals1.57-dev, libboost-signals1.58-dev, libboost-signals1.60-dev, libboost-signals1.61-dev, libboost-signals1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-signals163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-signals1.42-dev, scylla-libboost-signals1.46-dev, scylla-libboost-signals1.48-dev, scylla-libboost-signals1.49-dev, scylla-libboost-signals1.50-dev, scylla-libboost-signals1.52-dev, scylla-libboost-signals1.53-dev, scylla-libboost-signals1.54-dev, scylla-libboost-signals1.55-dev, scylla-libboost-signals1.57-dev, scylla-libboost-signals1.58-dev, scylla-libboost-signals1.60-dev, scylla-libboost-signals1.61-dev, scylla-libboost-signals1.62-dev
 Description: managed signals and slots library for C++
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -1104,12 +1001,12 @@ Description: managed signals and slots library for C++
  targets or subscribers), which are called when the signal is
  "emitted."
 
-Package: libboost-system1.63.0
+Package: scylla-libboost-system163.0
 Homepage: http://www.boost.org/libs/system/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: Operating system (e.g. diagnostics support) library
  This package forms part of the Boost C++ Libraries collection.
@@ -1122,15 +1019,15 @@ Description: Operating system (e.g. diagnostics support) library
  user-defined sources, each error_code and error_condition has an
  associated error_category.
 
-Package: libboost-system1.63-dev
+Package: scylla-libboost-system163-dev
 Homepage: http://www.boost.org/libs/system/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-system1.63.0 (= ${binary:Version})
-Conflicts: libboost-system1.42-dev, libboost-system1.46-dev, libboost-system1.48-dev, libboost-system1.49-dev, libboost-system1.50-dev, libboost-system1.52-dev, libboost-system1.53-dev, libboost-system1.54-dev, libboost-system1.55-dev, libboost-system1.57-dev, libboost-system1.58-dev, libboost-system1.60-dev, libboost-system1.61-dev, libboost-system1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-system163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-system1.42-dev, scylla-libboost-system1.46-dev, scylla-libboost-system1.48-dev, scylla-libboost-system1.49-dev, scylla-libboost-system1.50-dev, scylla-libboost-system1.52-dev, scylla-libboost-system1.53-dev, scylla-libboost-system1.54-dev, scylla-libboost-system1.55-dev, scylla-libboost-system1.57-dev, scylla-libboost-system1.58-dev, scylla-libboost-system1.60-dev, scylla-libboost-system1.61-dev, scylla-libboost-system1.62-dev
 Description: Operating system (e.g. diagnostics support) library
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -1142,12 +1039,12 @@ Description: Operating system (e.g. diagnostics support) library
  user-defined sources, each error_code and error_condition has an
  associated error_category.
 
-Package: libboost-test1.63.0
+Package: scylla-libboost-test163.0
 Homepage: http://www.boost.org/libs/test/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: components for writing and executing test suites
  This package forms part of the Boost C++ Libraries collection.  The
@@ -1157,15 +1054,15 @@ Description: components for writing and executing test suites
   * Facilities to monitor program execution and produce error reports.
   * Unit test framework to simplify writing test cases.
 
-Package: libboost-test1.63-dev
+Package: scylla-libboost-test163-dev
 Homepage: http://www.boost.org/libs/test/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-test1.63.0 (= ${binary:Version})
-Conflicts: libboost-test1.42-dev, libboost-test1.46-dev, libboost-test1.48-dev, libboost-test1.49-dev, libboost-test1.50-dev, libboost-test1.52-dev, libboost-test1.53-dev, libboost-test1.54-dev, libboost-test1.55-dev, libboost-test1.57-dev, libboost-test1.58-dev, libboost-test1.60-dev, libboost-test1.61-dev, libboost-test1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-test163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-test1.42-dev, scylla-libboost-test1.46-dev, scylla-libboost-test1.48-dev, scylla-libboost-test1.49-dev, scylla-libboost-test1.50-dev, scylla-libboost-test1.52-dev, scylla-libboost-test1.53-dev, scylla-libboost-test1.54-dev, scylla-libboost-test1.55-dev, scylla-libboost-test1.57-dev, scylla-libboost-test1.58-dev, scylla-libboost-test1.60-dev, scylla-libboost-test1.61-dev, scylla-libboost-test1.62-dev
 Description: components for writing and executing test suites
  This package forms part of the Boost C++ Libraries collection.  The
  library contains several components.
@@ -1174,12 +1071,12 @@ Description: components for writing and executing test suites
   * Facilities to monitor program execution and produce error reports.
   * Unit test framework to simplify writing test cases.
 
-Package: libboost-thread1.63.0
+Package: scylla-libboost-thread163.0
 Homepage: http://www.boost.org/libs/thread/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: portable C++ multi-threading
  This package forms part of the Boost C++ Libraries collection.
@@ -1189,19 +1086,19 @@ Description: portable C++ multi-threading
  own machine state including program instruction counter and
  registers.
 
-Package: libboost-thread1.63-dev
+Package: scylla-libboost-thread163-dev
 Homepage: http://www.boost.org/libs/thread/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-atomic1.63-dev (= ${binary:Version}),
- libboost-chrono1.63-dev (= ${binary:Version}),
- libboost-date-time1.63-dev (= ${binary:Version}),
- libboost-system1.63-dev (= ${binary:Version}),
- libboost-thread1.63.0 (= ${binary:Version})
-Conflicts: libboost-thread1.42-dev, libboost-thread1.46-dev, libboost-thread1.48-dev, libboost-thread1.49-dev, libboost-thread1.50-dev, libboost-thread1.52-dev, libboost-thread1.53-dev, libboost-thread1.54-dev, libboost-thread1.55-dev, libboost-thread1.57-dev, libboost-thread1.58-dev, libboost-thread1.60-dev, libboost-thread1.61-dev, libboost-thread1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-atomic163-dev (= ${binary:Version}),
+ scylla-libboost-chrono163-dev (= ${binary:Version}),
+ scylla-libboost-date-time163-dev (= ${binary:Version}),
+ scylla-libboost-system163-dev (= ${binary:Version}),
+ scylla-libboost-thread163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-thread1.42-dev, scylla-libboost-thread1.46-dev, scylla-libboost-thread1.48-dev, scylla-libboost-thread1.49-dev, scylla-libboost-thread1.50-dev, scylla-libboost-thread1.52-dev, scylla-libboost-thread1.53-dev, scylla-libboost-thread1.54-dev, scylla-libboost-thread1.55-dev, scylla-libboost-thread1.57-dev, scylla-libboost-thread1.58-dev, scylla-libboost-thread1.60-dev, scylla-libboost-thread1.61-dev, scylla-libboost-thread1.62-dev
 Description: portable C++ multi-threading
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -1210,12 +1107,12 @@ Description: portable C++ multi-threading
  own machine state including program instruction counter and
  registers.
 
-Package: libboost-timer1.63.0
+Package: scylla-libboost-timer163.0
 Homepage: http://www.boost.org/libs/timer/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: C++ wall clock and CPU process timers
  This package forms part of the Boost C++ Libraries collection.
@@ -1229,15 +1126,15 @@ Description: C++ wall clock and CPU process timers
  cpu_timer that automatically reports the elapsed times when an
  auto_cpu_timer object is destroyed.
 
-Package: libboost-timer1.63-dev
+Package: scylla-libboost-timer163-dev
 Homepage: http://www.boost.org/libs/timer/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-timer1.63.0 (= ${binary:Version})
-Conflicts: libboost-timer1.42-dev, libboost-timer1.46-dev, libboost-timer1.48-dev, libboost-timer1.49-dev, libboost-timer1.50-dev, libboost-timer1.52-dev, libboost-timer1.53-dev, libboost-timer1.54-dev, libboost-timer1.55-dev, libboost-timer1.57-dev, libboost-timer1.58-dev, libboost-timer1.60-dev, libboost-timer1.61-dev, libboost-timer1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-timer163.0 (= ${binary:Version})
+#Conflicts: scylla-libboost-timer1.42-dev, scylla-libboost-timer1.46-dev, scylla-libboost-timer1.48-dev, scylla-libboost-timer1.49-dev, scylla-libboost-timer1.50-dev, scylla-libboost-timer1.52-dev, scylla-libboost-timer1.53-dev, scylla-libboost-timer1.54-dev, scylla-libboost-timer1.55-dev, scylla-libboost-timer1.57-dev, scylla-libboost-timer1.58-dev, scylla-libboost-timer1.60-dev, scylla-libboost-timer1.61-dev, scylla-libboost-timer1.62-dev
 Description: C++ wall clock and CPU process timers
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -1250,12 +1147,12 @@ Description: C++ wall clock and CPU process timers
  cpu_timer that automatically reports the elapsed times when an
  auto_cpu_timer object is destroyed.
 
-Package: libboost-type-erasure1.63.0
+Package: scylla-libboost-type-erasure163.0
 Homepage: http://www.boost.org/doc/libs/1_60_0/doc/html/boost_typeerasure.html
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: C++ runtime polymorphism based on concepts
  This package forms part of the Boost C++ Libraries collection.
@@ -1265,14 +1162,14 @@ Description: C++ runtime polymorphism based on concepts
  library combines the superior abstraction capabilities of templates, with the
  runtime flexibility of virtual functions.
 
-Package: libboost-type-erasure1.63-dev
+Package: scylla-libboost-type-erasure163-dev
 Homepage: http://www.boost.org/doc/libs/1_60_0/doc/html/boost_typeerasure.html
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-type-erasure1.63.0 (= ${binary:Version})
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-type-erasure163.0 (= ${binary:Version})
 Description: C++ runtime polymorphism based on concepts
  This package forms part of the Boost C++ Libraries collection.
  .
@@ -1280,14 +1177,14 @@ Description: C++ runtime polymorphism based on concepts
  each of which has its own advantages and disadvantages.  The Boost.TypeErasure
  library combines the superior abstraction capabilities of templates, with the
  runtime flexibility of virtual functions.
-Conflicts: libboost-type-erasure1.60-dev, libboost-type-erasure1.61-dev, libboost-type-erasure1.62-dev
+#Conflicts: scylla-libboost-type-erasure1.60-dev, scylla-libboost-type-erasure1.61-dev, scylla-libboost-type-erasure1.62-dev
 
-Package: libboost-wave1.63.0
+Package: scylla-libboost-wave163.0
 Homepage: http://www.boost.org/libs/wave/
 Architecture: any
 Multi-Arch: same
 Section: libs
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, scylla-env
 Pre-Depends: ${misc:Pre-Depends}
 Description: C99/C++ preprocessor library
  This package forms part of the Boost C++ Libraries collection.
@@ -1297,17 +1194,17 @@ Description: C99/C++ preprocessor library
  packed behind a simple to use interface, which integrates well with
  the well known idioms of the Standard Template Library (STL).
 
-Package: libboost-wave1.63-dev
+Package: scylla-libboost-wave163-dev
 Homepage: http://www.boost.org/libs/wave/
 Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${misc:Depends},
- libboost1.63-dev (= ${binary:Version}),
- libboost-serialization1.63-dev (= ${binary:Version}),
- libboost-wave1.63.0 (= ${binary:Version}),
- libboost-filesystem1.63-dev (= ${binary:Version})
-Conflicts: libboost-wave1.42-dev, libboost-wave1.46-dev, libboost-wave1.48-dev, libboost-wave1.49-dev, libboost-wave1.50-dev, libboost-wave1.52-dev, libboost-wave1.53-dev, libboost-wave1.54-dev, libboost-wave1.55-dev, libboost-wave1.57-dev, libboost-wave1.58-dev, libboost-wave1.60-dev, libboolibboost1.6-dev, libboost-wave1.62-dev
+ scylla-libboost163-dev (= ${binary:Version}),
+ scylla-libboost-serialization163-dev (= ${binary:Version}),
+ scylla-libboost-wave163.0 (= ${binary:Version}),
+ scylla-libboost-filesystem163-dev (= ${binary:Version})
+#Conflicts: scylla-libboost-wave1.42-dev, scylla-libboost-wave1.46-dev, scylla-libboost-wave1.48-dev, scylla-libboost-wave1.49-dev, scylla-libboost-wave1.50-dev, scylla-libboost-wave1.52-dev, scylla-libboost-wave1.53-dev, scylla-libboost-wave1.54-dev, scylla-libboost-wave1.55-dev, scylla-libboost-wave1.57-dev, scylla-libboost-wave1.58-dev, scylla-libboost-wave1.60-dev, libbooscylla-libboost1.6-dev, scylla-libboost-wave1.62-dev
 Description: C99/C++ preprocessor library
  This package forms part of the Boost C++ Libraries collection.
  .

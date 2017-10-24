@@ -1,3 +1,9 @@
+scylla-boost163 (1.63.0+dfsg-1ubuntu4~xenialppa3) xenial; urgency=medium
+
+  * generate ppa package for xenial.
+
+ -- Takuya ASADA <syuu@scylladb.com>  Fri, 13 Oct 2017 08:37:05 +0900
+
 boost1.63 (1.63.0+dfsg-1ubuntu3) artful; urgency=medium
 
   * No-change rebuild to build with python3.6.
