@@ -1,3 +1,9 @@
+scylla-env (1.2-ubuntu1) trusty; urgency=medium
+
+  * Add /opt/scylladb/lib/x86_64-linux-gnu to library path.
+
+ -- syuu <syuu@scylladb.com>  Mon, 16 Oct 2017 17:32:25 +0900
+
 scylla-env (1.1-ubuntu1) trusty; urgency=medium
 
   * Fixed /opt/scylladb library path.
