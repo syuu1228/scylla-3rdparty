@@ -1,0 +1,11 @@
+--- boost1.63-1.63.0+dfsg.orig/tools/build/src/engine/debian/rules
++++ boost1.63-1.63.0+dfsg/tools/build/src/engine/debian/rules
+@@ -64,7 +64,7 @@ binary-arch: build install
+ 	dh_compress
+ 	dh_fixperms
+ 	dh_installdeb
+-	dh_shlibdeps
++#	dh_shlibdeps
+ 	dh_gencontrol
+ 	dh_md5sums
+ 	dh_builddeb
