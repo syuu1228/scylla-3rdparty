@@ -203,7 +203,7 @@ mk_debhelper_files = \
 		) \
 	)
 
-TOOLSET_CONFIG = 'using gcc : : $(DEB_HOST_GNU_TYPE)-g++-7 : <compileflags>"$(CPPFLAGS)" <cflags>"$(CFLAGS)" <cxxflags>"$(CXXFLAGS) -Wno-unused-local-typedefs" <linkflags>"$(LDFLAGS)" ;'
+TOOLSET_CONFIG = 'using gcc : : /opt/scylladb/bin/g++-7 : <compileflags>"$(CPPFLAGS)" <cflags>"$(CFLAGS)" <cxxflags>"$(CXXFLAGS) -Wno-unused-local-typedefs" <linkflags>"$(LDFLAGS)" ;'
 BUILD_CONTEXT = yes
 BUILD_LONG_DOUBLE = yes
 

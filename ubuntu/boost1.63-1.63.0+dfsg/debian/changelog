@@ -1,4 +1,10 @@
-scylla-boost163 (1.63.0+dfsg-1ubuntu4~xenialppa3) xenial; urgency=medium
+scylla-boost163 (1.63.0+dfsg-2ubuntu4) xenial; urgency=medium
+
+  * Switch to our gcc-7.2.
+
+ -- Takuya ASADA <syuu@scylladb.com>  Fri, 24 Nov 2017 09:41:00 +0000
+
+scylla-boost163 (1.63.0+dfsg-1ubuntu4) xenial; urgency=medium
 
   * generate ppa package for xenial.
 
