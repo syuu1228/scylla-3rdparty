@@ -132,21 +132,23 @@ done
 debuild -r fakeroot --no-tgz-check -S -sa
 cd -
 
-wget -O build/boost1.63_1.63.0+dfsg-1ubuntu3.dsc http://archive.ubuntu.com/ubuntu/pool/universe/b/boost1.63/boost1.63_1.63.0+dfsg-1ubuntu3.dsc
-wget -O build/boost1.63_1.63.0+dfsg.orig.tar.bz2 http://archive.ubuntu.com/ubuntu/pool/universe/b/boost1.63/boost1.63_1.63.0+dfsg.orig.tar.bz2
-wget -O build/boost1.63_1.63.0+dfsg-1ubuntu3.debian.tar.xz http://archive.ubuntu.com/ubuntu/pool/universe/b/boost1.63/boost1.63_1.63.0+dfsg-1ubuntu3.debian.tar.xz
-cd build
-dpkg-source -x boost1.63_1.63.0+dfsg-1ubuntu3.dsc
-mv boost1.63_1.63.0+dfsg.orig.tar.bz2 scylla-boost163_1.63.0+dfsg.orig.tar.bz2
-cd -
-rm -rf build/boost1.63-1.63.0+dfsg/debian
-cp -a ubuntu/boost1.63-1.63.0+dfsg/debian build/boost1.63-1.63.0+dfsg/
-cd build/boost1.63-1.63.0+dfsg
-for ((i=0; i < $COUNT; i++)); do
-    dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
-done
-debuild -r fakeroot --no-tgz-check -S -sa
-cd -
+if [ "$TARGET" = "trusty" ] || [ "$TARGET" = "xenial" ]; then
+    wget -O build/boost1.63_1.63.0+dfsg-1ubuntu3.dsc http://archive.ubuntu.com/ubuntu/pool/universe/b/boost1.63/boost1.63_1.63.0+dfsg-1ubuntu3.dsc
+    wget -O build/boost1.63_1.63.0+dfsg.orig.tar.bz2 http://archive.ubuntu.com/ubuntu/pool/universe/b/boost1.63/boost1.63_1.63.0+dfsg.orig.tar.bz2
+    wget -O build/boost1.63_1.63.0+dfsg-1ubuntu3.debian.tar.xz http://archive.ubuntu.com/ubuntu/pool/universe/b/boost1.63/boost1.63_1.63.0+dfsg-1ubuntu3.debian.tar.xz
+    cd build
+    dpkg-source -x boost1.63_1.63.0+dfsg-1ubuntu3.dsc
+    mv boost1.63_1.63.0+dfsg.orig.tar.bz2 scylla-boost163_1.63.0+dfsg.orig.tar.bz2
+    cd -
+    rm -rf build/boost1.63-1.63.0+dfsg/debian
+    cp -a ubuntu/boost1.63-1.63.0+dfsg/debian build/boost1.63-1.63.0+dfsg/
+    cd build/boost1.63-1.63.0+dfsg
+    for ((i=0; i < $COUNT; i++)); do
+        dch --distribution $TARGET -l ~${TARGET}ppa "generate ppa package for $TARGET."
+    done
+    debuild -r fakeroot --no-tgz-check -S -sa
+    cd -
+fi
 
 if [ $PPA = 1 ]; then
     for i in build/*.changes; do
