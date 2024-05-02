@@ -7,6 +7,6 @@ Build-Depends: debhelper (>= 9)
 
 Package: scylla-antlr35-c++-dev
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, scylla-env
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: language tool for constructing recognizers, compilers etc
  A language tool that provides a framework for constructing recognizers, interpreters, compilers, and translators from grammatical descriptions containing actions in a variety of target languages.
