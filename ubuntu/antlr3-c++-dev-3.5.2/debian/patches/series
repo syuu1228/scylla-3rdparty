@@ -1,0 +1,2 @@
+0006-antlr3memory.hpp-fix-for-C-20-mode.patch
+0008-unconst-cyclicdfa-gcc-14.patch
